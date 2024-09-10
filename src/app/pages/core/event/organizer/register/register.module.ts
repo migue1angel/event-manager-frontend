@@ -6,7 +6,8 @@ import { GeneralInformationComponent } from './general-information/general-infor
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { TicketTypeComponent } from './ticket-type/ticket-type.component';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { TicketTypeComponent } from './ticket-type/ticket-type.component';
   ],
   imports: [
     CommonModule,
-    RegisterRoutingModule
+    RegisterRoutingModule,
+    InputTextModule,
+    CalendarModule
   ]
 })
 export class RegisterModule { }

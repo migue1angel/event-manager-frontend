@@ -8,11 +8,17 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ThemeComponent } from './layout/theme/theme.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { MenubarModule } from 'primeng/menubar';
+import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ThemeComponent
+    ThemeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +26,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ButtonModule,
     InputTextModule,
-    CheckboxModule
+    CheckboxModule,
+    MenubarModule,
+    AvatarModule,
+    BadgeModule,
+    MenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

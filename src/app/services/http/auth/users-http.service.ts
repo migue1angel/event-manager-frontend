@@ -5,7 +5,7 @@ import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class UsersHttpService {
   url = 'http://localhost:3000/users';
   private readonly httpClient = inject(HttpClient);
   create(payload: any): any {
@@ -15,4 +15,6 @@ export class UsersService {
       })
     );
   }
+
+  
 }

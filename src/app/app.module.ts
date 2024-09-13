@@ -14,6 +14,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
 import { MainComponent } from './layout/main/main.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,11 @@ import { MainComponent } from './layout/main/main.component';
     MenubarModule,
     AvatarModule,
     BadgeModule,
-    MenuModule
+    MenuModule,
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

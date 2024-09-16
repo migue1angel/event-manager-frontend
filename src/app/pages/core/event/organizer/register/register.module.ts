@@ -8,6 +8,13 @@ import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { TicketTypeComponent } from './ticket-type/ticket-type.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
+import {ReactiveFormsModule} from "@angular/forms";
+import {ToastModule} from "primeng/toast";
+import {FileUploadModule} from "primeng/fileupload";
+import {MessageModule} from "primeng/message";
+import {MessageService} from "primeng/api";
+import {FloatLabelModule} from "primeng/floatlabel";
+import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
   declarations: [
@@ -20,7 +27,14 @@ import { CalendarModule } from 'primeng/calendar';
     CommonModule,
     RegisterRoutingModule,
     InputTextModule,
-    CalendarModule
-  ]
+    CalendarModule,
+    ReactiveFormsModule,
+    ToastModule,
+    FileUploadModule,
+    MessageModule,
+    FloatLabelModule,
+    InputNumberModule
+  ],
+  providers:[MessageService]
 })
 export class RegisterModule { }

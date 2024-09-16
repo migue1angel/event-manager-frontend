@@ -1,1 +1,29 @@
-<p>ticket-type works!</p>
+<div class="h-full col-12 flex justify-content-center">
+  <div class="col-10 flex justify-content-center">
+    <div class="w-full">
+      <form [formGroup]="form" class="p-fluid">
+
+        <div class="flex justify-content-center">
+          <h1 class="fadein animation-duration-2000">Registro de Tickets</h1>
+        </div>
+
+        <label for="name" class="block text-900 font-medium mb-3">Nombre: </label>
+        <input id="name" formControlName="name" placeholder="Inserte su nombre" pInputText class="w-full mb-3"/>
+
+        <label for="disponibility" class="block text-900 font-medium mb-3">Disponibilidad: </label>
+        <p-inputNumber
+          id="disponibility"
+          formControlName="disponibility"
+          [useGrouping]="false"
+          placeholder="Disponibilidad"
+          class="w-full mb-3"/>
+
+        <label for="price" class="block text-900 font-medium mb-3">Precio: </label>
+        <p-inputNumber id="price" formControlName="price" [useGrouping]="false" placeholder="Precio" class="w-full mb-3"/>
+
+        <label for="available" class="block text-900 font-medium mb-3"></label>
+        <input id="available" formControlName="available" placeholder="Precio" pInputText class="w-full mb-3"/>
+      </form>
+    </div>
+  </div>
+</div>

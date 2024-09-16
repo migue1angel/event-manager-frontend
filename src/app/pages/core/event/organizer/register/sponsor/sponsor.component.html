@@ -1,1 +1,42 @@
-<p>sponsor works!</p>
+<div class="h-full col-12 flex justify-content-center text">
+  <div class="col-10 justify-content-center">
+    <div class="w-full">
+      <form [formGroup]="form" class="p-fluid">
+
+        <div class="flex justify-content-center">
+          <h1 class="fadein animation-duration-2000">Registro de Sponsors</h1>
+        </div>
+
+        <label for="name" class="block text-900 font-medium mb-3">Nombre: </label>
+        <input id="name" formControlName="name" placeholder="Name" pInputText class="w-full mb-3"/>
+
+        <label for="email" class="block text-900 font-medium mb-3">Correo Electronico: </label>
+        <input id="email" formControlName="email" placeholder="Email" pInputText class="w-full mb-3"/>
+
+        <div class="text-left p-5">
+          <p-toast/>
+          <p-fileUpload
+            name="demo[]"
+            url="https://www.primefaces.org/cdn/api/upload.php"
+            (onUpload)="onUpload($event)"
+            [multiple]="true"
+            accept="image/*"
+            maxFileSize="1000000">
+            <ng-template pTemplate="content">
+              @if (uploadedFiles.length) {
+                <ul>
+                  @for (item of uploadedFiles; track $index) {
+                    <li>
+                      {{ item.name }} - {{ item.size }} bytes
+                    </li>
+                  }
+                </ul>
+              }
+            </ng-template>
+          </p-fileUpload>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

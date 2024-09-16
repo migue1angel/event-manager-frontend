@@ -6,8 +6,9 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { PrimeIcons } from 'primeng/api';
-import { UsersService } from '../../../services/http/auth/users.service';
+import { UsersHttpService } from '../../../services/http/auth/users-http.service';
 import {  Router } from '@angular/router';
+import { AuthService } from '../../../services/http/auth/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,12 +16,16 @@ import {  Router } from '@angular/router';
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
+  private readonly usersService = inject(UsersHttpService);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
+
   form!: FormGroup;
   private readonly formBuilder = inject(FormBuilder);
   protected readonly PrimeIcons = PrimeIcons;
-  // private readonly usersService = inject(UsersService);
 
-  constructor( private usersService: UsersService, private router: Router) {
+  constructor( ) {
     this.buildForm;
   }
   get buildForm() {
@@ -43,8 +48,12 @@ export class SignUpComponent {
   }
   create() {
     this.usersService.create(this.form.value).subscribe(() => {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/core/event/public/event-list']);
     });
+  }
+
+  googleRegister() {
+    this.authService.googleRegister();
   }
 
   get emailField(): AbstractControl {

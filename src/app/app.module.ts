@@ -15,6 +15,7 @@ import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
 import { MainComponent } from './layout/main/main.component';
 import { provideHttpClient } from '@angular/common/http';
+import {MessageModule} from "primeng/message";
 
 @NgModule({
   declarations: [

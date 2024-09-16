@@ -6,14 +6,12 @@ import { map } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersHttpService {
-  url = 'http://localhost:3000/users';
   private readonly httpClient = inject(HttpClient);
+  url = 'http://localhost:3000/users';
+
+  
   create(payload: any): any {
-    return this.httpClient.post(this.url, payload).pipe(
-      map((response: any) => {
-        return response.data;
-      })
-    );
+    return this.httpClient.post(this.url, payload);
   }
 
   

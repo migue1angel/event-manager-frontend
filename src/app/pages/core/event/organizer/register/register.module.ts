@@ -8,6 +8,14 @@ import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { TicketTypeComponent } from './ticket-type/ticket-type.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
+import { StepperModule } from 'primeng/stepper';
+import { DropdownModule } from 'primeng/dropdown';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { AccordionModule } from 'primeng/accordion';
+import { FileUploadModule } from 'primeng/fileupload';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +28,14 @@ import { CalendarModule } from 'primeng/calendar';
     CommonModule,
     RegisterRoutingModule,
     InputTextModule,
-    CalendarModule
+    CalendarModule,
+    StepperModule,
+    DropdownModule,
+    CascadeSelectModule,
+    MultiSelectModule,
+    SelectButtonModule,
+    AccordionModule,
+    FileUploadModule
   ]
 })
 export class RegisterModule { }

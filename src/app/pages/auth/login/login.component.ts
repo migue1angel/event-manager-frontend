@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrimeIcons } from 'primeng/api';
+import { AuthService } from '../../../services/http/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import { PrimeIcons } from 'primeng/api';
 export class LoginComponent {
   form!: FormGroup;
   private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
   protected readonly PrimeIcons = PrimeIcons;
 
   constructor() {
@@ -20,6 +22,10 @@ export class LoginComponent {
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
     })
+  }
+
+  login(){
+    this.authService.login()   
   }
 
   get emailField():AbstractControl{

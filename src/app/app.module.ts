@@ -16,13 +16,15 @@ import { MenuModule } from 'primeng/menu';
 import { MainComponent } from './layout/main/main.component';
 import { provideHttpClient } from '@angular/common/http';
 import {MessageModule} from "primeng/message";
+import { EmailComponent } from './pages/event/organizer/view/email/email.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ThemeComponent,
     NavbarComponent,
-    MainComponent
+    MainComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,

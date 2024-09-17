@@ -3,25 +3,21 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private readonly httpClient = inject(HttpClient);
-
 
   url = 'http://localhost:3000/auth';
 
-  constructor() { }
+  constructor() {}
 
-  googleRegister(){
-    const url = `${this.url}/google/login`
-    window.location.href = url;
+  googleRegister() {
+    const url = `${this.url}/google/login`;
+    window.open(url, 'Login', 'width=600,height=600');
   }
-  login(){
-    const url = `${this.url}/google/login`
-    this.httpClient.get(url).subscribe(
-      response => console.log(response) 
-    )
+  login() {
+    const url = `${this.url}/google/login`;
+    this.httpClient.get(url).subscribe((response) => console.log(response));
   }
 }

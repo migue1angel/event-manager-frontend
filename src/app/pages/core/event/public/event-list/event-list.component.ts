@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './event-list.component.scss'
 })
 export class EventListComponent {
+sidebarVisible: boolean = false;
 
 }

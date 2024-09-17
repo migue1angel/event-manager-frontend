@@ -10,13 +10,16 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { ProfileComponent } from './profile/profile.component';
+import { ActivatedRoute } from '@angular/router';
+import { AuthSuccessComponent } from './auth-success/auth-success.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     SignUpComponent,
-    ProfileComponent
+    ProfileComponent,
+    AuthSuccessComponent
   ],
   imports: [
     CommonModule,

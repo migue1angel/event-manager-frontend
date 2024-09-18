@@ -10,5 +10,6 @@ import { ButtonModule } from 'primeng/button';
   imports: [CardModule, ButtonModule]
 })
 export class EventListComponent {
+  sidebarVisible: boolean = false;
 
 }

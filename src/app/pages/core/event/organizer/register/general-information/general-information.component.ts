@@ -1,10 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormGroup, FormBuilder, AbstractControl, Validators } from '@angular/forms';
 import { SelectItemGroup } from 'primeng/api';
-
-interface Category {
-  name: string,
-  code: string
-}
 
 @Component({
   selector: 'app-general-information',
@@ -12,37 +8,51 @@ interface Category {
   styleUrl: './general-information.component.scss'
 })
 export class GeneralInformationComponent {
-  stateOptions: any[] = [{ label: 'Si', value: 'si' },{ label: 'No', value: 'no' }];
+  form!:FormGroup;
+  protected readonly formBuilder = inject(FormBuilder);
+  constructor() {
+    this.formBuild();
+  }
 
-    value: string = 'off';
-  prevCallback: any;
+  formBuild(){
+    return this.form = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      startDate: [null,[Validators.required]],
+      endDate: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      category: [null, [Validators.required]],
+      address: [null, [Validators.required]],
 
-  groupedCategory!: SelectItemGroup[];
+    });
+  };
 
-    selectedCategory!: Category[];
+  get name():AbstractControl{
+    return this.form.controls['name'];
+  };
 
-    constructor() {
-        this.groupedCategory = [
-            {
-                label: 'Deportes',
-                value: 'de',
-                items: [
-                    { label: 'Fútbol', value: 'Fútbol' },
-                    { label: 'Básquet', value: 'Básquet' },
-                    { label: 'Tenis', value: 'Tenis' },
-                    { label: 'Voleibol', value: 'Voleibol' }
-                ]
-            },
-            {
-                label: 'Bellakeo',
-                value: 'be',
-                items: [
-                    { label: 'Bellakeo de $1', value: 'Bellakeo de $1' },
-                    { label: 'En la Foch', value: 'En la Foch' },
-                    { label: 'Bellakeo fino de $15', value: 'Bellakeo fino de $15' }
-                ]
-            },
-        ];
-    }
+  get description():AbstractControl{
+    return this.form.controls['description'];
+  };
+
+  get startDate():AbstractControl{
+    return this.form.controls['startDate'];
+  };
+
+  get endDate():AbstractControl{
+    return this.form.controls['endDate'];
+  };
+
+  get status():AbstractControl{
+    return this.form.controls['status'];
+  };
+
+  get category():AbstractControl{
+    return this.form.controls['category'];
+  };
+
+  get address():AbstractControl{
+    return this.form.controls['address'];
+  };
     
 }

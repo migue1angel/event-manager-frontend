@@ -30,6 +30,7 @@ import { AuthSuccessComponent } from './auth-success/auth-success.component';
     InputTextModule,
     PasswordModule,
     InputTextModule
-  ]
+  ],
+  exports:[LoginComponent]
 })
 export class AuthModule { }

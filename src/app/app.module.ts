@@ -16,6 +16,9 @@ import { MenuModule } from 'primeng/menu';
 import { MainComponent } from './layout/main/main.component';
 import { provideHttpClient } from '@angular/common/http';
 import {MessageModule} from "primeng/message";
+import { SharedModule } from './shared/shared.module';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import {MessageModule} from "primeng/message";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    SharedModule,
     AppRoutingModule,
     ButtonModule,
     InputTextModule,
@@ -35,6 +39,8 @@ import {MessageModule} from "primeng/message";
     AvatarModule,
     BadgeModule,
     MenuModule,
+    IconFieldModule,
+    InputIconModule
   ],
   providers: [
     provideHttpClient(),

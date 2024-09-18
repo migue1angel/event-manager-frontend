@@ -12,10 +12,14 @@
     
     <ng-template pTemplate="end">
         <div class="flex align-items-center gap-2">
-            <input type="text" pInputText placeholder="Search" class="w-8rem sm:w-auto" />
-            <p-menu #menu [model]="profileItems" [popup]="true" />
+            <p-iconField iconPosition="left">
+                <p-inputIcon styleClass="pi pi-search" />
+                <input type="text" pInputText placeholder="Search" class="w-3rem sm:w-5rem md:w-8rem lg:w-11rem" />
+            </p-iconField>
+            <!-- <p-menu #menu [model]="profileItems" [popup]="true" />
+            <p-button (onClick)="menu.toggle($event)" icon="pi pi-user"/> -->
             <app-theme></app-theme>
-            <p-button (onClick)="menu.toggle($event)" icon="pi pi-user"/>
+            <app-auth-buttons></app-auth-buttons>
         </div>
     </ng-template>
 </p-menubar>

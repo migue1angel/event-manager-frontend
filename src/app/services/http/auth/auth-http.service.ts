@@ -5,19 +5,18 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthHttpService {
   private readonly httpClient = inject(HttpClient);
-
-  url = 'http://localhost:3000/auth';
+  url = 'http://localhost:3000/auth/';
 
   constructor() {}
 
   googleRegister() {
-    const url = `${this.url}/google/login`;
-    window.open(url, 'Login', 'width=600,height=600');
+    const url = `${this.url}google/login`;
+    window.location.href = `${url}`;
   }
   login() {
-    const url = `${this.url}/google/login`;
+    const url = `${this.url}/login`;
     this.httpClient.get(url).subscribe((response) => console.log(response));
   }
 }

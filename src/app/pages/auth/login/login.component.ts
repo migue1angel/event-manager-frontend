@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrimeIcons } from 'primeng/api';
 import { AuthHttpService } from '../../../services/http/auth/auth-http.service';
+import { LoginModel } from '../../../models/auth/login.model';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,12 @@ export class LoginComponent {
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
     })
+  }
+
+  submit(){}
+
+  login(){
+    this.authHttpService.login(this.form.value)
   }
 
   googleLogIn() {

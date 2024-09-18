@@ -28,8 +28,6 @@ export class SignUpComponent {
 
   constructor( ) {
     this.buildForm;
-    console.log(this.route.url);
-
   }
   get buildForm() {
     return this.form = this.formBuilder.group({
@@ -50,9 +48,7 @@ export class SignUpComponent {
     this.create();
   }
   create() {
-    this.usersService.create(this.form.value).subscribe(() => {
-      this.router.navigate(['/core/event/public/event-list']);
-    });
+    this.usersService.create(this.form.value);
   }
 
   googleRegister() {

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ViewRoutingModule } from './view-routing.module';
 import { CardModule } from 'primeng/card';
 import { EmailComponent } from './email/email.component';
+import { SidebarModule } from 'primeng/sidebar';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { EmailComponent } from './email/email.component';
   imports: [
     CommonModule,
     ViewRoutingModule,
-    CardModule
+    CardModule,
+    SidebarModule,
+    
   ]
 })
 export class ViewModule { }

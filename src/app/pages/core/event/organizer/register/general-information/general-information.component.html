@@ -1,131 +1,33 @@
-<form>
-  <p-stepper orientation="vertical">
-    <p-stepperPanel header="Información general del evento">
-        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
-            <div class="flex flex-column h-12rem">
-                <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                  <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                    <label for="firstname" class="font-bold block mb-2">Nombre</label>
-                    <input id="firstname" pInputText />
-                  </div>
-                  <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                    <label for="descripcion" class="font-bold block mb-2"> Descripción</label>
-                    <input id="descripcion" pInputText />
-                  </div>
-                  <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                    <label for="status" class="font-bold block mb-2">Estado</label>
-                    <input id="status" pInputText />
-                  </div>
-                  <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                    <label for="capacity" class="font-bold block mb-2">Capacidad</label>
-                    <input id="capacity" pInputText />
-                  </div>
-                </div>
-            </div>
-            <div class="flex py-4">
-                <p-button label="Next" (onClick)="nextCallback.emit()" />
-            </div>
-          </ng-template>
+<div class="h-full col-12 flex justify-content-center">
+  <div class="col-10 flex justify-content-center">
+    <div class="w-full">
+      <form [formGroup]="form" class="p-fluid">
 
-    </p-stepperPanel>
-    <p-stepperPanel header="Fecha y Hora del Evento">
-        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
-            <div class="flex flex-column h-12rem">
-                <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                  <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                    <label for="startDate" class="font-bold block mb-2">Fecha de Inicio</label>
-                    <p-calendar [showIcon]="true" [showTime]="true" />
-                  </div>
-                  <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                    <label for="endDate" class="font-bold block mb-2">Fecha de Fin</label>
-                    <p-calendar [showIcon]="true" [showTime]="true" />
-                  </div>
-                </div>
-            </div>
-            <div class="flex py-4 gap-2">
-              <p-button label="Back" severity="secondary" (onClick)="prevCallback.emit()" />
-              <p-button label="Next" (onClick)="nextCallback.emit()" />
-          </div>
-        </ng-template>
-    </p-stepperPanel>
+        <div class="flex justify-content-center">
+          <h1 class="fadein animation-duration-2000">Registro de Eventos</h1>
+        </div>
 
-    <p-stepperPanel header="Ubicación">
-        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
-            <div class="flex flex-column h-12rem">
-                <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                  <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                    <label for="address" class="font-bold block mb-2">Dirección</label>
-                    <input id="address" pInputText />
-                  </div>
-                </div>
-            </div>
-            <div class="flex py-4 gap-2">
-              <p-button label="Back" severity="secondary" (onClick)="prevCallback.emit()" />
-              <p-button label="Next" (onClick)="nextCallback.emit()" />
-          </div>
-        </ng-template>
-    </p-stepperPanel>
+        <label for="name" class="block text-900 font-medium mb-3">Nombre del Evento </label>
+        <input id="name" formControlName="name" placeholder="Nombre del Evento" pInputText class="w-full mb-3"/>
 
-    <p-stepperPanel header="Información Adicional">
-      <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
-          <div class="flex flex-column h-12rem">
-              <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                <div class="card flex justify-content-center">
-                  <p-accordion [activeIndex]="0">
-                    <p-accordionTab header="Categoría">
-                      <p-multiSelect 
-                        [options]="groupedCategory" 
-                        [group]="true" 
-                        placeholder="Seleciona la Categoría" 
-                        scrollHeight="250px" 
-                        display="chip">
-                            <ng-template let-group pTemplate="group">
-                                <div class="flex align-items-center">
-                                    <img 
-                                        src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" 
-                                        [class]="'mr-2 flag flag-' + group.value" 
-                                        style="width: 20px" />
-                                    <span>{{ group.label }}</span>
-                                </div>
-                            </ng-template>
-                    </p-multiSelect>
-                    </p-accordionTab>
-                      <p-accordionTab header="Organizador">
-                        <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                          <label for="organizerName" class="font-bold block mb-2">Nombre</label>
-                          <input id="organizerName" pInputText />
-                        </div>
-                        <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                          <label for="organizerEmail" class="font-bold block mb-2">Email</label>
-                          <input id="organizerEmail" pInputText />
-                        </div>
-                      </p-accordionTab>
-                      <p-accordionTab header="Sponsor">
-                        <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                          <label for="sponsorName" class="font-bold block mb-2">Nombre</label>
-                          <input id="sponsorName" pInputText />
-                        </div>
-                        <div class="field col-12 lg:col-3 md:col-8 sm:col-12">
-                          <label for="sponsorEmail" class="font-bold block mb-2">Email</label>
-                          <input id="sponsorEmail" pInputText />
-                        </div>
-                      </p-accordionTab>
-                      <p-accordionTab header="Archivos">
-                          <p>
-                              At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
-                              qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                          </p>
-                      </p-accordionTab>
-                  </p-accordion>
-              </div>
-              </div>
-              <div class="flex py-5 gap-2">
-                <p-button label="Back" severity="secondary" (onClick)="prevCallback.emit()" />
-                <p-button label="Next" (onClick)="nextCallback.emit()" />
-            </div>
-          </div>
-          
-      </ng-template>
-  </p-stepperPanel>
-</p-stepper>
-</form>
+        <label for="description" class="block text-900 font-medium mb-3">Descripción </label>
+        <input id="description" formControlName="description" placeholder="Descripción" pInputText class="w-full mb-3"/>
+
+        <label for="startDate" class="block text-900 font-medium mb-3">Fecha de Inicio</label>
+        <p-calendar [showIcon]="true" [showTime]="true" />
+
+        <label for="endDate" class="block text-900 font-medium mb-3">Fecha de Fin</label>
+        <p-calendar [showIcon]="true" [showTime]="true" />
+
+        <label for="status" class="block text-900 font-medium mb-3">Estado </label>
+        <input id="status" formControlName="status" placeholder="Estado" pInputText class="w-full mb-3"/>
+
+        <label for="category" class="block text-900 font-medium mb-3">Categoría </label>
+        <input id="category" formControlName="category" placeholder="Categoría" pInputText class="w-full mb-3"/>
+
+        <label for="address" class="block text-900 font-medium mb-3">Dirección</label>
+        <input id="address" formControlName="available" placeholder="Dirección" pInputText class="w-full mb-3"/>
+      </form>
+    </div>
+  </div>
+</div>

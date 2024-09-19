@@ -21,13 +21,15 @@ import {MessageModule} from "primeng/message";
 import {MessageService} from "primeng/api";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputNumberModule} from "primeng/inputnumber";
+import { RegisterComponent } from './register.component';
 
 @NgModule({
   declarations: [
     GeneralInformationComponent,
     SponsorComponent,
     CollaboratorComponent,
-    TicketTypeComponent
+    TicketTypeComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
@@ -46,9 +48,9 @@ import {InputNumberModule} from "primeng/inputnumber";
     FileUploadModule,
     MessageModule,
     FloatLabelModule,
-    InputNumberModule
+    InputNumberModule,
   ],
-    
+
   providers:[MessageService]
 })
 export class RegisterModule { }

@@ -4,9 +4,10 @@ import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { GeneralInformationComponent } from './general-information/general-information.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { TicketTypeComponent } from './ticket-type/ticket-type.component';
+import { RegisterComponent } from './register.component';
 
 const routes: Routes = [
-  {
+  /* {
     path:'collaborator',
     component:CollaboratorComponent
   },
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:'ticket-type',
     component:TicketTypeComponent
+  }, */
+  {
+    path:'',
+    component:RegisterComponent
   },
 ];
 

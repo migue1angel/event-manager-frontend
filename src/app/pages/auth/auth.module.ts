@@ -10,8 +10,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { ProfileComponent } from './profile/profile.component';
-import { ActivatedRoute } from '@angular/router';
 import { AuthSuccessComponent } from './auth-success/auth-success.component';
+import {AvatarModule} from "primeng/avatar";
+import {ImageModule} from "primeng/image";
+import {ChipModule} from "primeng/chip";
 
 
 @NgModule({
@@ -29,7 +31,10 @@ import { AuthSuccessComponent } from './auth-success/auth-success.component';
     ButtonModule,
     InputTextModule,
     PasswordModule,
-    InputTextModule
+    InputTextModule,
+    AvatarModule,
+    ImageModule,
+    ChipModule
   ]
 })
 export class AuthModule { }

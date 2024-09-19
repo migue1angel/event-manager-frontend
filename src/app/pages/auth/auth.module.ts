@@ -35,6 +35,7 @@ import {ChipModule} from "primeng/chip";
     AvatarModule,
     ImageModule,
     ChipModule
-  ]
+  ],
+  exports:[LoginComponent]
 })
 export class AuthModule { }

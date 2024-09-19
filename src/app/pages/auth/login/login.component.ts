@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrimeIcons } from 'primeng/api';
-import { AuthService } from '../../../services/http/auth/auth.service';
+import { AuthHttpService } from '../../../services/http/auth/auth-http.service';
+import { LoginModel } from '../../../models/auth/login.model';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { AuthService } from '../../../services/http/auth/auth.service';
 export class LoginComponent {
   form!: FormGroup;
   private readonly formBuilder = inject(FormBuilder);
-  private readonly authService = inject(AuthService);
+  private readonly authHttpService = inject(AuthHttpService);
   protected readonly PrimeIcons = PrimeIcons;
 
   constructor() {
@@ -24,8 +25,14 @@ export class LoginComponent {
     })
   }
 
+  submit(){}
+
   login(){
-    this.authService.login()   
+    this.authHttpService.login(this.form.value)
+  }
+
+  googleLogIn() {
+    this.authHttpService.googleRegister(); 
   }
 
   get emailField():AbstractControl{

@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import { PrimeIcons } from 'primeng/api';
 import { UsersHttpService } from '../../../services/http/auth/users-http.service';
-import {  Router } from '@angular/router';
-import { AuthService } from '../../../services/http/auth/auth.service';
+import {  ActivatedRoute, Router } from '@angular/router';
+import { AuthHttpService } from '../../../services/http/auth/auth-http.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,8 +17,9 @@ import { AuthService } from '../../../services/http/auth/auth.service';
 })
 export class SignUpComponent {
   private readonly usersService = inject(UsersHttpService);
-  private readonly authService = inject(AuthService);
+  private readonly authHttpService = inject(AuthHttpService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
 
   form!: FormGroup;
@@ -47,13 +48,11 @@ export class SignUpComponent {
     this.create();
   }
   create() {
-    this.usersService.create(this.form.value).subscribe(() => {
-      this.router.navigate(['/core/event/public/event-list']);
-    });
+    this.usersService.create(this.form.value);
   }
 
   googleRegister() {
-    this.authService.googleRegister();
+    this.authHttpService.googleRegister(); 
   }
 
   get emailField(): AbstractControl {

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AuthService } from '../../../../../services/http/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +8,4 @@ import { AuthService } from '../../../../../services/http/auth/auth.service';
 })
 export class RegisterComponent {
   protected form! : FormGroup;
-  private readonly authService = inject(AuthService);
-
 }

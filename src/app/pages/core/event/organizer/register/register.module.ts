@@ -49,7 +49,6 @@ import { RegisterComponent } from './register.component';
     MessageModule,
     FloatLabelModule,
     InputNumberModule,
-
   ],
 
   providers:[MessageService]

@@ -10,6 +10,7 @@ export class TicketTypeComponent {
 
   form!:FormGroup;
   protected readonly formBuilder = inject(FormBuilder);
+  
   constructor() {
     this.formBuild();
   }
@@ -19,7 +20,7 @@ export class TicketTypeComponent {
       name: [null, [Validators.required]],
       disponibility: [null, [Validators.required]],
       price: [null,[Validators.required]],
-      available: [null, [Validators.required]],
+      available: [true, [Validators.required]],
     });
   };
 
@@ -27,15 +28,15 @@ export class TicketTypeComponent {
     return this.form.controls['name'];
   };
 
-  get disponibility():AbstractControl{
+  get disponibilityField():AbstractControl{
     return this.form.controls['disponibility'];
   };
 
-  get price():AbstractControl{
+  get priceField():AbstractControl{
     return this.form.controls['price'];
   };
 
-  get available():AbstractControl{
+  get availableField():AbstractControl{
     return this.form.controls['available'];
   };
 }

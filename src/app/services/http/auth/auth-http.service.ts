@@ -4,29 +4,25 @@ import { Observable } from 'rxjs';
 import { LoginModel } from '../../../models/auth/login.model';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { ServerResponseInterface } from '../../../models/auth/server-response.model copy';
+import { AuthResponseInterface } from '../../../models/auth/auth-response.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthHttpService {
   private readonly httpClient = inject(HttpClient);
-  private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
   url = 'http://localhost:3000/auth/';
 
   constructor() {}
 
-  googleRegister() {
+  googleLogin() {
     const url = `${this.url}google/login`;
     window.location.href = `${url}`;
   }
 
-  login(credentials: LoginModel) {
+  login(credentials: LoginModel):Observable<AuthResponseInterface> {
     const url = `${this.url}login`;
-    this.httpClient.post(url, credentials).subscribe((response: any) => {
-      const route = sessionStorage.getItem('urlRedirect');
-      this.authService.token = response.token;
-      this.router.navigate([route]);
-    });
+    return this.httpClient.post<AuthResponseInterface>(url, credentials);
   }
 }

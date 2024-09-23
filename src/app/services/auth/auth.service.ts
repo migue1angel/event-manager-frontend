@@ -9,6 +9,7 @@ export class AuthService {
   saveUrlRedirect() {
     sessionStorage.setItem('urlRedirect', this.router.url);
   }
+  
   set token(value: string) {
     sessionStorage.setItem('token', value);
   }

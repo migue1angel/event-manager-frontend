@@ -7,8 +7,9 @@ import {
 } from '@angular/forms';
 import { PrimeIcons } from 'primeng/api';
 import { UsersHttpService } from '../../../services/http/auth/users-http.service';
-import {  ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthHttpService } from '../../../services/http/auth/auth-http.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,43 +17,47 @@ import { AuthHttpService } from '../../../services/http/auth/auth-http.service';
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
-  private readonly usersService = inject(UsersHttpService);
+  private readonly usersHttpService = inject(UsersHttpService);
+  private readonly authService = inject(AuthService);
   private readonly authHttpService = inject(AuthHttpService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
-
 
   form!: FormGroup;
   private readonly formBuilder = inject(FormBuilder);
   protected readonly PrimeIcons = PrimeIcons;
 
-  constructor( ) {
+  constructor() {
     this.buildForm;
   }
   get buildForm() {
-    return this.form = this.formBuilder.group({
+    return (this.form = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required],
-      informationUser: this.informationUserForm
-    });
+      informationUser: this.informationUserForm,
+    }));
   }
-  
-  get informationUserForm(){
-    return  this.formBuilder.group({
+
+  get informationUserForm() {
+    return this.formBuilder.group({
       name: [null, Validators.required],
-      lastname: [null, Validators.required],    
-    }) 
+      lastname: [null, Validators.required],
+    });
   }
 
   async OnSubmit() {
     this.create();
   }
   create() {
-    this.usersService.create(this.form.value);
+    this.usersHttpService.create(this.form.value).subscribe((response) => {
+      const route = sessionStorage.getItem('urlRedirect');
+      this.authService.token = response.token;
+      this.router.navigate([route]);
+    });
   }
 
   googleRegister() {
-    this.authHttpService.googleRegister(); 
+    this.authHttpService.googleLogin();
   }
 
   get emailField(): AbstractControl {
@@ -61,8 +66,8 @@ export class SignUpComponent {
   get passwordField(): AbstractControl {
     return this.form.controls['password'];
   }
-  get informationUserField():FormGroup {
-    return this.form.controls['informationUser'] as FormGroup
+  get informationUserField(): FormGroup {
+    return this.form.controls['informationUser'] as FormGroup;
   }
   get nameField(): AbstractControl {
     return this.informationUserForm.controls['name'];

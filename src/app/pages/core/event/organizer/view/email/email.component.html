@@ -1,1 +1,34 @@
-<p>email works!</p>
+<div class="col-12 flex justify-content-center flex align-content-center mt-5">
+
+<div class="col-11 justify-content-center p-4 shadow-2 border-round fadeinleft animation-duration-2000">
+    <div class="text-center text-3xl font-medium text-900 mb-3">PLANIFY EMAIL</div>
+    <div class="font-medium text-center text-blue-500 mb-3">Recuerda tu evento de una manera distinta</div>
+            <div class="col-9 flex flex-column justify-content-center w-full mt-3">
+                <form [formGroup]="form">
+                    <div class="formgrid grid">
+                        <div class="field col-12 md:col-6">
+                            <label for="title">Titulo</label>
+                            <input pInputText id="title" type="text" formControlName="title" class="text-base text-blue-500 surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        </div>
+                        
+                        <div class="field col-12">
+                            <label for="address">Mensaje</label>
+                            <textarea id="address" type="text" formControlName="message" rows="8" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></textarea>
+                        </div>
+                        
+                        <div class="field col-12 md:col-4">
+                            <label for="hasBendRead">Leido</label>
+                            <select id="hasBendRead" formControlName="hasBendRead" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
+                                <option>Arizona</option>
+                                <option>California</option>
+                                <option>Florida</option>
+                                <option>Ohio</option>
+                                <option>Washington</option>
+                            </select>
+                        </div>
+                    </div>                
+    
+                </form>
+            </div>
+    </div>
+</div>

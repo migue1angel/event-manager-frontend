@@ -8,10 +8,15 @@ import {PrimeIcons} from "primeng/api";
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
+getSeverity(arg0: any) {
+throw new Error('Method not implemented.');
+}
 
   form! : FormGroup
   protected readonly formBuilder = inject(FormBuilder);
   protected readonly PrimeIcons = PrimeIcons;
+products: any;
+responsiveOptions: any;
 
   constructor() {
     this.formBuild();

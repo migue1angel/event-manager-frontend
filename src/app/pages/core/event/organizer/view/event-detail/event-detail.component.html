@@ -1,15 +1,29 @@
 <div>
-<div class="card flex justify-content-start  mt-8">
-    <p-card header="Titulo del Evento" styleClass="w-6 ml-auto">
-        <p class="m-0">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-            quas!
-        </p>
-        <ng-template pTemplate="footer">
-            <div class="flex gap-3 mt-1">
-                <p-button label="Save" class="w-full" styleClass="w-full" />
-            </div>
-        </ng-template>
-    </p-card>
-</div>
+    <div class="card flex justify-content-start mt-6">
+        <p-card header="Titulo del Evento" styleClass="w-6 ml-auto">
+            <p class="m-0">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+                quas!
+            </p>
+            <ng-template pTemplate="footer">
+                <div class="flex gap-3 mt-1">
+                    <p-button label="Editar" class="w-full" styleClass="w-full" />
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+
+    <div class="card flex justify-content-start -mt-8">
+        <p-image 
+            src="https://render.vivenu.com/image?url=https%3A%2F%2Fs3.eu-central-1.amazonaws.com%2Fyt-s3%2F534db8b2-2393-41c7-85b4-407606fcc691.png&forceJPEG=true&width=2480" 
+            previewImageSrc="https://render.vivenu.com/image?url=https%3A%2F%2Fs3.eu-central-1.amazonaws.com%2Fyt-s3%2F534db8b2-2393-41c7-85b4-407606fcc691.png&forceJPEG=true&width=2480" 
+            alt="Image" 
+            class="w-12 h-auto -mt-8"
+            width="635" 
+            [preview]="true" />
+    </div>
+    
+    <div class="flex justify-content-center mt-3">
+        <p-button label="Editar Imagen" class="w-8" />
+    </div>
 </div>

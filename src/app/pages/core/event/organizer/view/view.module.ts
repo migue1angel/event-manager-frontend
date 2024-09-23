@@ -7,6 +7,7 @@ import { EmailComponent } from './email/email.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { GalleriaModule } from 'primeng/galleria';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { InputTextModule } from 'primeng/inputtext';
     ViewRoutingModule,
     CardModule,
     SidebarModule,
-    InputTextModule
+    InputTextModule,
+    GalleriaModule
     
   ]
 })

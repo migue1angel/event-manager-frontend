@@ -14,6 +14,33 @@ export class RegisterComponent {
 constructor() {
   this.buildForm()
 }
+active: number | undefined = 0;
+
+    name: string |null = null;
+
+    email: string |null = null;
+
+    password: string |null = null;
+
+    option1: boolean | undefined = false;
+
+    option2: boolean | undefined = false;
+
+    option3: boolean | undefined = false;
+
+    option4: boolean | undefined = false;
+
+    option5: boolean | undefined = false;
+
+    option6: boolean | undefined = false;
+
+    option7: boolean | undefined = false;
+
+    option8: boolean | undefined = false;
+
+    option9: boolean | undefined = false;
+
+    option10: boolean | undefined = false;
 
   buildForm(){
     return this.form = this.formBuilder.group({

@@ -1,41 +1,78 @@
-<div class="card">
-    <p-stepper orientation="vertical">
-        <p-stepperPanel header="Evento">
-            <ng-template pTemplate="content" let-nextCallback="nextCallback">
-                <div class="flex flex-column h-12rem">
-                    <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                        Content I
-                    </div>
-                </div>
-                <div class="flex py-4">
-                    <p-button label="Next" (onClick)="nextCallback.emit()" />
-                </div>
-            </ng-template>
-        </p-stepperPanel>
-        <p-stepperPanel header="">
-            <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
-                <div class="flex flex-column h-12rem">
-                    <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                        Content II
-                    </div>
-                </div>
-                <div class="flex py-4 gap-2">
-                    <p-button label="Back" severity="secondary" (onClick)="prevCallback.emit()" />
-                    <p-button label="Next" (onClick)="nextCallback.emit()" />
-                </div>
-            </ng-template>
-        </p-stepperPanel>
-        <p-stepperPanel header="Header III">
-            <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
-                <div class="flex flex-column h-12rem">
-                    <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                        Content III
-                    </div>
-                </div>
-                <div class="flex py-4">
-                    <p-button label="Back" (onClick)="prevCallback.emit()" />
-                </div>
-            </ng-template>
-        </p-stepperPanel>
-    </p-stepper>
-</div>
+<p-stepper [(activeStep)]="active" [linear]="false">
+    <!-- general information and collaborator panel-->
+    <p-stepperPanel class="min-h-full">
+
+        <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
+            <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
+                <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+                    [ngClass]="{
+                        'bg-primary border-primary': index <= active!,
+                        'surface-border': index > active!
+                    }">
+                    <i class="pi pi-warehouse"></i>
+                </span>
+            </button>
+        </ng-template>
+
+        <ng-template pTemplate="content" let-nextCallback="nextCallback">
+            <app-collaborator></app-collaborator>
+            <p-divider />
+            <app-general-information></app-general-information>
+            <div class="flex pt-4 justify-content-end">
+                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
+            </div>
+        </ng-template>
+
+    </p-stepperPanel>
+
+    <!-- address panel-->
+    <p-stepperPanel>
+
+        <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
+            <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
+                <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+                    [ngClass]="{
+                    'bg-primary border-primary': index <= active!,
+                    'surface-border': index > active!
+                }">
+                    <i class="pi pi-star"></i>
+                </span>
+            </button>
+        </ng-template>
+
+        <ng-template pTemplate="content" let-nextCallback="nextCallback">
+            <app-address></app-address>
+
+            <div class="flex pt-4 justify-content-end">
+                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
+            </div>
+        </ng-template>
+    </p-stepperPanel>
+
+    <!-- ticket type  and sponsor panel-->
+    <p-stepperPanel>
+
+        <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
+            <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
+                <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+                    [ngClass]="{
+                        'bg-primary border-primary': index <= active!,
+                        'surface-border': index > active!
+                    }">
+                    <i class="pi pi-star"></i>
+                </span>
+            </button>
+        </ng-template>
+
+        <ng-template pTemplate="content" let-nextCallback="nextCallback">
+            <app-sponsor></app-sponsor>
+            <p-divider />
+            <app-ticket-type></app-ticket-type>
+
+            <div class="flex pt-4 justify-content-end">
+                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
+            </div>
+        </ng-template>
+    </p-stepperPanel>
+
+</p-stepper>

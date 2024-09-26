@@ -15,14 +15,22 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { AccordionModule } from 'primeng/accordion';
 import { FileUploadModule } from 'primeng/fileupload';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToastModule} from "primeng/toast";
 import {MessageModule} from "primeng/message";
 import {MessageService} from "primeng/api";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputNumberModule} from "primeng/inputnumber";
 import { RegisterComponent } from './register.component';
-
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { PasswordModule } from 'primeng/password';
+import { TimelineModule } from 'primeng/timeline';
+import { CardModule } from 'primeng/card';
+import { StepsModule } from 'primeng/steps';
+import { DividerModule } from 'primeng/divider';
+import { AddressComponent } from './address/address.component';
 @NgModule({
   declarations: [
     GeneralInformationComponent,
@@ -30,6 +38,7 @@ import { RegisterComponent } from './register.component';
     CollaboratorComponent,
     TicketTypeComponent,
     RegisterComponent,
+    AddressComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +58,17 @@ import { RegisterComponent } from './register.component';
     MessageModule,
     FloatLabelModule,
     InputNumberModule,
+    ToggleButtonModule,
+    IconFieldModule,
+    InputIconModule,
+    InputTextModule,
+    FormsModule,
+    PasswordModule,
+    TimelineModule,
+    CardModule,
+    StepsModule,
+    InputNumberModule,
+    DividerModule
   ],
 
   providers:[MessageService]

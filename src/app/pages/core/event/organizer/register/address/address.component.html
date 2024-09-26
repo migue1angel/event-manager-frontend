@@ -1,0 +1,30 @@
+<div class="grid p-fluid">
+    <div class="field col-12 flex justify-content-center">
+        <h3> Dirección del evento</h3>
+    </div>
+
+    <!-- latitude -->
+    <div class="field col-6 ">
+        <label for="">Latitud:</label>
+        <p-inputNumber  inputId="minmax" mode="decimal" [min]="0" [max]="100" />
+    </div>
+
+    <!-- altitude -->
+    <div class="field col-6 ">
+        <label for="">Altitud:</label>
+        <p-inputNumber  inputId="minmax" mode="decimal" [min]="0" [max]="100" />
+    </div>
+
+    
+    <!-- address  -->
+    <div class="field col-12 ">
+        <label for=""> Dirección:</label>
+        <input type="text" pInputText />
+    </div>
+    
+    <!-- Reference -->
+    <div class="field col-12 ">
+        <label for=""> Referencia:</label>
+        <input type="text" pInputText />
+    </div>
+</div>

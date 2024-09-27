@@ -1,14 +1,13 @@
 <p-stepper [(activeStep)]="active" [linear]="false">
     <!-- general information and collaborator panel-->
     <p-stepperPanel class="min-h-full">
-
         <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
             <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
                 <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
                     [ngClass]="{
-                        'bg-primary border-primary': index <= active!,
-                        'surface-border': index > active!
-                    }">
+            'bg-primary border-primary': index <= active!,
+            'surface-border': index > active!
+          }">
                     <i class="pi pi-warehouse"></i>
                 </span>
             </button>
@@ -22,43 +21,17 @@
                 <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
             </div>
         </ng-template>
-
-    </p-stepperPanel>
-
-    <!-- address panel-->
-    <p-stepperPanel>
-
-        <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
-            <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
-                <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-                    [ngClass]="{
-                    'bg-primary border-primary': index <= active!,
-                    'surface-border': index > active!
-                }">
-                    <i class="pi pi-star"></i>
-                </span>
-            </button>
-        </ng-template>
-
-        <ng-template pTemplate="content" let-nextCallback="nextCallback">
-            <app-address></app-address>
-
-            <div class="flex pt-4 justify-content-end">
-                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
-            </div>
-        </ng-template>
     </p-stepperPanel>
 
     <!-- ticket type  and sponsor panel-->
     <p-stepperPanel>
-
         <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
             <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
                 <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
                     [ngClass]="{
-                        'bg-primary border-primary': index <= active!,
-                        'surface-border': index > active!
-                    }">
+            'bg-primary border-primary': index <= active!,
+            'surface-border': index > active!
+          }">
                     <i class="pi pi-star"></i>
                 </span>
             </button>
@@ -75,4 +48,26 @@
         </ng-template>
     </p-stepperPanel>
 
+    <!-- address panel-->
+    <p-stepperPanel>
+        <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
+            <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
+                <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+                    [ngClass]="{
+            'bg-primary border-primary': index <= active!,
+            'surface-border': index > active!
+          }">
+                    <i class="pi pi-star"></i>
+                </span>
+            </button>
+        </ng-template>
+
+        <ng-template pTemplate="content" let-nextCallback="nextCallback">
+            <app-address></app-address>
+
+            <div class="flex pt-4 justify-content-end">
+                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
+            </div>
+        </ng-template>
+    </p-stepperPanel>
 </p-stepper>

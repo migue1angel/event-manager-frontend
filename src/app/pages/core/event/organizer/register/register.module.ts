@@ -31,6 +31,7 @@ import { CardModule } from 'primeng/card';
 import { StepsModule } from 'primeng/steps';
 import { DividerModule } from 'primeng/divider';
 import { AddressComponent } from './address/address.component';
+import { SharedModule } from '../../../../../shared/shared.module';
 @NgModule({
   declarations: [
     GeneralInformationComponent,
@@ -43,6 +44,7 @@ import { AddressComponent } from './address/address.component';
   imports: [
     CommonModule,
     RegisterRoutingModule,
+    SharedModule,
     InputTextModule,
     CalendarModule,
     StepperModule,
@@ -68,7 +70,7 @@ import { AddressComponent } from './address/address.component';
     CardModule,
     StepsModule,
     InputNumberModule,
-    DividerModule
+    DividerModule,
   ],
 
   providers:[MessageService]

@@ -41,7 +41,7 @@ export class ErrorMessageDirective {
       this.htmlElement.nativeElement.classList.add('p-error');
       this.htmlElement.nativeElement.classList.remove('hidden');
       if (errors.includes('required')) {
-        this.htmlElement.nativeElement.innerText = 'Este campo es requerido';
+        this.htmlElement.nativeElement.innerText = 'Campo requerido';
         return;
       }
       if (errors.includes('minlength')) {

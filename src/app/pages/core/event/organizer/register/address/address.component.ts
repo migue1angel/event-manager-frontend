@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -14,25 +14,38 @@ import {
 export class AddressComponent {
   private readonly formBuilder = inject(FormBuilder);
 
+  @Output() formOutput = new EventEmitter();
+
   constructor() {}
 
-  form: FormGroup = this.formBuilder.group({
+  addressForm: FormGroup = this.formBuilder.group({
     latitude: [null, [Validators.required]],
     longitude: [null, [Validators.required]],
     reference: [null, [Validators.required]],
     address: [null, [Validators.required]],
   });
 
+  form: FormGroup = this.formBuilder.group({
+    address: this.addressForm,
+  });
+
+  onSubmit() {
+    this.formOutput.emit(this.form.value);
+  }
+
+  // get addressFormGroup(): FormGroup {
+  //   return this.form.controls['address'] as FormGroup;
+  // }
   get latitudeField(): AbstractControl {
-    return this.form.controls['latitude'];
+    return this.addressForm.controls['latitude'];
   }
   get longitudeField(): AbstractControl {
-    return this.form.controls['longitude'];
+    return this.addressForm.controls['longitude'];
   }
   get referenceField(): AbstractControl {
-    return this.form.controls['reference'];
+    return this.addressForm.controls['reference'];
   }
   get addressField(): AbstractControl {
-    return this.form.controls['address'];
+    return this.addressForm.controls['address'];
   }
 }

@@ -3,7 +3,7 @@
     <h3>Dirección del evento</h3>
   </div>
 
-  <div [formGroup]="form" class="grid p-fluid">
+  <div [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="grid p-fluid">
     <!-- latitude -->
     <div class="field col-6">
       <label for="latitude">Latitud:</label>
@@ -25,7 +25,7 @@
     <!-- longitude -->
     <div class="field col-6">
       <label for="longitude">Longitud:</label>
-      <p-inputNumber id="longitude" inputId="minmax" mode="decimal" [min]="0" [max]="100" />
+      <p-inputNumber id="longitude" formControlName="longitude" inputId="minmax" mode="decimal" [min]="0" [max]="100" />
       <span
         appErrorMessage
         [errors]="longitudeField.errors"
@@ -56,6 +56,9 @@
         [touched]="referenceField.touched"
         [dirty]="referenceField.dirty"
       ></span>
+    </div>
+    <div class="col-12">
+        <button pButton type="submit" (click)="onSubmit()" label="Guardar"></button>
     </div>
   </div>
 </div>

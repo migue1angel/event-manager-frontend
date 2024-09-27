@@ -63,7 +63,7 @@
         </ng-template>
 
         <ng-template pTemplate="content" let-nextCallback="nextCallback">
-            <app-address></app-address>
+            <app-address (formOutput)="saveData($event)"></app-address>
 
             <div class="flex pt-4 justify-content-end">
                 <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
@@ -71,3 +71,5 @@
         </ng-template>
     </p-stepperPanel>
 </p-stepper>
+
+{{form.value | json}}

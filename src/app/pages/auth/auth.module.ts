@@ -14,6 +14,9 @@ import { AuthSuccessComponent } from './auth-success/auth-success.component';
 import {AvatarModule} from "primeng/avatar";
 import {ImageModule} from "primeng/image";
 import {ChipModule} from "primeng/chip";
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -34,8 +37,11 @@ import {ChipModule} from "primeng/chip";
     InputTextModule,
     AvatarModule,
     ImageModule,
-    ChipModule
+    ChipModule,
+    ToastModule,
+    SharedModule
   ],
-  exports:[LoginComponent]
+  exports:[LoginComponent],
+  providers:[MessageService]
 })
 export class AuthModule { }

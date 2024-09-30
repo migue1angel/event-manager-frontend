@@ -15,10 +15,9 @@ import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
 import { MainComponent } from './layout/main/main.component';
 import { provideHttpClient } from '@angular/common/http';
-import {MessageModule} from "primeng/message";
-import { SharedModule } from './shared/shared.module';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { LoginModel } from '../../../models/auth/login.model';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ export class AuthHttpService {
     window.location.href = `${url}`;
   }
 
-  login(credentials: LoginModel):Observable<AuthResponseInterface> {
+  login(credentials: LoginModel): Observable<AuthResponseInterface> {
     const url = `${this.url}login`;
     return this.httpClient.post<AuthResponseInterface>(url, credentials);
   }

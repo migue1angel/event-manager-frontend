@@ -5,11 +5,13 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { PrimeIcons } from 'primeng/api';
+import { MessageService, PrimeIcons } from 'primeng/api';
 import { AuthHttpService } from '../../../services/http/auth/auth-http.service';
 import { LoginModel } from '../../../models/auth/login.model';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { ServerResponseInterface } from '../../../models/auth/server-response.model copy';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,7 @@ export class LoginComponent {
   private readonly formBuilder = inject(FormBuilder);
   private readonly authHttpService = inject(AuthHttpService);
   private readonly authService = inject(AuthService);
+  private messageService = inject(MessageService);
   private readonly router = inject(Router);
   protected readonly PrimeIcons = PrimeIcons;
 
@@ -35,15 +38,35 @@ export class LoginComponent {
   }
 
   submit() {
-    this.login();
+    this.form.markAllAsTouched()
+    if(this.form.valid){
+      this.login();
+    }
   }
 
   login() {
-    this.authHttpService.login(this.form.value).subscribe((response) => {
-      const route = sessionStorage.getItem('urlRedirect');
-      this.authService.token = response.token;
-      this.router.navigate([route]);
-    });
+    this.authHttpService.login(this.form.value).pipe(
+      first()
+    ).subscribe({
+      next:(response) => {
+        const route =
+          sessionStorage.getItem('urlRedirect') ||
+          'core/event/organizer/register';
+        this.authService.token = response.token;
+        this.router.navigate([route]);
+      },
+      error: (error)=> {
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Credenciales incorrectas', life: 3000});
+      }
+
+    })
+    // this.authHttpService.login(this.form.value).subscribe((response) => {
+    //   const route =
+    //     sessionStorage.getItem('urlRedirect') ||
+    //     'core/event/organizer/register';
+    //   this.authService.token = response.token;
+    //   this.router.navigate([route]);
+    // });
   }
 
   googleLogIn() {

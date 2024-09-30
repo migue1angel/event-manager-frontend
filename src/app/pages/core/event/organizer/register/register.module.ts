@@ -60,7 +60,8 @@ import { SharedModule } from '../../../../../shared/shared.module';
     StepsModule,
     InputNumberModule,
     DividerModule,
-    MessageModule
+    MessageModule,
+    ToastModule
   ],
 
   providers:[MessageService]

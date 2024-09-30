@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { LngLat } from 'maplibre-gl';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-address',
@@ -14,6 +15,7 @@ import { LngLat } from 'maplibre-gl';
 })
 export class AddressComponent {
   private readonly formBuilder = inject(FormBuilder);
+  private messageService = inject(MessageService)
   @Output() formOutput = new EventEmitter();
 
   constructor() {}
@@ -33,7 +35,12 @@ export class AddressComponent {
     this.form.markAllAsTouched()
     if(this.form.valid){
       this.formOutput.emit(this.form.value);
-    }else{}
+    }else{
+      this.messageService.add({severity:'error', detail:'Revise que todo los campos se han llenado correctamente'})
+      setTimeout(() => {
+        this.messageService.clear()
+      }, 3000);
+    }
   }
 
 

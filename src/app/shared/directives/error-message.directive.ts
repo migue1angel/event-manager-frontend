@@ -38,18 +38,22 @@ export class ErrorMessageDirective {
 
     const errors = Object.keys(this._errors);
     if (this._touched || this._dirty) {
+
       this.htmlElement.nativeElement.classList.add('p-error');
       this.htmlElement.nativeElement.classList.remove('hidden');
+
       if (errors.includes('required')) {
         this.htmlElement.nativeElement.innerText = 'Campo requerido';
         return;
       }
+
       if (errors.includes('minlength')) {
         const min = this._errors['minlength']['requiredLength'];
         const current = this._errors['minlength']['actualLength'];
         this.htmlElement.nativeElement.innerText = `${current}/${min} caracteres requeridos`;
         return;
       }
+      
     }
   }
 }

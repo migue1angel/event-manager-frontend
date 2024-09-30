@@ -6,16 +6,19 @@ import { AuthModule } from '../pages/auth/auth.module';
 import {  ButtonGroupModule } from 'primeng/buttongroup';
 import { AuthButtonsComponent } from './components/auth-buttons/auth-buttons.component';
 import { ErrorMessageDirective } from './directives/error-message.directive';
+import { MapComponent } from './components/map/map.component';
 
 
 
 @NgModule({
   declarations: [
     AuthButtonsComponent,
-    ErrorMessageDirective
+    ErrorMessageDirective,
+    MapComponent
   ],
   exports:[
     AuthButtonsComponent,
+    MapComponent,
     ErrorMessageDirective
   ],
   imports: [

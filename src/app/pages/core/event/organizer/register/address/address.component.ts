@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { LngLat } from 'maplibre-gl';
 
 @Component({
   selector: 'app-address',
@@ -13,7 +14,6 @@ import {
 })
 export class AddressComponent {
   private readonly formBuilder = inject(FormBuilder);
-
   @Output() formOutput = new EventEmitter();
 
   constructor() {}
@@ -22,7 +22,7 @@ export class AddressComponent {
     latitude: [null, [Validators.required]],
     longitude: [null, [Validators.required]],
     reference: [null, [Validators.required]],
-    address: [null, [Validators.required]],
+    venue: [null, [Validators.required]],
   });
 
   form: FormGroup = this.formBuilder.group({
@@ -30,12 +30,19 @@ export class AddressComponent {
   });
 
   onSubmit() {
-    this.formOutput.emit(this.form.value);
+    this.form.markAllAsTouched()
+    if(this.form.valid){
+      this.formOutput.emit(this.form.value);
+    }else{}
   }
 
-  // get addressFormGroup(): FormGroup {
-  //   return this.form.controls['address'] as FormGroup;
-  // }
+
+  getLngLAt(event: LngLat){
+    const {lng, lat} = event
+    this.longitudeField.setValue(lng)
+    this.latitudeField.setValue(lat)
+  }
+
   get latitudeField(): AbstractControl {
     return this.addressForm.controls['latitude'];
   }
@@ -45,7 +52,7 @@ export class AddressComponent {
   get referenceField(): AbstractControl {
     return this.addressForm.controls['reference'];
   }
-  get addressField(): AbstractControl {
-    return this.addressForm.controls['address'];
+  get venueField(): AbstractControl {
+    return this.addressForm.controls['venue'];
   }
 }

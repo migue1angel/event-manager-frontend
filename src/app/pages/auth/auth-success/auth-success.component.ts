@@ -5,8 +5,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-auth-success',
-  templateUrl: './auth-success.component.html',
-  styleUrl: './auth-success.component.scss',
+  template:'',
 })
 export class AuthSuccessComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

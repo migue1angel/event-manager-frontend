@@ -11,8 +11,6 @@ export class AuthButtonsComponent {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
 
-  dialogLoginVisible: boolean = false;
-  dialogSignUpVisible: boolean = false;
   redirectLogin() {
     this.authService.saveUrlRedirect();
     this.router.navigate(['auth/login']);

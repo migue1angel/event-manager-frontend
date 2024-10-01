@@ -7,12 +7,14 @@ import { ButtonModule } from 'primeng/button';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { SidebarModule } from 'primeng/sidebar';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     EventListComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

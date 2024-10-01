@@ -6,6 +6,7 @@ import {  ButtonGroupModule } from 'primeng/buttongroup';
 import { AuthButtonsComponent } from './components/auth-buttons/auth-buttons.component';
 import { ErrorMessageDirective } from './directives/error-message.directive';
 import { MapComponent } from './components/map/map.component';
+import { MessageService } from 'primeng/api';
 
 
 

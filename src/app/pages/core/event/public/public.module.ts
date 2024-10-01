@@ -8,7 +8,9 @@ import { EventListComponent } from './event-list/event-list.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { HomeComponent } from './home/home.component';
-
+import { DataViewModule } from 'primeng/dataview';
+import { TagModule } from 'primeng/tag';
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,10 @@ import { HomeComponent } from './home/home.component';
     PublicRoutingModule,
     CardModule,
     ButtonModule,
-    SidebarModule
-  ]
+    SidebarModule,
+    DataViewModule,
+    TagModule,
+    RatingModule
+  ],
 })
 export class PublicModule { }

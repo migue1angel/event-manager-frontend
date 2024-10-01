@@ -38,11 +38,9 @@ export class AddressComponent {
     } else {
       this.messageService.add({
         severity: 'error',
-        detail: 'Revise que todo los campos se han llenado correctamente',
+        detail: 'Revise que todos los campos se han llenado correctamente',
+        life: 3000,
       });
-      setTimeout(() => {
-        this.messageService.clear();
-      }, 3000);
     }
   }
 

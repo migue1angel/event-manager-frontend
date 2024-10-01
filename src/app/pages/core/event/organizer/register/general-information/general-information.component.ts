@@ -23,7 +23,6 @@ export class GeneralInformationComponent {
       status: [null, [Validators.required]],
       category: [null, [Validators.required]],
       address: [null, [Validators.required]],
-
     });
   };
 

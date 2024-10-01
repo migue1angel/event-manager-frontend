@@ -12,6 +12,13 @@
                 </span>
             </button>
         </ng-template>
+        <ng-template pTemplate="content" let-nextCallback="nextCallback">
+            <app-general-information></app-general-information>
+
+            <div class="flex pt-4 justify-content-end">
+                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
+            </div>
+        </ng-template>
     </p-stepperPanel>
 
     <!-- ticket type  and sponsor panel-->

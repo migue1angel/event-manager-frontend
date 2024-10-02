@@ -7,6 +7,7 @@ import { AuthButtonsComponent } from './components/auth-buttons/auth-buttons.com
 import { ErrorMessageDirective } from './directives/error-message.directive';
 import { MapComponent } from './components/map/map.component';
 import { MessageService } from 'primeng/api';
+import { CustomLabelDirective } from './directives/custom-label.directive';
 
 
 
@@ -14,12 +15,14 @@ import { MessageService } from 'primeng/api';
   declarations: [
     AuthButtonsComponent,
     ErrorMessageDirective,
+    CustomLabelDirective,
     MapComponent
   ],
   exports:[
     AuthButtonsComponent,
     MapComponent,
-    ErrorMessageDirective
+    ErrorMessageDirective,
+    CustomLabelDirective
   ],
   imports: [
     CommonModule,

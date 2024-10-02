@@ -10,7 +10,7 @@
   <div [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="grid p-fluid">
     <!-- latitude -->
     <div class="field col-6">
-      <label for="latitude">Latitud:</label>
+      <label appCustomLabel [label]="AddressEnum.latitude" for="address"></label>
       <p-inputNumber
         [readonly]="true"
         id="latitude"
@@ -27,7 +27,7 @@
 
     <!-- longitude -->
     <div class="field col-6">
-      <label for="longitude">Longitud:</label>
+      <label appCustomLabel [label]="AddressEnum.longitude" app for="longitude"></label>
       <p-inputNumber
         [readonly]="true"
         id="longitude"
@@ -45,7 +45,7 @@
 
     <!-- venue  -->
     <div class="field col-12">
-      <label for="venue"> Lugar del evento:</label>
+      <label appCustomLabel [label]="AddressEnum.venue" for="venue"></label>
       <input id="venue" formControlName="venue" type="text" pInputText />
       <span
         appErrorMessage
@@ -57,7 +57,7 @@
 
     <!-- Reference -->
     <div class="field col-12">
-      <label for="reference"> Referencia:</label>
+      <label appCustomLabel [label]="AddressEnum.reference" for="reference"></label>
       <input
         type="text"
         id="reference"

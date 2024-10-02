@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { LngLat } from 'maplibre-gl';
 import { MessageService } from 'primeng/api';
+import { AddressEnum, ValidateFormEnum } from '../../../../../../shared/enums';
 
 @Component({
   selector: 'app-address',
@@ -14,22 +15,33 @@ import { MessageService } from 'primeng/api';
   styleUrl: './address.component.scss',
 })
 export class AddressComponent {
-  private readonly formBuilder = inject(FormBuilder);
-  private messageService = inject(MessageService);
+  form!: FormGroup;
+  addressForm!: FormGroup;
   @Output() formOutput = new EventEmitter();
 
-  constructor() {}
+  private readonly formBuilder = inject(FormBuilder);
+  private messageService = inject(MessageService);
 
-  addressForm: FormGroup = this.formBuilder.group({
-    latitude: [null, [Validators.required]],
-    longitude: [null, [Validators.required]],
-    reference: [null, [Validators.required]],
-    venue: [null, [Validators.required]],
-  });
+  protected AddressEnum = AddressEnum;
 
-  form: FormGroup = this.formBuilder.group({
-    address: this.addressForm,
-  });
+  constructor() {
+    this.buildAddressForm(), this.buildForm();
+  }
+
+  buildAddressForm() {
+    return (this.addressForm = this.formBuilder.group({
+      latitude: [null, [Validators.required]],
+      longitude: [null, [Validators.required]],
+      reference: [null, [Validators.required]],
+      venue: [null, [Validators.required]],
+    }));
+  }
+
+  buildForm() {
+    return (this.form = this.formBuilder.group({
+      address: this.addressForm,
+    }));
+  }
 
   onSubmit() {
     this.form.markAllAsTouched();
@@ -37,8 +49,8 @@ export class AddressComponent {
       this.formOutput.emit(this.form.value);
     } else {
       this.messageService.add({
-        severity: 'error',
-        detail: 'Revise que todos los campos se han llenado correctamente',
+        severity: ValidateFormEnum.severity,
+        detail: ValidateFormEnum.message,
         life: 3000,
       });
     }

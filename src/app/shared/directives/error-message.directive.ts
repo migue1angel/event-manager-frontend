@@ -31,13 +31,13 @@ export class ErrorMessageDirective {
 
   setErrorMessage(): void {
     if (!this.htmlElement) return;
-    if (!this._errors) {
+    if (!this._errors || !this._touched) {
       this.htmlElement.nativeElement.classList.add('hidden');
       return;
     }
 
     const errors = Object.keys(this._errors);
-    if (this._touched || this._dirty) {
+    if ((this._touched || this._dirty)) {
 
       this.htmlElement.nativeElement.classList.add('p-error');
       this.htmlElement.nativeElement.classList.remove('hidden');

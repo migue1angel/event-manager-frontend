@@ -1,55 +1,51 @@
-import {Component, inject} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {PrimeIcons} from "primeng/api";
-
-interface UploadEvent {
-  originalEvent: Event;
-  files: File[];
-}
+import { Component, inject } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService, PrimeIcons } from 'primeng/api';
+import { SponsorEnum } from '../../../../../../shared/enums';
 
 @Component({
   selector: 'app-sponsor',
   templateUrl: './sponsor.component.html',
-  styleUrl: './sponsor.component.scss'
+  styleUrl: './sponsor.component.scss',
 })
 export class SponsorComponent {
-
-  /** Form **/
-  form! : FormGroup
+  protected form!: FormGroup;
+  protected sponsorForm!: FormGroup;
+  private messageService = inject(MessageService);
   private readonly formBuilder = inject(FormBuilder);
-  uploadedFiles: any[] = [];
-  private messageService: any;
+  protected SponsorEnum = SponsorEnum
+  
 
   constructor() {
     this.buildForm();
+    this.buildSponsorForm();
   }
 
-  buildForm(){
-    return this.form = this.formBuilder.group({
+  buildForm() {
+    this.form = this.formBuilder.group({
+      sponsors: this.formBuilder.array([], [Validators.minLength(1)]),
+    });
+  }
+
+  buildSponsorForm() {
+    this.sponsorForm = this.formBuilder.group({
       name: [null, [Validators.required]],
-      email: [null, [Validators.required, Validators.email]],
-      fileSponsor: [null, [Validators.required]],
-    })
+      photo: [null, [Validators.required]],
+    });
   }
 
-  onUpload(event:any) {
-    for(let file of event.files) {
-      this.uploadedFiles.push(file);
+  addSponsor() {
+    this.sponsors.push(this.formBuilder.group(this.sponsorForm.value));
+  }
+
+  onSubmit() {
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      console.log('data enviada');
     }
-
-    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
   }
 
-  get nameField():AbstractControl{
-    return this.form.controls['name'];
+  get sponsors():FormArray {
+    return this.form.get('sponsors') as FormArray;
   }
-
-  get emailField():AbstractControl{
-    return this.form.controls['email'];
-  }
-
-  get fileField(): AbstractControl {
-    return this.form.controls['fileSponsors'];
-  }
-
 }

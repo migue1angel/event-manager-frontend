@@ -7,7 +7,7 @@ export enum AddressEnum {
 
 export enum SponsorEnum {
   name = 'Nombre',
-  photo = 'Foto',
+  photo = 'Fotos',
 }
 
 export enum TicketType {

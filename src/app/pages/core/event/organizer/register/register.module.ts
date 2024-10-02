@@ -7,14 +7,13 @@ import { SponsorComponent } from './sponsor/sponsor.component';
 import { TicketTypeComponent } from './ticket-type/ticket-type.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
+import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
 import { DropdownModule } from 'primeng/dropdown';
-import { CascadeSelectModule } from 'primeng/cascadeselect';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { AccordionModule } from 'primeng/accordion';
 import { FileUploadModule } from 'primeng/fileupload';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule} from "@angular/forms";
 import {ToastModule} from "primeng/toast";
 import {MessageModule} from "primeng/message";
 import {MessageService} from "primeng/api";
@@ -25,6 +24,8 @@ import { StepsModule } from 'primeng/steps';
 import { DividerModule } from 'primeng/divider';
 import { AddressComponent } from './address/address.component';
 import { SharedModule } from '../../../../../shared/shared.module';
+import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
 @NgModule({
   declarations: [
     GeneralInformationComponent,
@@ -53,7 +54,10 @@ import { SharedModule } from '../../../../../shared/shared.module';
     InputNumberModule,
     DividerModule,
     MessageModule,
-    ToastModule
+    ToastModule,
+    ButtonModule, 
+    AvatarModule,
+    BadgeModule
   ],
 
   providers:[MessageService]

@@ -1,42 +1,59 @@
-<div class="h-full col-12 flex justify-content-center text">
-  <div class="col-10 justify-content-center">
-    <div class="w-full">
-      <form [formGroup]="form" class="p-fluid">
-
-        <div class="flex justify-content-center">
-          <h1 class="fadein animation-duration-2000">Registro de Sponsors de Evento</h1>
-        </div>
-
-        <label for="name" class="block text-900 font-medium mb-3">Nombre: </label>
-        <input id="name" formControlName="name" placeholder="Name" pInputText class="w-full mb-3"/>
-
-        <label for="email" class="block text-900 font-medium mb-3">Correo Electronico: </label>
-        <input id="email" formControlName="email" placeholder="Email" pInputText class="w-full mb-3"/>
-
-        <div class="text-left p-5">
-          <p-toast/>
-          <p-fileUpload
-            name="demo[]"
-            url="https://www.primefaces.org/cdn/api/upload.php"
-            (onUpload)="onUpload($event)"
-            [multiple]="true"
-            accept="image/*"
-            maxFileSize="1000000">
-            <ng-template pTemplate="content">
-              @if (uploadedFiles.length) {
-                <ul>
-                  @for (item of uploadedFiles; track $index) {
-                    <li>
-                      {{ item.name }} - {{ item.size }} bytes
-                    </li>
-                  }
-                </ul>
-              }
-            </ng-template>
-          </p-fileUpload>
-        </div>
-
-      </form>
-    </div>
+<div class="field col-12 fadeinleft animation-duration-1000">
+  
+  <div class="field col-12 flex justify-content-center"> 
+    <h1>Agregar Sponsors</h1>
   </div>
+
+  <div class="field col-12">
+    <!-- FormGroup -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="col-12">
+      <div [formGroup]="sponsorForm" class="grid p-fluid">
+        <!-- name -->
+        <div class="field col-6">
+          <label appCustomLabel [label]="SponsorEnum.name" for="name"></label>
+          <input pInputText id="name" formControlName="name">
+        </div>
+
+        <!-- file -->
+        <div class="field col-6">
+          <label appCustomLabel [label]="SponsorEnum.photo" for="name"></label>
+          <input pInputText id="name" formControlName="name">
+        </div>
+      </div>
+
+      <div formArrayName="sponsors">
+        @for (item of sponsors.controls; track $index; let i = $index) {
+          <div [formGroupName]="i" class="grid p-fluid">
+            <!-- {{item}} -->
+            {{item.value | json}}
+            {{item.get('name')?.value | json}}
+            <!-- name -->
+            <div class="field col-6">
+              <label appCustomLabel [label]="SponsorEnum.name" for="name"></label>
+              <input pInputText id="name" formControlName="name">
+              <span appErrorMessage
+                [touched]="item.get('name')!.touched"
+                [dirty]="item.get('name')!.dirty"
+                [errors]="item.get('name')!.errors"
+              >
+              </span>
+            </div>
+            <!-- file -->
+            <div class="field col-6">
+              <label appCustomLabel [label]="SponsorEnum.photo" for="name"></label>
+              <input pInputText id="name" formControlName="name">
+              <span appErrorMessage
+              ></span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="field col-12 justify-content-center">
+        <p-button pButton label="Agregar" icon="pi pi-plus" (onClick)="addSponsor()"/>
+      </div>      
+
+    </form>
+  </div>
+
 </div>

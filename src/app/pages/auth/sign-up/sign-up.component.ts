@@ -10,6 +10,7 @@ import { UsersHttpService } from '../../../services/http/auth/users-http.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthHttpService } from '../../../services/http/auth/auth-http.service';
 import { AuthService } from '../../../services/auth/auth.service';
+import { AuthEnum } from '../../../shared/enums';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,11 +18,11 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
-  private readonly usersHttpService = inject(UsersHttpService);
-  private readonly authService = inject(AuthService);
   private readonly authHttpService = inject(AuthHttpService);
+  private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
+  private readonly usersHttpService = inject(UsersHttpService);
+  protected AuthEnum = AuthEnum;
 
   form!: FormGroup;
   private readonly formBuilder = inject(FormBuilder);

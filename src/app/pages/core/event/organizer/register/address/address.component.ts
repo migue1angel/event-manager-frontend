@@ -21,7 +21,6 @@ export class AddressComponent {
 
   private readonly formBuilder = inject(FormBuilder);
   private messageService = inject(MessageService);
-
   protected AddressEnum = AddressEnum;
 
   constructor() {

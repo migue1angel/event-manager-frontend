@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormGroup, FormBuilder, AbstractControl, Validators } from '@angular/forms';
-import { SelectItemGroup } from 'primeng/api';
+import { MessageService, SelectItemGroup } from 'primeng/api';
+import { GeneralInformationEnum } from '../../../../../../shared/enums/fields-enum';
+import { ValidateFormEnum } from '../../../../../../shared/enums/message-service.enum';
 
 @Component({
   selector: 'app-general-information',
@@ -9,9 +11,16 @@ import { SelectItemGroup } from 'primeng/api';
 })
 export class GeneralInformationComponent {
   form!:FormGroup;
+  generalInformationForm!: FormGroup;
+  @Output() formOutput = new EventEmitter();
+
   protected readonly formBuilder = inject(FormBuilder);
+  private messageService = inject(MessageService);
+  protected GeneralInformationEnum = GeneralInformationEnum;
+  
   constructor() {
     this.formBuild();
+
   }
 
   formBuild(){
@@ -26,31 +35,44 @@ export class GeneralInformationComponent {
     });
   };
 
-  get name():AbstractControl{
+  onSubmit() {
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      this.formOutput.emit(this.form.value);
+    } else {
+      this.messageService.add({
+        severity: ValidateFormEnum.severity,
+        detail: ValidateFormEnum.message,
+        life: 3000,
+      });
+    }
+  }
+
+  get nameField():AbstractControl{
     return this.form.controls['name'];
   };
 
-  get description():AbstractControl{
+  get descriptionField():AbstractControl{
     return this.form.controls['description'];
   };
 
-  get startDate():AbstractControl{
+  get startDateField():AbstractControl{
     return this.form.controls['startDate'];
   };
 
-  get endDate():AbstractControl{
+  get endDateField():AbstractControl{
     return this.form.controls['endDate'];
   };
 
-  get status():AbstractControl{
+  get statusField():AbstractControl{
     return this.form.controls['status'];
   };
 
-  get category():AbstractControl{
+  get categoryField():AbstractControl{
     return this.form.controls['category'];
   };
 
-  get address():AbstractControl{
+  get addressField():AbstractControl{
     return this.form.controls['address'];
   };
     

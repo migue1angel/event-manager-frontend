@@ -7,7 +7,10 @@ import { EmailComponent } from './email/email.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { GalleriaModule } from 'primeng/galleria';
+import { DataViewModule } from 'primeng/dataview';
+import { ButtonModule } from 'primeng/button';
+
+
 
 
 @NgModule({
@@ -21,8 +24,9 @@ import { GalleriaModule } from 'primeng/galleria';
     CardModule,
     SidebarModule,
     InputTextModule,
-    GalleriaModule
-    
+    DataViewModule,
+    ButtonModule
+
   ]
 })
 export class ViewModule { }

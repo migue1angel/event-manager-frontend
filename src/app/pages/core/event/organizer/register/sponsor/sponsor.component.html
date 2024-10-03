@@ -1,59 +1,74 @@
-<div class="field col-12 fadeinleft animation-duration-1000">
-  
-  <div class="field col-12 flex justify-content-center"> 
+<div class="field col-12">
+
+  <div class="field col-12 flex justify-content-center">
     <h1>Agregar Sponsors</h1>
   </div>
 
   <div class="field col-12">
-    <!-- FormGroup -->
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="col-12">
-      <div [formGroup]="sponsorForm" class="grid p-fluid">
-        <!-- name -->
-        <div class="field col-6">
-          <label appCustomLabel [label]="SponsorEnum.name" for="name"></label>
-          <input pInputText id="name" formControlName="name">
-        </div>
-
-        <!-- file -->
-        <div class="field col-6">
-          <label appCustomLabel [label]="SponsorEnum.photo" for="name"></label>
-          <input pInputText id="name" formControlName="name">
-        </div>
+    <form [formGroup]="sponsorForm" (ngSubmit)="addSponsor()" class="grid p-fluid">
+      <!-- name -->
+      <div class="field col-6">
+        <label appCustomLabel [label]="SponsorEnum.name" for="name"></label>
+        <input pInputText id="name" formControlName="name">
+        <span appErrorMessage [touched]="nameField.touched" [dirty]="nameField.dirty"
+          [errors]="nameField.errors"></span>
       </div>
 
-      <div formArrayName="sponsors">
-        @for (item of sponsors.controls; track $index; let i = $index) {
-          <div [formGroupName]="i" class="grid p-fluid">
-            <!-- {{item}} -->
-            {{item.value | json}}
-            {{item.get('name')?.value | json}}
-            <!-- name -->
-            <div class="field col-6">
-              <label appCustomLabel [label]="SponsorEnum.name" for="name"></label>
-              <input pInputText id="name" formControlName="name">
-              <span appErrorMessage
-                [touched]="item.get('name')!.touched"
-                [dirty]="item.get('name')!.dirty"
-                [errors]="item.get('name')!.errors"
-              >
-              </span>
-            </div>
-            <!-- file -->
-            <div class="field col-6">
-              <label appCustomLabel [label]="SponsorEnum.photo" for="name"></label>
-              <input pInputText id="name" formControlName="name">
-              <span appErrorMessage
-              ></span>
-            </div>
-          </div>
-        }
+      <!-- file -->
+      <div class="field col-6">
+        <label appCustomLabel [label]="SponsorEnum.photo" for="photo"></label>
+        <p-fileUpload 
+          name="demo[]" 
+          url="https://www.primefaces.org/cdn/api/upload.php" 
+          (onUpload)="onUpload($event)" 
+          [multiple]="true" 
+          accept="image/*" 
+          maxFileSize="1000000">
+          <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">
+                    {{ file.name }} - {{ file.size }} bytes
+                </li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+        <span appErrorMessage [touched]="photoField.touched" [dirty]="photoField.dirty"
+          [errors]="photoField.errors"></span>
       </div>
-
       <div class="field col-12 justify-content-center">
-        <p-button pButton label="Agregar" icon="pi pi-plus" (onClick)="addSponsor()"/>
-      </div>      
-
+        <p-button pButton label="Agregar" type="submit" icon="pi pi-plus" />
+      </div>
     </form>
+
+    @if (sponsors.controls.length >= 1) {
+    <div>
+      <p-accordion styleClass="border-solid border-2 border-200 border-round-lg	">
+        @for (item of sponsors.controls; track $index; let i = $index) {
+        <p-accordionTab [header]="item.get('name')!.value">
+          <p class="m-0">
+            {{item.get('name')!.value}}
+          </p>
+          <p class="m-0">
+            {{item.get('photo')!.value}}
+          </p>
+          <button pButton type="button" label="Eliminar" (click)="removeSponsor(i)"></button>
+          <button pButton type="button" label="Editar" (click)="editSponsor(i)"></button>
+        </p-accordionTab>
+        }
+      </p-accordion>
+
+    </div>
+
+    }
+
+    <div class="col-12 p-fluid">
+      <p-messages />
+    </div>
+
+    <div class="field col-12 justify-content-center">
+      <button pButton label="Guardar y continuar" (click)="onSubmit()"> </button>
+    </div>
+
   </div>
 
 </div>

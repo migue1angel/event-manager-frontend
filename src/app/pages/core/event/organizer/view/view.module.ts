@@ -11,8 +11,6 @@ import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 
 
-
-
 @NgModule({
   declarations: [
     EmailComponent

@@ -19,8 +19,8 @@ active: number | undefined = 0;
     return this.form = this.formBuilder.group({
       name: [null],
       description:[null],
-      start_date:[null],
-      end_date:[null],
+      startDate:[null],
+      endDate:[null],
       state:[null],
       isPublic:[null],
       category:[null],

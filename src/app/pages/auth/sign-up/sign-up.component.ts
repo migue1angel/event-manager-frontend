@@ -51,9 +51,8 @@ export class SignUpComponent {
   }
   create() {
     this.usersHttpService.create(this.form.value).subscribe((response) => {
-      const route = sessionStorage.getItem('urlRedirect');
       this.authService.token = response.token;
-      this.router.navigate([route]);
+      this.router.navigate([this.authService.urlRedirect]);
     });
   }
 

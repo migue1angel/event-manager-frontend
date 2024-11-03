@@ -49,24 +49,14 @@ export class LoginComponent {
       first()
     ).subscribe({
       next:(response) => {
-        const route =
-          sessionStorage.getItem('urlRedirect') ||
-          'core/event/organizer/register';
         this.authService.token = response.token;
-        this.router.navigate([route]);
+        this.router.navigate([this.authService.urlRedirect]);
       },
       error: (error)=> {
         this.messageService.add({severity: 'error', summary: 'Error', detail: 'Credenciales incorrectas', life: 3000});
       }
 
     })
-    // this.authHttpService.login(this.form.value).subscribe((response) => {
-    //   const route =
-    //     sessionStorage.getItem('urlRedirect') ||
-    //     'core/event/organizer/register';
-    //   this.authService.token = response.token;
-    //   this.router.navigate([route]);
-    // });
   }
 
   googleLogIn() {

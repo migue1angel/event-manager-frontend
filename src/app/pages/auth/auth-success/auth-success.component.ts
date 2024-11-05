@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthHttpService } from '../../../services/http/auth/auth-http.service';
 import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({

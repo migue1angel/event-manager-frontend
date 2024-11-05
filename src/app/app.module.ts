@@ -14,11 +14,11 @@ import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
 import { MainComponent } from './layout/main/main.component';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { SharedModule } from './shared/shared.module';
-import { MessageService } from 'primeng/api';
+import { errorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,9 @@ import { MessageService } from 'primeng/api';
     InputIconModule
   ],
   providers: [
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([errorInterceptor])
+    ),
   ],
   bootstrap: [AppComponent]
 })

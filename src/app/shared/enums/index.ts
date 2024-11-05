@@ -1,2 +1,2 @@
-export * from './fields-enum'
-export * from './message-service.enum'
+export * from './fields.enum'
+export * from './validate-form.enum'

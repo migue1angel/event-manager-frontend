@@ -6,9 +6,8 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { PrimeIcons } from 'primeng/api';
-import { UsersHttpService } from '../../../services/http/auth/users-http.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthHttpService } from '../../../services/http/auth/auth-http.service';
+import { UsersHttpService } from '../../../services/core/users-http.service';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { AuthEnum } from '../../../shared/enums';
 
@@ -18,7 +17,6 @@ import { AuthEnum } from '../../../shared/enums';
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
-  private readonly authHttpService = inject(AuthHttpService);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly usersHttpService = inject(UsersHttpService);
@@ -47,17 +45,17 @@ export class SignUpComponent {
   }
 
   async OnSubmit() {
-    this.create();
+    this.register();
   }
-  create() {
-    this.usersHttpService.create(this.form.value).subscribe((response) => {
+  register() {
+    this.authService.register(this.form.value).subscribe((response) => {
       this.authService.token = response.token;
       this.router.navigate([this.authService.urlRedirect]);
     });
   }
 
   googleRegister() {
-    this.authHttpService.googleLogin();
+    this.authService.googleLogin();
   }
 
   get emailField(): AbstractControl {

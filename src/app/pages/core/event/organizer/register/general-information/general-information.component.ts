@@ -1,8 +1,8 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormGroup, FormBuilder, AbstractControl, Validators } from '@angular/forms';
-import { MessageService, SelectItemGroup } from 'primeng/api';
-import { GeneralInformationEnum } from '../../../../../../shared/enums/fields-enum';
-import { ValidateFormEnum } from '../../../../../../shared/enums/message-service.enum';
+import { MessageService } from 'primeng/api';
+import { GeneralInformationEnum } from '../../../../../../shared/enums/fields.enum';
+import { ValidateFormEnum } from '../../../../../../shared/enums/validate-form.enum';
 
 @Component({
   selector: 'app-general-information',
@@ -15,7 +15,7 @@ export class GeneralInformationComponent {
   @Output() formOutput = new EventEmitter();
 
   protected readonly formBuilder = inject(FormBuilder);
-  private messageService = inject(MessageService);
+  private readonly messageService = inject(MessageService);
   protected GeneralInformationEnum = GeneralInformationEnum;
   
   constructor() {

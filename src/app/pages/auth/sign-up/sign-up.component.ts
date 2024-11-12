@@ -6,7 +6,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { PrimeIcons } from 'primeng/api';
-import { UsersHttpService } from '../../../services/core/users-http.service';
+import { UsersHttpService } from '../../../services/auth/users-http.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { AuthEnum } from '../../../shared/enums';
@@ -19,7 +19,6 @@ import { AuthEnum } from '../../../shared/enums';
 export class SignUpComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
-  private readonly usersHttpService = inject(UsersHttpService);
   protected AuthEnum = AuthEnum;
 
   form!: FormGroup;

@@ -1,5 +1,7 @@
+import { UserInterface } from "./user.interface";
 
 
 export interface AuthResponseInterface{
-    token:string
+    token:string,
+    user:UserInterface
 }

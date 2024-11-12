@@ -1,4 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+} from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthResponseInterface } from '../../models/auth/auth-response.model';
@@ -14,4 +16,5 @@ export class UsersHttpService {
   create(payload: any): Observable<AuthResponseInterface> {
     return this.httpClient.post<AuthResponseInterface>(this.url, payload);
   }
+  
 }

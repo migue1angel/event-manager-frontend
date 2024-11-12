@@ -43,7 +43,7 @@ export class LoginComponent {
     this.authService
       .login(this.form.value)
       .subscribe({
-        next: () => {
+        next: (value) => {
           this.router.navigate([this.authService.urlRedirect]);
         },
         error: (error) => {

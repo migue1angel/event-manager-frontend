@@ -17,8 +17,14 @@ export function errorInterceptor(
       if (err.error instanceof ErrorEvent) {
         errorMessage = `${err.error.message}`;
       } else if (err.status >= 500) {
-        errorMessage = `Internal server error`;
+        errorMessage = `Internal server error\nInténtelo mas tarde`;
+      } else if (err.status >= 400) {
+        errorMessage = `Not found`;
+      } else if (err.statusText === 'Unknown Error') {
+        errorMessage = `Inténtelo mas tarde`;
       } else {
+        console.log(err);
+
         errorMessage = `${err.error.message}`;
       }
 

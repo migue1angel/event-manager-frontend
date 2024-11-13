@@ -3,7 +3,7 @@ import {
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthResponseInterface } from '../../models/auth/auth-response.model';
+import { AuthResponseInterface } from '../../models/auth/auth-response.interface';
 
 @Injectable({
   providedIn: 'root',

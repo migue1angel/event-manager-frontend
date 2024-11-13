@@ -19,6 +19,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { SharedModule } from './shared/shared.module';
 import { errorInterceptor } from './interceptors/error.interceptor';
+import { authHeadersInterceptor } from './interceptors/auth-headers.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { errorInterceptor } from './interceptors/error.interceptor';
   ],
   providers: [
     provideHttpClient(
-      withInterceptors([errorInterceptor])
+      withInterceptors([errorInterceptor, authHeadersInterceptor])
     ),
   ],
   bootstrap: [AppComponent]

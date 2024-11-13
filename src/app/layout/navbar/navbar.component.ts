@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent implements OnInit {
+  private readonly authService = inject(AuthService);
+  protected get currentUser() {
+    return this.authService.currentUser;
+  }
   items: any[] = [];
   profileItems: any[] = [];
   ngOnInit() {

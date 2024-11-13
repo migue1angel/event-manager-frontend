@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -6,28 +6,38 @@ import {
   map,
   Observable,
   of,
-  switchMap,
   tap,
   throwError,
 } from 'rxjs';
-import { AuthResponseInterface } from '../../models/auth/auth-response.model';
+import { AuthResponseInterface } from '../../models/auth/auth-response.interface';
 import { LoginModel } from '../../models/auth/login.model';
 import { UserInterface } from '../../models/auth/user.interface';
+import { AuthStatus } from '../../shared/enums/auth-status.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUser?: UserInterface;
+  private _currentUser?: UserInterface;
+  private _authStatus:AuthStatus = AuthStatus.checking;
   private readonly router = inject(Router);
   private readonly httpClient = inject(HttpClient);
   url = 'http://localhost:3000/auth';
 
-  saveUrlRedirect() {
-    sessionStorage.setItem('urlRedirect', this.router.url);
+  saveUrlRedirect(url:string) {
+    sessionStorage.setItem('urlRedirect', url);
   }
+
   get urlRedirect() {
     return sessionStorage.getItem('urlRedirect') ?? '/';
+  }
+
+  get authStatus(): AuthStatus {
+    return this._authStatus;
+  }
+
+  get currentUser(): UserInterface | undefined {
+    return this._currentUser;
   }
 
   set token(value: string) {
@@ -41,14 +51,14 @@ export class AuthService {
     const url = `${this.url}/google/login`;
     window.location.href = `${url}`;
   }
-
-  // todo:Guardar el usuario que inicio sesión y el estado de la sesión
+  //todo: refactorizar los metodos de login y register
   login(credentials: LoginModel): Observable<AuthResponseInterface> {
     const url = `${this.url}/login`;
 
     return this.httpClient.post<AuthResponseInterface>(url, credentials).pipe(
       tap((response) => (this.token = response.token)),
-      tap((response) => (this.currentUser = response.user)),
+      tap((response) => (this._currentUser = response.user)),
+      tap(() => (this._authStatus = AuthStatus.authenticated)),
       catchError(() => throwError(() => 'Invalid credentials'))
     );
   }
@@ -60,11 +70,21 @@ export class AuthService {
 
   validateToken(): Observable<boolean> {
     const url = `${this.url}/validate-token`;
+    if (!this.token) {
+      this._authStatus = AuthStatus.unauthenticated;
+      return of(false);
+    }
+
+    // interceptor se encarga de enviar el token en la header
     return this.httpClient.get<AuthResponseInterface>(url).pipe(
       tap((response) => (this.token = response.token)),
-      tap((response) => (this.currentUser = response.user)),
+      tap((response) => (this._currentUser = response.user)),
+      tap(() => (this._authStatus = AuthStatus.authenticated)),
       map(() => true),
-      catchError(() => of(false))
+      catchError(() => {
+        this._authStatus = AuthStatus.unauthenticated;
+        return of(false)
+      })
     );
   }
 }

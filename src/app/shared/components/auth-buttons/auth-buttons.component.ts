@@ -12,12 +12,12 @@ export class AuthButtonsComponent {
   private readonly authService = inject(AuthService);
 
   redirectLogin() {
-    this.authService.saveUrlRedirect();
+    // this.authService.saveUrlRedirect();
     this.router.navigate(['auth/login']);
   }
 
   redirectSignUp() {
-    this.authService.saveUrlRedirect();
+    // this.authService.saveUrlRedirect();
     this.router.navigate(['auth/sign-up']);
   }
 }

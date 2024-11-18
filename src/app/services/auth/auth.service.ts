@@ -50,7 +50,8 @@ export class AuthService {
 
     return this.httpClient.post<AuthResponseInterface>(url, credentials).pipe(
       tap((response) => this.setAuthentication(response)),
-      catchError(() => throwError(() => 'Invalid credentials'))
+      catchError((error) => {        
+        return throwError(() => error)})
     );
   }
 

@@ -8,12 +8,14 @@ import { ErrorMessageDirective } from './directives/error-message.directive';
 import { MapComponent } from './components/map/map.component';
 import { MessageService } from 'primeng/api';
 import { CustomLabelDirective } from './directives/custom-label.directive';
+import { HomeComponent } from './components/home/home.component';
 
 
 
 @NgModule({
   declarations: [
     AuthButtonsComponent,
+    HomeComponent,
     ErrorMessageDirective,
     CustomLabelDirective,
     MapComponent

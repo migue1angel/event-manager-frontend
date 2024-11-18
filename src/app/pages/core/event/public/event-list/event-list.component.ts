@@ -28,8 +28,8 @@ export class EventListComponent implements OnInit {
     {
       id: '1000',
       code: 'f230fh0g3',
-      name: 'Primer evento de prueba',
-      description: 'Descripción para el evento de prueba 1',
+      name: 'test event ',
+      description: 'Descripción para el evento de prueba  lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi.  lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, eligendi. ',
       image: 'bamboo-watch.jpg',
       price: 65,
       category: 'Educativo',

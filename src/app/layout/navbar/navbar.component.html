@@ -1,29 +1,15 @@
 <p-menubar [model]="items">
   <ng-template pTemplate="item" let-item let-root="root">
-    <a
-      [routerLink]="item.route"
-      pRipple
-      class="flex align-items-center p-menuitem-link"
-    >
+    <a [routerLink]="item.route" pRipple class="flex align-items-center p-menuitem-link">
       <span [class]="item.icon"></span>
       <span class="ml-2">{{ item.label }}</span>
-      <p-badge
-        *ngIf="item.badge"
-        [ngClass]="{ 'ml-auto': !root, 'ml-2': root }"
-        [value]="item.badge"
-      />
-      <span
-        *ngIf="item.shortcut"
-        class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1"
-        >{{ item.shortcut }}</span
-      >
-      <i
-        *ngIf="item.items"
-        [ngClass]="[
+      <p-badge *ngIf="item.badge" [ngClass]="{ 'ml-auto': !root, 'ml-2': root }" [value]="item.badge" />
+      <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{
+        item.shortcut }}</span>
+      <i *ngIf="item.items" [ngClass]="[
           'pi',
           root ? 'pi-angle-down ml-2' : 'pi-angle-right ml-auto'
-        ]"
-      ></i>
+        ]"></i>
     </a>
   </ng-template>
 
@@ -31,16 +17,25 @@
     <div class="flex align-items-center gap-2">
       <p-iconField iconPosition="left">
         <p-inputIcon styleClass="pi pi-search" />
-        <input
-          type="text"
-          pInputText
-          placeholder="Search"
-          class="w-3rem sm:w-5rem md:w-8rem lg:w-11rem"
-        />
+        <input type="text" pInputText placeholder="Search" class="w-3rem sm:w-5rem md:w-8rem lg:w-11rem" />
       </p-iconField>
       <app-theme></app-theme>
       @if(currentUser){
-      <p-menu #menu [model]="profileItems" [popup]="true" />
+      <p-menu #menu [model]="profileItems" [popup]="true">
+        <ng-template pTemplate="items" let-item>
+          @if (item.route) {
+          <div [routerLink]="item.route" class="flex ml-2 align-items-center gap-2 cursor-pointer"> <span
+              [class]="item.icon"></span>
+            <p>{{item.label}}</p>
+          </div>
+          }@else{
+          <div (click)="logout()" class="flex ml-2 align-items-center gap-2 cursor-pointer"> <span
+              [class]="item.icon"></span>
+            <p>{{item.label}}</p>
+          </div>
+          }
+        </ng-template>
+      </p-menu>
       <p-button (onClick)="menu.toggle($event)" icon="pi pi-user" />
       }@else{
       <app-auth-buttons></app-auth-buttons>

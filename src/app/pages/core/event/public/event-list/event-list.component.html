@@ -13,8 +13,8 @@
                         <img class="block xl:block mx-auto border-round w-full"
                             [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + item.image"
                             [alt]="item.name" />
-                        <p-tag [value]="item.date" [severity]="getSeverity(item)" class="absolute"
-                            [style.left.px]="4" [style.top.px]="4" />
+                        <p-tag [value]="item.date" [severity]="getSeverity(item)" class="absolute" [style.left.px]="4"
+                            [style.top.px]="4" />
                     </div>
                     <div
                         class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
@@ -23,9 +23,8 @@
                                 <span class="font-medium text-secondary text-sm">{{ item.category }}</span>
                                 <div class="text-lg font-medium text-900 mt-2">{{ item.name }}</div>
                             </div>
-                            <div class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2">
-                                <!-- todo -->
-                                <p >{{item.description}}
+                            <div class="surface-0 flex align-items-start gap-2 justify-content-center py-1 px-2 max-h-5rem overflow-hidden">
+                                <p class="">{{item.description}}
                                 </p>
                             </div>
                         </div>
@@ -33,9 +32,8 @@
                             <span class="text-xl font-semibold text-900">{{ '$' + item.price }}</span>
                             <div class="flex flex-row-reverse md:flex-row gap-2">
                                 <p-button icon="pi pi-save" [outlined]="true" />
-                                <p-button icon="pi pi-info"
-                                    class="flex-auto md:flex-initial white-space-nowrap" label="Ver a detalle"
-                                    [disabled]="item.inventoryStatus === 'OUTOFSTOCK'" />
+                                <p-button icon="pi pi-info" class="flex-auto md:flex-initial white-space-nowrap"
+                                    label="Ver a detalle" [disabled]="item.inventoryStatus === 'OUTOFSTOCK'" />
                             </div>
                         </div>
                     </div>
@@ -66,9 +64,8 @@
                         <div class="flex flex-column gap-4 mt-4">
                             <span class="text-2xl font-semibold">{{ '$' + product.price }}</span>
                             <div class="flex gap-2">
-                                <p-button icon="pi pi-info"
-                                    class="flex-auto md:flex-initial white-space-nowrap" label="Ver a detalle"
-                                    [disabled]="product.inventoryStatus === 'OUTOFSTOCK'" />
+                                <p-button icon="pi pi-info" class="flex-auto md:flex-initial white-space-nowrap"
+                                    label="Ver a detalle" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'" />
                                 <p-button icon="pi pi-save" [outlined]="true" />
                             </div>
                         </div>
@@ -77,4 +74,4 @@
             </div>
         </div>
     </ng-template>
-</p-dataView>   
+</p-dataView>

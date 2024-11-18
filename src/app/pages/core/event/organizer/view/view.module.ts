@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ViewRoutingModule } from './view-routing.module';
 import { CardModule } from 'primeng/card';
-import { EmailComponent } from './email/email.component';
+import { EmailComponent } from '../../components/email/email.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';

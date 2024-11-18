@@ -18,19 +18,19 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Home',
         icon: 'pi pi-home',
-        route: 'core/event/public/home',
+        route: '/home',
       },
       {
-        label: 'Features',
-        icon: 'pi pi-star',
-        route: 'core/event/public/home',
+        label: 'Eventos',
+        icon: 'pi pi-tag',
+        route: 'core/event/public/event-list',
       },
       {
-        label: 'Projects',
+        label: 'Pendiente',
         icon: 'pi pi-search',
         items: [
           {
-            label: 'Core',
+            label: 'Todos los eventos',
             icon: 'pi pi-bolt',
             route: 'core/event/public/event-list',
           },
@@ -52,26 +52,22 @@ export class NavbarComponent implements OnInit {
           },
         ],
       },
-      {
-        label: 'Contact',
-        icon: 'pi pi-envelope',
-        badge: '3',
-      },
     ];
     this.profileItems = [
       {
-        label: 'Options',
-        items: [
-          {
-            label: 'Refresh',
-            icon: 'pi pi-refresh',
-          },
-          {
-            label: 'Export',
-            icon: 'pi pi-upload',
-          },
-        ],
+        label: 'Perfil',
+        icon: 'pi pi-user',
+        route: 'auth/profile',
+      },
+      {
+        label: 'Cerrar sesión',
+        icon: 'pi pi-sign-out',
       },
     ];
+  }
+
+  logout(){
+    this.authService.logout();
+    
   }
 }

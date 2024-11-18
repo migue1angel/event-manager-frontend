@@ -47,6 +47,7 @@ export class LoginComponent {
           this.router.navigate([this.authService.urlRedirect]);
         },
         error: (error) => {
+          
           this.messageService.add({
             severity: 'error',
             summary: 'Error',

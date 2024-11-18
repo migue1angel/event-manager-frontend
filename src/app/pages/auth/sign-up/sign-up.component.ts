@@ -5,7 +5,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
-import { PrimeIcons } from 'primeng/api';
+import { MessageService, PrimeIcons } from 'primeng/api';
 import { UsersHttpService } from '../../../services/auth/users-http.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -17,6 +17,7 @@ import { AuthEnum } from '../../../shared/enums';
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
+  private readonly messageService = inject(MessageService);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   protected AuthEnum = AuthEnum;
@@ -47,9 +48,20 @@ export class SignUpComponent {
     this.register();
   }
   register() {
-    this.authService.register(this.form.value).subscribe((response) => {
-      this.authService.token = response.token;
-      this.router.navigate([this.authService.urlRedirect]);
+    this.authService.register(this.form.value).subscribe({
+      next: (value) => {
+        this.router.navigate([this.authService.urlRedirect]);
+      },
+      error: (error) => {
+        console.log(error);
+        
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${error}`,
+          life: 3000,
+        });
+      },
     });
   }
 

@@ -6,7 +6,6 @@ import {ToastModule} from "primeng/toast";
 import {StepperModule} from "primeng/stepper";
 import {StepsModule} from "primeng/steps";
 import {Button} from "primeng/button";
-import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({

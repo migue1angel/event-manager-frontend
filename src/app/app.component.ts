@@ -9,9 +9,11 @@ import { AuthStatus } from './shared/enums/auth-status.enum';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.validateToken().subscribe();
+  }
   title = 'event-manager-frontend';
-  // private readonly authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
   // private readonly router = inject(Router);
   // ngOnInit(): void {
   //   this.authService.validateToken().subscribe(() => {

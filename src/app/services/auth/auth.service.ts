@@ -1,14 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  catchError,
-  map,
-  Observable,
-  of,
-  tap,
-  throwError,
-} from 'rxjs';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { AuthResponseInterface } from '../../models/auth/auth-response.interface';
 import { LoginModel } from '../../models/auth/login.model';
 import { UserInterface } from '../../models/auth/user.interface';
@@ -19,12 +12,11 @@ import { AuthStatus } from '../../shared/enums/auth-status.enum';
 })
 export class AuthService {
   private _currentUser?: UserInterface;
-  private _authStatus:AuthStatus = AuthStatus.checking;
-  private readonly router = inject(Router);
+  private _authStatus: AuthStatus = AuthStatus.checking;
   private readonly httpClient = inject(HttpClient);
   url = 'http://localhost:3000/auth';
 
-  saveUrlRedirect(url:string) {
+  saveUrlRedirect(url: string) {
     sessionStorage.setItem('urlRedirect', url);
   }
 
@@ -47,25 +39,30 @@ export class AuthService {
   get token(): string | null {
     return sessionStorage.getItem('token');
   }
+
   googleLogin() {
     const url = `${this.url}/google/login`;
     window.location.href = `${url}`;
   }
-  //todo: refactorizar los metodos de login y register
+
   login(credentials: LoginModel): Observable<AuthResponseInterface> {
     const url = `${this.url}/login`;
 
     return this.httpClient.post<AuthResponseInterface>(url, credentials).pipe(
-      tap((response) => (this.token = response.token)),
-      tap((response) => (this._currentUser = response.user)),
-      tap(() => (this._authStatus = AuthStatus.authenticated)),
+      tap((response) => this.setAuthentication(response)),
       catchError(() => throwError(() => 'Invalid credentials'))
     );
   }
 
   register(payload: any): Observable<AuthResponseInterface> {
     const url = `${this.url}/register`;
-    return this.httpClient.post<AuthResponseInterface>(url, payload);
+    return this.httpClient
+      .post<AuthResponseInterface>(url, payload)
+      .pipe(
+        tap((response) => this.setAuthentication(response)),
+        catchError(() => throwError(() => 'Invalid request'))
+      );
+
   }
 
   validateToken(): Observable<boolean> {
@@ -77,14 +74,24 @@ export class AuthService {
 
     // interceptor se encarga de enviar el token en la header
     return this.httpClient.get<AuthResponseInterface>(url).pipe(
-      tap((response) => (this.token = response.token)),
-      tap((response) => (this._currentUser = response.user)),
-      tap(() => (this._authStatus = AuthStatus.authenticated)),
+      tap((response) => this.setAuthentication(response)),
       map(() => true),
       catchError(() => {
         this._authStatus = AuthStatus.unauthenticated;
-        return of(false)
+        return of(false);
       })
     );
+  }
+
+  private setAuthentication(response: AuthResponseInterface) {
+    this.token = response.token;
+    this._currentUser = response.user;
+    this._authStatus = AuthStatus.authenticated;
+  }
+
+  logout() {
+    sessionStorage.removeItem('token');
+    this._currentUser = undefined;
+    this._authStatus = AuthStatus.unauthenticated;
   }
 }

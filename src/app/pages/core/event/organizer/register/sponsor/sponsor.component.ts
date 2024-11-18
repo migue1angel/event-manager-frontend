@@ -33,14 +33,14 @@ export class SponsorComponent implements OnInit {
 
   buildForm() {
     this.form = this.formBuilder.group({
-      sponsors: this.formBuilder.array([], [Validators.required,Validators.minLength(1)]),
+      sponsors: this.formBuilder.array([], [Validators.required,Validators.maxLength(1)]),
     });
   }
 
   buildSponsorForm() {
     this.sponsorForm = this.formBuilder.group({
       name: [null, [Validators.required]],
-      photo: [null,[Validators.required]],
+      photo: [null],
     });
   }
 
@@ -66,6 +66,7 @@ export class SponsorComponent implements OnInit {
   removeSponsor(index:number){
     this.sponsors.removeAt(index)
   }
+  
   onSubmit() {
     this.form.markAllAsTouched();
     if (this.form.valid) {

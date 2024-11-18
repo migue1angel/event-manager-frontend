@@ -11,6 +11,7 @@ export function errorInterceptor(
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> {
   return next(req).pipe(
+
     catchError((err: HttpErrorResponse) => {
       let errorMessage: string = '';
 

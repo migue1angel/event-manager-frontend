@@ -7,7 +7,8 @@ import {
 } from '@angular/forms';
 import { LngLat } from 'maplibre-gl';
 import { MessageService } from 'primeng/api';
-import { AddressEnum, ValidateFormEnum } from '../../../../../../shared/enums';
+import { AddressEnum } from '../../../../../../shared/enums';
+import { MessageValidationService } from '../../../../../../services/core/message-validation.service';
 
 @Component({
   selector: 'app-address',
@@ -20,7 +21,8 @@ export class AddressComponent {
   @Output() formOutput = new EventEmitter();
 
   private readonly formBuilder = inject(FormBuilder);
-  private messageService = inject(MessageService);
+  private readonly messageService = inject(MessageService);
+  private readonly validationMessageService = inject(MessageValidationService);
   protected AddressEnum = AddressEnum;
 
   constructor() {
@@ -47,11 +49,11 @@ export class AddressComponent {
     if (this.form.valid) {
       this.formOutput.emit(this.form.value);
     } else {
-      this.messageService.add({
-        severity: ValidateFormEnum.severity,
-        detail: ValidateFormEnum.message,
-        life: 3000,
-      });
+      // this.messageService.add({
+      //   severity: ValidateFormEnum.severity,
+      //   detail: ValidateFormEnum.message, 
+      //   life: validateForm.life,});
+      this.validationMessageService.showMessage();
     }
   }
 

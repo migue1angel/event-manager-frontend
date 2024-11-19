@@ -26,6 +26,7 @@ import { AddressComponent } from './address/address.component';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
+import { MessageValidationService } from '../../../../../services/core/message-validation.service';
 @NgModule({
   declarations: [
     GeneralInformationComponent,
@@ -57,9 +58,11 @@ import { BadgeModule } from 'primeng/badge';
     ToastModule,
     ButtonModule, 
     AvatarModule,
-    BadgeModule
+    BadgeModule,
   ],
-
-  providers:[MessageService]
+  providers: [
+    MessageService,
+    MessageValidationService
+  ]
 })
 export class RegisterModule { }

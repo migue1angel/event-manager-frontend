@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-12 map">
-    <app-map class="col-6" (outputLngLat)="getLngLAt($event)"></app-map>
+    <interactive-map class="col-6" (outputLngLat)="getLngLAt($event)"></interactive-map>
   </div>
 
   <div [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="grid p-fluid">
@@ -44,7 +44,7 @@
     </div>
 
     <!-- venue  -->
-    <div class="field col-12">
+    <div class="field col-12 md:col-6">
       <label appCustomLabel [label]="AddressEnum.venue" for="venue"></label>
       <input id="venue" formControlName="venue" type="text" pInputText />
       <span
@@ -56,7 +56,7 @@
     </div>
 
     <!-- Reference -->
-    <div class="field col-12">
+    <div class="field col-12 md:col-6">
       <label appCustomLabel [label]="AddressEnum.reference" for="reference"></label>
       <input
         type="text"

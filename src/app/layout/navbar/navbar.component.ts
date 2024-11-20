@@ -23,7 +23,18 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Eventos',
         icon: 'pi pi-tag',
-        route: 'core/event/public/event-list',
+        items: [
+          {
+            label: 'Explorar',
+            icon: 'pi pi-globe',
+            route: 'core/event/public/event-list',
+          },
+          {
+            label: 'Mis eventos',
+            icon: 'pi pi-calendar',
+            route: 'core/event/organizer/view/event-list',
+          },
+        ],
       },
       {
         label: 'Pendiente',
@@ -66,8 +77,7 @@ export class NavbarComponent implements OnInit {
     ];
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
-    
   }
 }

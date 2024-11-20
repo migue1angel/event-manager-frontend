@@ -14,6 +14,7 @@ export class AuthService {
   private _currentUser?: UserInterface;
   private _authStatus: AuthStatus = AuthStatus.checking;
   private readonly httpClient = inject(HttpClient);
+  private readonly router = inject(Router);
   url = 'http://localhost:3000/auth';
 
   saveUrlRedirect(url: string) {
@@ -50,26 +51,25 @@ export class AuthService {
 
     return this.httpClient.post<AuthResponseInterface>(url, credentials).pipe(
       tap((response) => this.setAuthentication(response)),
-      catchError((error) => {        
-        return throwError(() => error)})
+      catchError((error) => {
+        return throwError(() => error);
+      })
     );
   }
 
   register(payload: any): Observable<AuthResponseInterface> {
     const url = `${this.url}/register`;
-    return this.httpClient
-      .post<AuthResponseInterface>(url, payload)
-      .pipe(
-        tap((response) => this.setAuthentication(response)),
-        catchError(() => throwError(() => 'Invalid request'))
-      );
-
+    return this.httpClient.post<AuthResponseInterface>(url, payload).pipe(
+      tap((response) => this.setAuthentication(response)),
+      catchError(() => throwError(() => 'Invalid request'))
+    );
   }
 
   validateToken(): Observable<boolean> {
     const url = `${this.url}/validate-token`;
     if (!this.token) {
       this._authStatus = AuthStatus.unauthenticated;
+      this._currentUser = undefined;
       return of(false);
     }
 
@@ -78,7 +78,7 @@ export class AuthService {
       tap((response) => this.setAuthentication(response)),
       map(() => true),
       catchError(() => {
-        this._authStatus = AuthStatus.unauthenticated;
+        this.logout();
         return of(false);
       })
     );
@@ -94,5 +94,6 @@ export class AuthService {
     sessionStorage.removeItem('token');
     this._currentUser = undefined;
     this._authStatus = AuthStatus.unauthenticated;
+    this.router.navigateByUrl('/auth/login');
   }
 }

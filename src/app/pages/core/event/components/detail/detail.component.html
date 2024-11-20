@@ -1,14 +1,104 @@
-<div class="m-3">
-    <h1>Nombre del evento</h1>
-
-    <div class="grid">
-
-        <div class="col-12 md:col-6">
-            <p>Descripcion del evento</p>
+<div class="pt-3">
+  <div class="grid p-fluid md:col-offset-1 gap-3 mt-3">
+    <div class="col-12 md:col-8 p-3 surface-50 border-round-lg">
+      <div class="grid p-fluid">
+        <div class="col-12 lg:col-6 field">
+          <label appCustomLabel label="Nombre" for="venue"></label>
+          <input id="venue" value="event.nombre" type="text" pInputText />
         </div>
 
-        <div class="col-12 md:col-6">
-            <p>Descripcion del evento</p>
+        <div class="col-12 lg:col-6 field">
+          <label appCustomLabel label="Categoría" for="venue"></label>
+          <input id="venue" value="event.Categoría" type="text" pInputText />
         </div>
+
+        <div class="w-full">
+          <p-carousel
+            [value]="products"
+            [numVisible]="1"
+            [numScroll]="1"
+            [circular]="true"
+            [responsiveOptions]="responsiveOptions"
+            class="w-full"
+          >
+            <ng-template let-product pTemplate="item">
+              <div class="border-1 surface-border border-round m-2 p-3">
+                <div class="mb-3">
+                  <div class="relative col-8 col-offset-2">
+                    <img
+                      src="https://images.squarespace-cdn.com/content/v1/63293cc62a2fee42318123d5/1663646922071-AO7D1JH4GFXABUC5FGWG/Events_Colorful.png"
+                      [alt]="product.name"
+                      class="w-full border-round max-h-18rem"
+                    />
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
     </div>
+
+    <div class="col-12 md:col-3 p-3 surface-50 border-round-lg">
+      <div class="grid p-fluid">
+        <div class="col-12 m-0">
+          <p class="text-xl"><b>Precio:</b> $54</p>
+          <p class="text-xl"><b>Tickets disponibles:</b> 10</p>
+          <p class="text-xl"><b>Organizador:</b></p>
+          <p class="text-xl">Some Organizer</p>
+        </div>
+        <div class="col-12">
+          <p class="text-xl text-center"><b>Sponsors</b></p>
+          <p-carousel
+            [value]="products"
+            [numVisible]="1"
+            [numScroll]="1"
+            [circular]="true"
+            orientation="horizontal"
+            [showNavigators]="false"
+            [showIndicators]="false"
+            autoplayInterval="3000"
+            [responsiveOptions]="responsiveOptions"
+            class="w-full"
+          >
+            <ng-template let-product pTemplate="item">
+              <div class="border-1 surface-border border-round m-1 p-3">
+                <div class="relative">
+                  <img
+                    src="https://images.squarespace-cdn.com/content/v1/63293cc62a2fee42318123d5/1663646922071-AO7D1JH4GFXABUC5FGWG/Events_Colorful.png"
+                    [alt]="product.name"
+                    class="col-8 md:col-12 col-offset-2 md:col-offset-0 border-round max-h-15rem"
+                  />
+                </div>
+                <p class="text-lg text-center">Sponsor name</p>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-11 p-3 surface-50 border-round-lg">
+      <div class="grid p-fluid">
+        <div class="col-12 field">
+          <label appCustomLabel label="Descripción" for="venue"></label>
+          <textarea rows="5" cols="30" pInputTextarea></textarea>
+        </div>
+
+        <div class="col-12 lg:col-6 field">
+          <label appCustomLabel label="Lugar del evento:" for="venue"></label>
+          <input id="venue" value="event.address" type="text" pInputText />
+        </div>
+
+        <div class="col-12 lg:col-6 field">
+          <label appCustomLabel label="Referencia" for="venue"></label>
+          <input id="venue" value="event.reference" type="text" pInputText />
+        </div>
+
+        <div class="col-12 h-30rem">
+          <app-map></app-map>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

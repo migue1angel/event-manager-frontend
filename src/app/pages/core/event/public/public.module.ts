@@ -16,7 +16,6 @@ import { DetailComponent } from '../components/detail/detail.component';
   declarations: [
     EventListComponent,
     EventDetailComponent,
-    DetailComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +25,8 @@ import { DetailComponent } from '../components/detail/detail.component';
     SidebarModule,
     DataViewModule,
     TagModule,
-    RatingModule
+    RatingModule,
+    DetailComponent
   ],
 })
 export class PublicModule { }

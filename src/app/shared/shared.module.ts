@@ -4,9 +4,10 @@ import { ButtonModule } from 'primeng/button';
 import {  ButtonGroupModule } from 'primeng/buttongroup';
 import { AuthButtonsComponent } from './components/auth-buttons/auth-buttons.component';
 import { ErrorMessageDirective } from './directives/error-message.directive';
-import { MapComponent } from './components/map/map.component';
+import { InteractiveMapComponent } from './components/interactive-map/interactive-map.component';
 import { CustomLabelDirective } from './directives/custom-label.directive';
 import { HomeComponent } from './components/home/home.component';
+import { MapComponent } from './components/map/map.component';
 
 
 
@@ -16,13 +17,15 @@ import { HomeComponent } from './components/home/home.component';
     HomeComponent,
     ErrorMessageDirective,
     CustomLabelDirective,
-    MapComponent,
+    InteractiveMapComponent,
+    MapComponent
   ],
   exports:[
     AuthButtonsComponent,
-    MapComponent,
+    InteractiveMapComponent,
     ErrorMessageDirective,
-    CustomLabelDirective
+    CustomLabelDirective,
+    MapComponent
   ],
   imports: [
     CommonModule,

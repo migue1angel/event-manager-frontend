@@ -69,6 +69,21 @@ export class SponsorComponent implements OnInit {
     this.sponsors.removeAt(index); // Eliminar de la lista
   }
 
+  onSubmit() {
+    console.log(this.form.value);
+  }
+
+  onSubmit2(file: any) {
+    console.log(file);
+    console.log(file.target.files);
+  }
+
+  filetest: any;
+  takefile(event: any) {
+    this.filetest = event.target.files[0];
+    // console.log(event.target.files[0]);
+    console.log(this.filetest);
+  }
   // Eliminar sponsor
   removeSponsor(index: number) {
     this.sponsors.removeAt(index); // Quitar del array

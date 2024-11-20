@@ -52,3 +52,9 @@
     </div>
   </div>
 </div>
+
+<!-- implementación de prueba -->
+<input type="file" #fileInput (change)="takefile($event)">
+
+<button (click)="onSubmit2(fileInput.value)">send</button>
+<button (click)="onSubmit()">send1</button>

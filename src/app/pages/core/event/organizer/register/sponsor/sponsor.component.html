@@ -1,60 +1,104 @@
-<div class="field col-12">
-  <div class="field col-12 flex justify-content-center">
-    <h1>Agregar Sponsors</h1>
-  </div>
+<div class="surface-ground p-4">
+  <p-toast></p-toast>
+  <div class="surface-card p-4 shadow-2 border-round">
+    <div class="text-center mb-5">
+      <div class="text-900 text-3xl font-medium mb-3">Agregar Sponsors</div>
+    </div>
 
-  <!-- Formulario -->
-  <div class="field col-12">
-    <form [formGroup]="sponsorForm" (ngSubmit)="addSponsor()" class="grid p-fluid">
+    <!-- Formulario -->
+    <form [formGroup]="sponsorForm" (ngSubmit)="addSponsor()" class="flex flex-column align-items-center">
       <!-- Campo Nombre -->
-      <div class="field col-6">
-        <label>Nombre:</label>
-        <input pInputText id="name" formControlName="name" />
+      <div class="field w-full max-w-30rem mb-4">
+        <label for="name" class="block text-900 font-medium mb-2">Nombre:</label>
+        <input pInputText id="name" formControlName="name" class="w-full p-inputtext-lg" />
+        <small *ngIf="sponsorForm.get('name')?.invalid && sponsorForm.get('name')?.touched" class="p-error">El nombre es requerido</small>
       </div>
 
       <!-- Campo Foto -->
-      <div class="field col-6">
-        <label>Foto:</label>
-        <p-fileUpload
+      <div class="field w-full max-w-30rem">
+        <label class="block text-900 font-medium mb-2">Foto:</label>
+        <p-fileUpload #fileUpload
           name="demo[]"
-          (onSelect)="onSelectImage($event)"
-          (onClear)="onClear()"
           [multiple]="false"
           accept="image/*"
           maxFileSize="1000000"
           [showUploadButton]="false"
           [showCancelButton]="false"
-          chooseLabel="Seleccionar imagen">
+          (onSelect)="onSelectFile($event)"
+          (onClear)="onClear()"
+          [customUpload]="true"
+          styleClass="w-full">
+          <ng-template pTemplate="header" let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback">
+            <div class="flex flex-wrap justify-content-between align-items-center flex-1 gap-2">
+              <div class="flex gap-2">
+                <p-button (onClick)="chooseCallback($event)" icon="pi pi-images" [rounded]="true" [outlined]="true" />
+                <p-button (onClick)="clearCallback()" icon="pi pi-times" [rounded]="true" [outlined]="true" severity="danger" [disabled]="!files || files.length === 0" />
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="content" let-files>
+            <div *ngIf="files?.length > 0" class="flex flex-wrap p-0 sm:p-5 gap-5">
+              <div *ngFor="let file of files; let i = index" class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3">
+                <div>
+                  <img role="presentation" [alt]="file.name" [src]="file.objectURL" width="100" height="100" style="object-fit: cover;" />
+                </div>
+                <span class="font-semibold">{{ file.name }}</span>
+                <div>{{ formatSize(file.size) }}</div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="empty">
+            <div class="flex align-items-center justify-content-center flex-column">
+              <i class="pi pi-cloud-upload border-2 border-circle p-5 text-8xl text-400 border-400"></i>
+              <p class="mt-4 mb-0">Arrastra y suelta imágenes aquí o haz clic para seleccionar.</p>
+            </div>
+          </ng-template>
         </p-fileUpload>
+        <small *ngIf="sponsorForm.get('file')?.invalid && sponsorForm.get('file')?.touched" class="p-error">La imagen es requerida</small>
       </div>
 
       <!-- Botón Agregar -->
-      <div class="field col-12 justify-content-center">
-        <p-button pButton label="Agregar" type="submit" icon="pi pi-plus"></p-button>
+      <div class="mt-4">
+        <p-button
+          label="Agregar"
+          type="submit"
+          icon="pi pi-plus"
+          styleClass="p-button-lg">
+        </p-button>
       </div>
     </form>
 
     <!-- Listado de sponsors -->
-    <div class="grid" *ngIf="sponsors.controls.length > 0">
-      <div class="col-12 md:col-4" *ngFor="let item of sponsors.controls; let i = index">
-        <div class="p-3 border-round shadow-2 surface-card">
+    <div class="grid mt-6" *ngIf="sponsors.controls.length > 0">
+      <div class="col-12 md:col-6 lg:col-4" *ngFor="let item of sponsors.controls; let i = index">
+        <div class="surface-card p-4 shadow-2 border-round h-full">
           <div class="flex flex-column align-items-center">
             <!-- Mostrar Imagen -->
-            <img *ngIf="item.get('photo')!.value" [src]="item.get('photo')!.value" width="150" class="mb-2" alt="Imagen del Sponsor" />
-            <p>{{ item.get('name')!.value }}</p>
-          </div>
-          <div class="flex justify-content-center mt-3">
-            <button pButton type="button" label="Eliminar" (click)="removeSponsor(i)" class="p-button-danger mr-2"></button>
-            <button pButton type="button" label="Editar" (click)="editSponsor(i)" class="p-button-secondary"></button>
+            <div class="mb-3">
+              <img *ngIf="item.get('file')!.value"
+                   [src]="getFileUrl(item.get('file')!.value)"
+                   class="border-circle"
+                   style="width: 150px; height: 150px; object-fit: cover;"
+                   alt="Imagen del Sponsor" />
+            </div>
+            <div class="text-900 text-xl font-medium mb-3">{{ item.get('name')!.value }}</div>
+
+            <!-- Botones de acción -->
+            <div class="flex gap-2">
+              <p-button
+                icon="pi pi-trash"
+                (onClick)="removeSponsor(i)"
+                styleClass="p-button-danger p-button-rounded">
+              </p-button>
+              <p-button
+                icon="pi pi-pencil"
+                (onClick)="editSponsor(i)"
+                styleClass="p-button-secondary p-button-rounded">
+              </p-button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- implementación de prueba -->
-<input type="file" #fileInput (change)="takefile($event)">
-
-<button (click)="onSubmit2(fileInput.value)">send</button>
-<button (click)="onSubmit()">send1</button>

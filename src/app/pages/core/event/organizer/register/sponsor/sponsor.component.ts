@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
 import { MessageService } from 'primeng/api';
+import { SponsorEnum } from '../../../../../../shared/enums/fields.enum';
 
 @Component({
   selector: 'app-sponsor',
@@ -15,66 +16,61 @@ throw new Error('Method not implemented.');
 }
   @ViewChild('fileUpload') fileUpload!: FileUpload;
 
-  sponsorForm!: FormGroup;
-  form!: FormGroup;
+  protected sponsorForm!: FormGroup;
+  protected form!: FormGroup;
+  protected readonly formBuilder = inject(FormBuilder)
+  protected readonly messageService = inject(MessageService);
+  protected SponsorEnum = SponsorEnum;
+  
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) {
+  constructor() {
     this.buildForm();
     this.buildSponsorForm();
   }
 
   ngOnInit(): void {}
 
-  // Construir el formulario principal
   buildForm() {
-    this.form = this.fb.group({
-      sponsors: this.fb.array([]), // Lista de sponsors
+    this.form = this.formBuilder.group({
+      sponsors: this.formBuilder.array([]), 
     });
   }
 
-  // Construir formulario para agregar sponsors
   buildSponsorForm() {
-    this.sponsorForm = this.fb.group({
+    this.sponsorForm = this.formBuilder.group({
       name: ['', Validators.required],
-      file: [null, Validators.required], // Campo para el archivo, ahora es requerido
+      file: [null, Validators.required],
     });
   }
 
-  // Método para manejar la selección del archivo
   onSelectFile(event: any) {
-    const file = event.files[0]; // Seleccionamos el primer archivo subido
-    this.sponsorForm.get('file')?.setValue(file); // Guardar el archivo directamente en el formulario
-    this.sponsorForm.get('file')?.updateValueAndValidity(); // Actualizar la validez del campo
+    const file = event.files[0];
+    this.sponsorForm.get('file')?.setValue(file);
+    this.sponsorForm.get('file')?.updateValueAndValidity(); 
   }
 
-  // Limpiar los datos del archivo
   onClear() {
-    this.sponsorForm.get('file')?.setValue(null); // Limpiar campo de archivo
-    this.sponsorForm.get('file')?.updateValueAndValidity(); // Actualizar la validez del campo
-    this.fileUpload.clear(); // Limpiar el componente FileUpload
+    this.sponsorForm.get('file')?.setValue(null);
+    this.sponsorForm.get('file')?.updateValueAndValidity(); 
+    this.fileUpload.clear();
   }
 
-  // Agregar un nuevo sponsor
   addSponsor() {
     if (this.sponsorForm.valid) {
-      this.sponsors.push(this.fb.group(this.sponsorForm.value)); // Agregar sponsor al array
-      this.sponsorForm.reset(); // Limpiar formulario
-      this.fileUpload.clear(); // Limpiar el componente FileUpload
+      this.sponsors.push(this.formBuilder.group(this.sponsorForm.value));
+      this.sponsorForm.reset(); 
+      this.fileUpload.clear(); 
       this.messageService.add({severity:'success', summary: 'Éxito', detail: 'Sponsor agregado correctamente'});
     } else {
-      // Mostrar mensaje de error si el formulario no es válido
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Por favor, complete todos los campos requeridos'});
-      // Marcar los campos como tocados para mostrar los errores de validación
       this.sponsorForm.markAllAsTouched();
     }
   }
 
-  // Obtener URL temporal para mostrar la imagen
   getFileUrl(file: File): string {
     return file ? URL.createObjectURL(file) : '';
   }
 
-  // Editar sponsor existente
   editSponsor(index: number) {
     const sponsor = this.sponsors.at(index); // Obtener sponsor seleccionado
     this.sponsorForm.patchValue(sponsor.value); // Cargar datos al formulario
@@ -84,18 +80,23 @@ throw new Error('Method not implemented.');
     }
   }
 
-  // Eliminar sponsor
   removeSponsor(index: number) {
     this.sponsors.removeAt(index); // Quitar del array
     this.messageService.add({severity:'info', summary: 'Información', detail: 'Sponsor eliminado'});
   }
 
-  // Obtener la lista de sponsors
   get sponsors(): FormArray {
     return this.form.get('sponsors') as FormArray;
   }
 
-  // Formatear el tamaño del archivo
+  get nameField (): AbstractControl{
+    return this.sponsorForm.controls['name'];
+  }
+
+  get fileField (): AbstractControl{
+    return this.sponsorForm.controls['file']
+  }
+
   formatSize(bytes: number) {
     if (bytes === 0) return '0 B';
     const k = 1024;

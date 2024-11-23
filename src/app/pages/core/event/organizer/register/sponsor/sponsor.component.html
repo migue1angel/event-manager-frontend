@@ -1,22 +1,30 @@
 <div class="surface-ground p-4">
-  <p-toast></p-toast>
-  <div class="surface-card p-4 shadow-2 border-round">
     <div class="text-center mb-5">
       <div class="text-900 text-3xl font-medium mb-3">Agregar Sponsors</div>
     </div>
 
-    <!-- Formulario -->
+    <!-- Form -->
     <form [formGroup]="sponsorForm" (ngSubmit)="addSponsor()" class="flex flex-column align-items-center">
-      <!-- Campo Nombre -->
+      <!-- name -->
       <div class="field w-full max-w-30rem mb-4">
-        <label for="name" class="block text-900 font-medium mb-2">Nombre:</label>
-        <input pInputText id="name" formControlName="name" class="w-full p-inputtext-lg" />
-        <small *ngIf="sponsorForm.get('name')?.invalid && sponsorForm.get('name')?.touched" class="p-error">El nombre es requerido</small>
+        <label appCustomLabel [label]="SponsorEnum.name" for="name">Nombre:</label>
+        <input 
+        pInputText 
+        id="name" 
+        formControlName="name" 
+        class="w-full p-inputtext-lg" 
+        />
+        <span 
+            appErrorMessage
+            [errors]="nameField.errors"
+            [dirty]="nameField.dirty"
+            [touched]="nameField.touched"
+        ></span>
       </div>
 
-      <!-- Campo Foto -->
+      <!-- Photo -->
       <div class="field w-full max-w-30rem">
-        <label class="block text-900 font-medium mb-2">Foto:</label>
+        <label appCustomLabel [label]="SponsorEnum.photo" for="photo">Foto:</label>
         <p-fileUpload #fileUpload
           name="demo[]"
           [multiple]="false"
@@ -37,15 +45,19 @@
             </div>
           </ng-template>
           <ng-template pTemplate="content" let-files>
-            <div *ngIf="files?.length > 0" class="flex flex-wrap p-0 sm:p-5 gap-5">
-              <div *ngFor="let file of files; let i = index" class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3">
-                <div>
-                  <img role="presentation" [alt]="file.name" [src]="file.objectURL" width="100" height="100" style="object-fit: cover;" />
+            @if(files?.length > 0 ){
+            <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+                @for (file of files; track $index) {
+                <div class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3">
+                  <div>
+                    <img role="presentation" [alt]="file.name" [src]="file.objectURL" width="100" height="100" style="object-fit: cover;" />
+                  </div>
+                  <span class="font-semibold">{{ file.name }}</span>
+                  <div>{{ formatSize(file.size) }}</div>
                 </div>
-                <span class="font-semibold">{{ file.name }}</span>
-                <div>{{ formatSize(file.size) }}</div>
+              }
               </div>
-            </div>
+            }
           </ng-template>
           <ng-template pTemplate="empty">
             <div class="flex align-items-center justify-content-center flex-column">
@@ -54,10 +66,14 @@
             </div>
           </ng-template>
         </p-fileUpload>
-        <small *ngIf="sponsorForm.get('file')?.invalid && sponsorForm.get('file')?.touched" class="p-error">La imagen es requerida</small>
+        <span 
+            appErrorMessage
+            [errors]="fileField.errors"
+            [dirty]="fileField.dirty"
+            [touched]="fileField.touched"
+        ></span>
       </div>
 
-      <!-- Botón Agregar -->
       <div class="mt-4">
         <p-button
           label="Agregar"
@@ -69,17 +85,20 @@
     </form>
 
     <!-- Listado de sponsors -->
-    <div class="grid mt-6" *ngIf="sponsors.controls.length > 0">
+    @if(sponsors.controls.length > 0){
+    <div class="grid mt-6">
       <div class="col-12 md:col-6 lg:col-4" *ngFor="let item of sponsors.controls; let i = index">
         <div class="surface-card p-4 shadow-2 border-round h-full">
           <div class="flex flex-column align-items-center">
             <!-- Mostrar Imagen -->
             <div class="mb-3">
-              <img *ngIf="item.get('file')!.value"
-                   [src]="getFileUrl(item.get('file')!.value)"
-                   class="border-circle"
-                   style="width: 150px; height: 150px; object-fit: cover;"
-                   alt="Imagen del Sponsor" />
+              @if(item.get('file')!.value){
+                <img
+                     [src]="getFileUrl(item.get('file')!.value)"
+                     class="border-circle"
+                     style="width: 150px; height: 150px; object-fit: cover;"
+                     alt="Imagen del Sponsor" />
+              }
             </div>
             <div class="text-900 text-xl font-medium mb-3">{{ item.get('name')!.value }}</div>
 
@@ -100,5 +119,6 @@
         </div>
       </div>
     </div>
+    }
   </div>
-</div>
+

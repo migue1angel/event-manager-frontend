@@ -5,59 +5,41 @@
         <h1 class="fadein animation-duration-2000">Registro de Eventos</h1>
       </div>
 
-  <div [formGroup]="form" (ngSubmit)="onSubmit()" class="grid p-fluid">
+      <div [formGroup]="form" (ngSubmit)="onSubmit()" class="grid p-fluid">
         <!-- Name -->
 
         <div class="field col-12">
           <label appCustomLabel [label]="GeneralInformationEnum.name" for="name"></label>
           <input id="name" formControlName="name" type="text" pInputText />
-          <span
-            appErrorMessage
-            [errors]="nameField.errors"
-            [touched]="nameField.touched"
-            [dirty]="nameField.dirty"
-          ></span>
+          <span appErrorMessage [errors]="nameField.errors" [touched]="nameField.touched"
+            [dirty]="nameField.dirty"></span>
         </div>
 
-         <!-- Description -->
+        <!-- Description -->
 
-         <div class="field col-12">
+        <div class="field col-12">
           <label appCustomLabel [label]="GeneralInformationEnum.description" for="description"></label>
           <input id="description" formControlName="description" type="text" pInputText />
-          <span
-            appErrorMessage
-            [errors]="descriptionField.errors"
-            [touched]="descriptionField.touched"
-            [dirty]="descriptionField.dirty"
-          ></span>
+          <span appErrorMessage [errors]="descriptionField.errors" [touched]="descriptionField.touched"
+            [dirty]="descriptionField.dirty"></span>
         </div>
 
         <!-- StartDate -->
 
         <div class="field col-6">
           <label appCustomLabel [label]="GeneralInformationEnum.startDate" for="startDate"></label>
-          <!-- <p-calendar [showIcon]="true" [showTime]="true" /> -->
-          <input id="startDate" formControlName="startDate" type="Date" pInputText />
-          <span
-            appErrorMessage
-            [errors]="startDateField.errors"
-            [touched]="startDateField.touched"
-            [dirty]="startDateField.dirty"
-          ></span>
+          <p-calendar formControlName="startDate" [showIcon]="true" [showTime]="true" />
+          <span appErrorMessage [errors]="startDateField.errors" [touched]="startDateField.touched"
+            [dirty]="startDateField.dirty"></span>
         </div>
 
         <!-- EndDate -->
 
         <div class="field col-6">
           <label appCustomLabel [label]="GeneralInformationEnum.endDate" for="endDate"></label>
-          <!-- <p-calendar [showIcon]="true" [showTime]="true" /> -->
-          <input id="endDate" formControlName="endDate" type="Date" pInputText />
-          <span
-            appErrorMessage
-            [errors]="endDateField.errors"
-            [touched]="endDateField.touched"
-            [dirty]="endDateField.dirty"
-          ></span>
+          <p-calendar formControlName="endDate" [showIcon]="true" [showTime]="true" />
+          <span appErrorMessage [errors]="endDateField.errors" [touched]="endDateField.touched"
+            [dirty]="endDateField.dirty"></span>
         </div>
 
         <!-- Status -->
@@ -65,25 +47,17 @@
         <div class="field col-6">
           <label appCustomLabel [label]="GeneralInformationEnum.status" for="status"></label>
           <input id="status" formControlName="status" type="text" pInputText />
-          <span
-            appErrorMessage
-            [errors]="statusField.errors"
-            [touched]="statusField.touched"
-            [dirty]="statusField.dirty"
-          ></span>
+          <span appErrorMessage [errors]="statusField.errors" [touched]="statusField.touched"
+            [dirty]="statusField.dirty"></span>
         </div>
 
-         <!-- Category -->
+        <!-- Category -->
 
-         <div class="field col-6">
+        <div class="field col-6">
           <label appCustomLabel [label]="GeneralInformationEnum.category" for="category"></label>
           <input id="category" formControlName="category" type="text" pInputText />
-          <span
-            appErrorMessage
-            [errors]="categoryField.errors"
-            [touched]="categoryField.touched"
-            [dirty]="categoryField.dirty"
-          ></span>
+          <span appErrorMessage [errors]="categoryField.errors" [touched]="categoryField.touched"
+            [dirty]="categoryField.dirty"></span>
         </div>
 
         <!-- Address -->
@@ -91,12 +65,8 @@
         <div class="field col-12">
           <label appCustomLabel [label]="GeneralInformationEnum.address" for="address"></label>
           <input id="address" formControlName="address" type="text" pInputText />
-          <span
-            appErrorMessage
-            [errors]="addressField.errors"
-            [touched]="addressField.touched"
-            [dirty]="addressField.dirty"
-          ></span>
+          <span appErrorMessage [errors]="addressField.errors" [touched]="addressField.touched"
+            [dirty]="addressField.dirty"></span>
         </div>
 
         <div class="col-12 p-fluid">
@@ -104,13 +74,9 @@
         </div>
 
         <div class="col-12">
-          <button
-            pButton
-            type="submit"
-            (click)="onSubmit()"
-            label="Guardar"
-          ></button>
+          <button pButton type="submit" (click)="onSubmit()" label="Guardar"></button>
         </div>
-        
+      </div>
+    </div>
   </div>
 </div>

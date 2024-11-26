@@ -29,7 +29,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       style:
         'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL', // style URL
       center: this.currentLngLat, // starting position [lng, lat]
-      zoom: this.zoom ?? 6, // starting zoom
+      zoom: this.zoom ?? 10, // starting zoom
     });
   }
 

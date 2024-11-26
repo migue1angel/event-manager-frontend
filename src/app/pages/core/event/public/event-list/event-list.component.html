@@ -23,7 +23,8 @@
                                 <span class="font-medium text-secondary text-sm">{{ item.category }}</span>
                                 <div class="text-lg font-medium text-900 mt-2">{{ item.name }}</div>
                             </div>
-                            <div class="surface-0 flex align-items-start gap-2 justify-content-center py-1 px-2 max-h-5rem overflow-hidden">
+                            <div
+                                class="surface-0 flex align-items-start gap-2 justify-content-center py-1 px-2 max-h-5rem overflow-hidden">
                                 <p class="">{{item.description}}
                                 </p>
                             </div>
@@ -33,7 +34,7 @@
                             <div class="flex flex-row-reverse md:flex-row gap-2">
                                 <p-button icon="pi pi-save" [outlined]="true" />
                                 <p-button icon="pi pi-info" class="flex-auto md:flex-initial white-space-nowrap"
-                                    label="Ver a detalle" [disabled]="item.inventoryStatus === 'OUTOFSTOCK'" />
+                                  [routerLink]="'/core/event/public/event-detail/'+item.id"  label="Ver a detalle" [disabled]="item.inventoryStatus === 'OUTOFSTOCK'" />
                             </div>
                         </div>
                     </div>

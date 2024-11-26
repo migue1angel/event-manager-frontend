@@ -39,7 +39,7 @@ export class EventListComponent implements OnInit {
       rating: 5
   },
     {
-      id: '1000',
+      id: '100sdf20',
       code: 'f230fh0g3',
       name: 'Primer evento de prueba',
       description: 'Descripción para el evento de prueba 1',
@@ -52,7 +52,7 @@ export class EventListComponent implements OnInit {
       rating: 5
   },
     {
-      id: '1000',
+      id: '100sdf0',
       code: 'f230fh0g3',
       name: 'Primer evento de prueba',
       description: 'Descripción para el evento de prueba 1',
@@ -82,4 +82,6 @@ export class EventListComponent implements OnInit {
             return undefined;
     }
 };
+
+
 }

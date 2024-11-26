@@ -27,6 +27,7 @@ import { SharedModule } from '../../../../../shared/shared.module';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { MessageValidationService } from '../../../../../services/core/message-validation.service';
+import { PanelModule } from 'primeng/panel';
 @NgModule({
   declarations: [
     GeneralInformationComponent,
@@ -57,8 +58,9 @@ import { MessageValidationService } from '../../../../../services/core/message-v
     MessageModule,
     ToastModule,
     ButtonModule, 
-    AvatarModule,
+    AvatarModule, 
     BadgeModule,
+    PanelModule
   ],
   providers: [
     MessageService,

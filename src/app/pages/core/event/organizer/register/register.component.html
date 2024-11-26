@@ -1,93 +1,27 @@
-<p-stepper [(activeStep)]="active" [linear]="false">
-    <!-- general information and collaborator panel-->
-    <p-stepperPanel class="min-h-full">
-        <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
-            <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
-                <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-                    [ngClass]="{
-            'bg-primary border-primary': index <= active!,
-            'surface-border': index > active!
-          }">
-                    <i class="pi pi-warehouse"></i>
-                </span>
-            </button>
-        </ng-template>
-        <ng-template pTemplate="content" let-nextCallback="nextCallback">
-            <app-general-information (formOutput)="saveData($event)"></app-general-information>
+<div class="grid my-3">
 
-            <div class="flex pt-4 justify-content-end">
-                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
-            </div>
-        </ng-template>
-    </p-stepperPanel>
+    <div class="col-12 md:col-10 md:col-offset-1">
+        <p-panel (onBeforeToggle)="saveData($event)" [showHeader]="false">
 
-    <!-- ticket type  and sponsor panel-->
-    <p-stepperPanel>
-        <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
-            <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
-                <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-                    [ngClass]="{
-            'bg-primary border-primary': index <= active!,
-            'surface-border': index > active!
-          }">
-                    <i class="pi pi-star"></i>
-                </span>
-            </button>
-        </ng-template>
+            <p-accordion [activeIndex]="0">
 
-        <ng-template pTemplate="content" let-nextCallback="nextCallback">
-            <app-sponsor></app-sponsor>
+                <p-accordionTab header="Información General" [selected]="true">
+                    <app-general-information (formOutput)="saveData($event)"></app-general-information>
 
-            <div class="flex pt-4 justify-content-end">
-                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
-            </div>
-        </ng-template>
-    </p-stepperPanel>
+                </p-accordionTab>
 
-    <p-stepperPanel>
-        <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
-            <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
-                <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-                    [ngClass]="{
-            'bg-primary border-primary': index <= active!,
-            'surface-border': index > active!
-          }">
-                    <i class="pi pi-star"></i>
-                </span>
-            </button>
-        </ng-template>
+                <p-accordionTab header="Lugar del evento">
+                    <app-address (formOutput)="saveData($event)"></app-address>
+                </p-accordionTab>
 
-        <ng-template pTemplate="content" let-nextCallback="nextCallback">
-            <app-ticket-type></app-ticket-type>
+                <p-accordionTab header="Sponsors">
+                    <app-sponsor></app-sponsor>
+                </p-accordionTab>
 
-            <div class="flex pt-4 justify-content-end">
-                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
-            </div>
-        </ng-template>
-    </p-stepperPanel>
+            </p-accordion>
 
-    <!-- address panel-->
-    <p-stepperPanel>
-        <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
-            <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
-                <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-                    [ngClass]="{
-            'bg-primary border-primary': index <= active!,
-            'surface-border': index > active!
-          }">
-                    <i class="pi pi-star"></i>
-                </span>
-            </button>
-        </ng-template>
-
-        <ng-template pTemplate="content" let-nextCallback="nextCallback">
-            <app-address (formOutput)="saveData($event)"></app-address>
-
-            <div class="flex pt-4 justify-content-end">
-                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" />
-            </div>
-        </ng-template>
-    </p-stepperPanel>
-</p-stepper>
+        </p-panel>
+    </div>
+</div>
 
 {{form.value | json}}

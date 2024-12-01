@@ -28,6 +28,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { MessageValidationService } from '../../../../../services/core/message-validation.service';
 import { PanelModule } from 'primeng/panel';
+import { PaypalComponent } from '../../components/paypal/paypal.component';
 @NgModule({
   declarations: [
     GeneralInformationComponent,
@@ -37,6 +38,7 @@ import { PanelModule } from 'primeng/panel';
     AddressComponent,
   ],
   imports: [
+    PaypalComponent,
     CommonModule,
     RegisterRoutingModule,
     SharedModule,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EventRoutingModule } from './event-routing.module';
 import {ToastModule} from "primeng/toast";
+import { PaypalComponent } from './components/paypal/paypal.component';
 
 @NgModule({
   declarations: [],

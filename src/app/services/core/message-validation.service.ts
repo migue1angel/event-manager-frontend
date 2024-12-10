@@ -11,7 +11,7 @@ export class MessageValidationService {
     this.messageService.add({
       severity: 'error',
       detail: `Revise que todos los campos se han llenado correctamente`,
-      life: 3000,
+      life: 1500,
     });
   }
 }

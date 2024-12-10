@@ -26,7 +26,9 @@ active: number | undefined = 0;
       category:[null],
       organizer:[null],
       address:[null],
+      hasSponsors:[null],
       sponsors:[null],
+      ticketTypes:[null],
     });
   }
 

@@ -2,7 +2,7 @@ export enum AddressEnum {
   latitude = 'Latitud',
   longitude = 'Longitud',
   reference = 'Referencia',
-  venue = 'Lugar del evento',
+  address = 'Calle principal y Calle secundaria',
 }
 
 export enum SponsorEnum {
@@ -10,10 +10,10 @@ export enum SponsorEnum {
   photo = 'Fotos',
 }
 
-export enum TicketType {
-  name = 'Nombre',
-  disponibility =  'Disponibilidad',
-  price = 'price',
+export enum TicketTypeEnum {
+  name = 'Nombre del ticket',
+  disponibility =  'Cantidad disponible',
+  price = 'Precio',
 }
 
 export enum AuthEnum {

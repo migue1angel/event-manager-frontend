@@ -1,88 +1,47 @@
-<div class="col-12">
-  <div class="field col-12 flex justify-content-center">
-    <h3>Dirección del evento</h3>
-  </div>
+<h2 class="text-center">Dirección del evento</h2>
 
-  <div class="col-12 map">
-    <interactive-map class="col-6" (outputLngLat)="getLngLAt($event)"></interactive-map>
-  </div>
-
-  <div [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="grid p-fluid">
-    <!-- latitude -->
-    <div class="field col-6">
-      <label appCustomLabel [label]="AddressEnum.latitude" for="latitude"></label>
-      <p-inputNumber
-        [readonly]="true"
-        id="latitude"
-        formControlName="latitude"
-        mode="decimal"
-      />
-      <span
-        appErrorMessage
-        [errors]="latitudeField.errors"
-        [touched]="latitudeField.touched"
-        [dirty]="latitudeField.dirty"
-      ></span>
-    </div>
-
-    <!-- longitude -->
-    <div class="field col-6">
-      <label appCustomLabel [label]="AddressEnum.longitude" app for="longitude"></label>
-      <p-inputNumber
-        [readonly]="true"
-        id="longitude"
-        formControlName="longitude"
-        inputId="minmax"
-        mode="decimal"
-      />
-      <span
-        appErrorMessage
-        [errors]="longitudeField.errors"
-        [touched]="longitudeField.touched"
-        [dirty]="longitudeField.dirty"
-      ></span>
-    </div>
-
-    <!-- venue  -->
-    <div class="field col-12 md:col-6">
-      <label appCustomLabel [label]="AddressEnum.venue" for="venue"></label>
-      <input id="venue" formControlName="venue" type="text" pInputText />
-      <span
-        appErrorMessage
-        [errors]="venueField.errors"
-        [touched]="venueField.touched"
-        [dirty]="venueField.dirty"
-      ></span>
-    </div>
-
-    <!-- Reference -->
-    <div class="field col-12 md:col-6">
-      <label appCustomLabel [label]="AddressEnum.reference" for="reference"></label>
-      <input
-        type="text"
-        id="reference"
-        formControlName="reference"
-        pInputText
-      />
-      <span
-        appErrorMessage
-        [errors]="referenceField.errors"
-        [touched]="referenceField.touched"
-        [dirty]="referenceField.dirty"
-      ></span>
-    </div>
-
-    <div class="col-12 p-fluid">
-      <p-messages/>
-    </div>
-
-    <div class="col-12">
-      <button
-        pButton
-        type="submit"
-        (click)="onSubmit()"
-        label="Guardar"
-      ></button>
-    </div>
-  </div>
+<div class="col-12 map">
+  <interactive-map class="col-6" (outputLngLat)="getLngLAt($event)"></interactive-map>
 </div>
+
+<form [formGroup]="addressForm" (submit)="onSubmit()" class="grid p-fluid">
+  <!-- latitude -->
+  <div class="field col-6">
+    <label appCustomLabel [label]="AddressEnum.latitude" for="latitude"></label>
+    <p-inputNumber [readonly]="true" id="latitude" formControlName="latitude" mode="decimal" />
+    <span appErrorMessage [errors]="latitudeField.errors" [touched]="latitudeField.touched"
+      [dirty]="latitudeField.dirty"></span>
+  </div>
+
+  <!-- longitude -->
+  <div class="field col-6">
+    <label appCustomLabel [label]="AddressEnum.longitude" app for="longitude"></label>
+    <p-inputNumber [readonly]="true" id="longitude" formControlName="longitude" inputId="minmax" mode="decimal" />
+    <span appErrorMessage [errors]="longitudeField.errors" [touched]="longitudeField.touched"
+      [dirty]="longitudeField.dirty"></span>
+  </div>
+
+  <!-- address  -->
+  <div class="field col-12">
+    <label appCustomLabel [label]="AddressEnum.address" for="address"></label>
+    <input id="address" formControlName="address" pInputText />
+    <span appErrorMessage [errors]="addressField.errors" [touched]="addressField.touched"
+      [dirty]="addressField.dirty"></span>
+  </div>
+
+  <!-- Reference -->
+  <div class="field col-12">
+    <label appCustomLabel [label]="AddressEnum.reference" for="reference"></label>
+    <input type="text" id="reference" formControlName="reference" pInputText />
+    <span appErrorMessage [errors]="referenceField.errors" [touched]="referenceField.touched"
+      [dirty]="referenceField.dirty"></span>
+  </div>
+
+  <div class="col-12 p-fluid">
+    <p-messages />
+  </div>
+
+  <div class="col-12">
+    <button pButton type="submit" label="Guardar"></button>
+  </div>
+</form>

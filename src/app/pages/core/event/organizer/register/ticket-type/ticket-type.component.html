@@ -1,29 +1,68 @@
-<div class="h-full col-12 flex justify-content-center">
-  <div class="col-10 flex justify-content-center">
-    <div class="col-8 w-full">
-      <form [formGroup]="form" class="p-fluid">
+<h2 class="text-center"> Tickets Disponibles</h2>
 
-        <div class="flex justify-content-center">
-          <h1 class="fadein animation-duration-2000">Registro de Tickets</h1>
-        </div>
+<input type="text" style="display: none;" name="" id="">
+<form [formGroup]="ticketTypeForm" (submit)="addTicketType()" class="grid p-fluid">
 
-        <label for="name" class="block text-900 font-medium mb-3">Nombre: </label>
-        <input id="name" formControlName="name" placeholder="Inserte su nombre" pInputText class="w-full mb-3"/>
+  <!-- nombre del ticket -->
+  <div class="field col-12">
+    <label appCustomLabel [label]="ticketTypeEnum.name" for="name"></label>
+    <input pInputText formControlName="name" id="name">
+    <span appErrorMessage [errors]="nameField.errors" [touched]="nameField.touched" [dirty]="nameField.dirty"></span>
+  </div>
 
-        <label for="disponibility" class="block text-900 font-medium mb-3">Disponibilidad: </label>
-        <p-inputNumber
-          id="disponibility"
-          formControlName="disponibility"
-          [useGrouping]="false"
-          placeholder="Disponibilidad"
-          class="w-full mb-3"/>
+  <!-- disponibilidad y precio -->
+  <div class="col-12 flex gap-2 align-items-baseline ">
 
-        <label for="price" class="block text-900 font-medium mb-3">Precio: </label>
-        <p-inputNumber id="price" formControlName="price" [useGrouping]="false" placeholder="Precio" class="w-full mb-3"/>
+    <div class="field col-6">
+      <label appCustomLabel [label]="ticketTypeEnum.disponibility" for="disponibility"></label>
+      <p-inputNumber formControlName="disponibility" id="disponibility" useGrouping="false" />
+      <span appErrorMessage [errors]="disponibilityField.errors" [touched]="disponibilityField.touched"
+        [dirty]="disponibilityField.dirty"></span>
+    </div>
 
-        <label for="available" class="block text-900 font-medium mb-3"></label>
-        <input id="available" formControlName="available" placeholder="Disponible" pInputText class="w-full mb-3"/>
-      </form>
+    <div class="field col-6">
+      <label appCustomLabel [label]="ticketTypeEnum.price" for="price"></label>
+      <p-inputNumber formControlName="price" id="price" mode="currency" currency="USD" />
+      <span appErrorMessage [errors]="priceField.errors" [touched]="priceField.touched"
+        [dirty]="priceField.dirty"></span>
     </div>
   </div>
+
+  <div class="col-12 p-fluid">
+    <p-messages />
+  </div>
+
+  <div class="col-12">
+    <p-button label="Agregar" icon="pi pi-plus" type="submit" />
+  </div>
+
+
+</form>
+
+@if (ticketTypesField.value.length > 0) {
+<p-table [value]="ticketTypesField.value" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nombre</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-ticketType let-rowIndex="rowIndex">
+    <tr>
+      <td>{{ ticketType.name }}</td>
+      <td>{{ ticketType.disponibility }}</td>
+      <td>{{ ticketType.price }}</td>
+      <td class="flex gap-2">
+        <p-button icon="pi pi-trash" (onClick)="removeTicketType(rowIndex)"></p-button>
+        <p-button icon="pi pi-pencil" (onClick)="editTicketType(rowIndex)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<div class="col-12">
+  <button class="w-full" pButton label="Guardar" (click)="onSubmit()"></button>
 </div>
+}

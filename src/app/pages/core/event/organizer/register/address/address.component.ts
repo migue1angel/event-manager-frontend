@@ -30,18 +30,18 @@ export class AddressComponent {
   }
 
   buildAddressForm() {
-    return (this.addressForm = this.formBuilder.group({
+    this.addressForm = this.formBuilder.group({
       latitude: [null, [Validators.required]],
       longitude: [null, [Validators.required]],
       reference: [null, [Validators.required]],
-      venue: [null, [Validators.required]],
-    }));
+      address: [null, [Validators.required]],
+    });
   }
 
   buildForm() {
-    return (this.form = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       address: this.addressForm,
-    }));
+    });
   }
 
   onSubmit() {
@@ -51,7 +51,7 @@ export class AddressComponent {
     } else {
       // this.messageService.add({
       //   severity: ValidateFormEnum.severity,
-      //   detail: ValidateFormEnum.message, 
+      //   detail: ValidateFormEnum.message,
       //   life: validateForm.life,});
       this.validationMessageService.showMessage();
     }
@@ -72,7 +72,7 @@ export class AddressComponent {
   get referenceField(): AbstractControl {
     return this.addressForm.controls['reference'];
   }
-  get venueField(): AbstractControl {
-    return this.addressForm.controls['venue'];
+  get addressField(): AbstractControl {
+    return this.addressForm.controls['address'];
   }
 }

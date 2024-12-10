@@ -29,6 +29,9 @@ import { BadgeModule } from 'primeng/badge';
 import { MessageValidationService } from '../../../../../services/core/message-validation.service';
 import { PanelModule } from 'primeng/panel';
 import { PaypalComponent } from '../../components/paypal/paypal.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TableModule } from 'primeng/table';
+
 @NgModule({
   declarations: [
     GeneralInformationComponent,
@@ -62,7 +65,9 @@ import { PaypalComponent } from '../../components/paypal/paypal.component';
     ButtonModule, 
     AvatarModule, 
     BadgeModule,
-    PanelModule
+    PanelModule,
+    InputTextareaModule,
+    TableModule
   ],
   providers: [
     MessageService,

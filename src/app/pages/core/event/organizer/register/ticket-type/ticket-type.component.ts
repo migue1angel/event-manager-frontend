@@ -1,42 +1,91 @@
-import {Component, inject} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { TicketTypeEnum } from '../../../../../../shared/enums';
+import { MessageValidationService } from '../../../../../../services/core/message-validation.service';
 
 @Component({
   selector: 'app-ticket-type',
   templateUrl: './ticket-type.component.html',
-  styleUrl: './ticket-type.component.scss'
+  styleUrl: './ticket-type.component.scss',
 })
-export class TicketTypeComponent {
+export class TicketTypeComponent implements OnInit {
+  form!: FormGroup;
+  ticketTypeForm!: FormGroup;
+  @Output() formOutput = new EventEmitter();
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly validationMessageService = inject(MessageValidationService);
 
-  form!:FormGroup;
-  protected readonly formBuilder = inject(FormBuilder);
-  
-  constructor() {
-    this.formBuild();
+  protected ticketTypeEnum = TicketTypeEnum;
+  constructor() {}
+  ngOnInit(): void {
+    this.buildForm();
+    this.buildTicketTypeForm();
   }
 
-  formBuild(){
-    return this.form = this.formBuilder.group({
+  buildTicketTypeForm() {
+    this.ticketTypeForm = this.formBuilder.group({
       name: [null, [Validators.required]],
       disponibility: [null, [Validators.required]],
-      price: [null,[Validators.required]],
-      available: [true, [Validators.required]],
+      price: [null, [Validators.required]],
+      isAvailable: [true, [Validators.required]],
     });
-  };
+  }
 
-  get nameField():AbstractControl{
-    return this.form.controls['name'];
-  };
+  buildForm() {
+    this.form = this.formBuilder.group({
+      ticketTypes: this.formBuilder.array([]),
+    });
+  }
 
-  get disponibilityField():AbstractControl{
-    return this.form.controls['disponibility'];
-  };
+  onSubmit() {
+    this.formOutput.emit(this.form.value);
+  }
 
-  get priceField():AbstractControl{
-    return this.form.controls['price'];
-  };
+  addTicketType() {
+    this.ticketTypeForm.markAllAsTouched();
+    if (this.ticketTypeForm.valid) {
+      this.ticketTypesField.push(
+        this.formBuilder.group(this.ticketTypeForm.value)
+      );
+      this.buildTicketTypeForm();
+      return;
+    }
+    this.validationMessageService.showMessage();
+  }
 
-  get availableField():AbstractControl{
-    return this.form.controls['available'];
-  };
+  editTicketType(index: number) {
+    const ticketType = this.ticketTypesField.at(index);
+    this.ticketTypeForm.patchValue(ticketType.value);
+    this.ticketTypesField.removeAt(index);
+  }
+
+  removeTicketType(index: number) {
+    this.ticketTypesField.removeAt(index);
+  }
+
+  get nameField(): AbstractControl {
+    return this.ticketTypeForm.controls['name'];
+  }
+
+  get disponibilityField(): AbstractControl {
+    return this.ticketTypeForm.controls['disponibility'];
+  }
+
+  get priceField(): AbstractControl {
+    return this.ticketTypeForm.controls['price'];
+  }
+
+  get ticketTypesField(): FormArray {
+    return this.form.controls['ticketTypes'] as FormArray;
+  }
+
+  get availableField(): AbstractControl {
+    return this.ticketTypeForm.controls['available'];
+  }
 }

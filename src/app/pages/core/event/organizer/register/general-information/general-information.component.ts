@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { GeneralInformationEnum } from '../../../../../../shared/enums/fields.enum';
 import { MessageValidationService } from '../../../../../../services/core/message-validation.service';
+import { AuthService } from '../../../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-general-information',
@@ -18,6 +19,7 @@ export class GeneralInformationComponent {
   generalInformationForm!: FormGroup;
   @Output() formOutput = new EventEmitter();
 
+  protected readonly authService = inject(AuthService);
   protected readonly formBuilder = inject(FormBuilder);
   private readonly messageValidationService = inject(MessageValidationService);
   protected GeneralInformationEnum = GeneralInformationEnum;
@@ -27,15 +29,15 @@ export class GeneralInformationComponent {
   }
 
   formBuild() {
-    return (this.form = this.formBuilder.group({
+    this.form = this.formBuilder.group({
+      organizer: [this.authService.currentUser?.id],
       name: [null, [Validators.required]],
       description: [null, [Validators.required]],
       startDate: [null, [Validators.required]],
       endDate: [null, [Validators.required]],
-      status: [null, [Validators.required]],
-      category: [null, [Validators.required]],
-      address: [null, [Validators.required]],
-    }));
+      state: ['COMING', [Validators.required]],
+      category: [null],
+    });
   }
 
   onSubmit() {
@@ -63,15 +65,11 @@ export class GeneralInformationComponent {
     return this.form.controls['endDate'];
   }
 
-  get statusField(): AbstractControl {
-    return this.form.controls['status'];
+  get stateField(): AbstractControl {
+    return this.form.controls['state'];
   }
 
   get categoryField(): AbstractControl {
     return this.form.controls['category'];
-  }
-
-  get addressField(): AbstractControl {
-    return this.form.controls['address'];
   }
 }

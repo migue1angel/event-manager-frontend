@@ -1,4 +1,4 @@
-<!-- <div class="grid my-3">
+<div class="grid my-3">
 
     <div class="col-12 md:col-10 md:col-offset-1">
         <p-panel (onBeforeToggle)="saveData($event)" [showHeader]="false">
@@ -8,6 +8,10 @@
                 <p-accordionTab header="Información General" [selected]="true">
                     <app-general-information (formOutput)="saveData($event)"></app-general-information>
 
+                </p-accordionTab>
+
+                <p-accordionTab header="Tickets y precios" [selected]="true">
+                    <app-ticket-type (formOutput)="saveData($event)"></app-ticket-type>
                 </p-accordionTab>
 
                 <p-accordionTab header="Lugar del evento">
@@ -24,6 +28,4 @@
     </div>
 </div>
 
-{{form.value | json}} -->
-
-<app-paypal></app-paypal>
+{{form.value | json}}

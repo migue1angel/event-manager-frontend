@@ -6,6 +6,7 @@ import { AuthResponseInterface } from '../../models/auth/auth-response.interface
 import { LoginModel } from '../../models/auth/login.model';
 import { UserInterface } from '../../models/auth/user.interface';
 import { AuthStatus } from '../../shared/enums/auth-status.enum';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class AuthService {
   private _authStatus: AuthStatus = AuthStatus.checking;
   private readonly httpClient = inject(HttpClient);
   private readonly router = inject(Router);
-  url = 'http://localhost:3000/auth';
+  url = `${environment.baseApiUrl}/auth`;
 
   saveUrlRedirect(url: string) {
     sessionStorage.setItem('urlRedirect', url);

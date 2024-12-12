@@ -10,10 +10,16 @@ export class EventService {
 
   create(data: any): Observable<any> {
     const url = `${this.baseUrl}/event`;
-    
-    
-    return this.httpClient.post(url, data).pipe(
-        catchError(throwError)
-    );
+    const { images, ...event } = data;
+    const formData = new FormData();
+
+    formData.append('event', JSON.stringify(event));
+    images.map((image: any) => {
+      console.log('image', image);
+
+      formData.append('images', image);
+    });
+
+    return this.httpClient.post(url, formData).pipe(catchError(throwError));
   }
 }

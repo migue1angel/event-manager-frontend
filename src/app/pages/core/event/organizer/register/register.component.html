@@ -19,7 +19,7 @@
                 </p-accordionTab>
 
                 <p-accordionTab header="Sponsors">
-                    <app-sponsor></app-sponsor>
+                    <app-sponsor (formOutput)="saveData($event)"></app-sponsor>
                 </p-accordionTab>
 
             </p-accordion>
@@ -27,5 +27,9 @@
         </p-panel>
     </div>
 </div>
+
+<p-button type="submit" (onClick)="submit()" label="Guardar" icon="pi pi-check" styleClass="p-button-success">
+
+</p-button>
 
 {{form.value | json}}

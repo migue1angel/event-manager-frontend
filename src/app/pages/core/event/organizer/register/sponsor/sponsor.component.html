@@ -1,123 +1,54 @@
-<div class="surface-ground p-4">
-    <div class="text-center mb-5">
-      <div class="text-900 text-3xl font-medium mb-3">Agregar Sponsors</div>
-    </div>
-
-    <!-- Form -->
-    <form [formGroup]="sponsorForm" (ngSubmit)="addSponsor()" class="flex flex-column align-items-center">
-      <!-- name -->
-      <div class="field w-full max-w-30rem mb-4">
-        <label appCustomLabel [label]="SponsorEnum.name" for="name">Nombre:</label>
-        <input 
-        pInputText 
-        id="name" 
-        formControlName="name" 
-        />
-        <span 
-            appErrorMessage
-            [errors]="nameField.errors"
-            [dirty]="nameField.dirty"
-            [touched]="nameField.touched"
-        ></span>
-      </div>
-
-      <!-- Photo -->
-      <div class="field w-full max-w-30rem">
-        <label appCustomLabel [label]="SponsorEnum.photo" for="photo">Foto:</label>
-        <p-fileUpload #fileUpload
-          name="demo[]"
-          [multiple]="false"
-          accept="image/*"
-          maxFileSize="1000000"
-          [showUploadButton]="false"
-          [showCancelButton]="false"
-          (onSelect)="onSelectFile($event)"
-          (onClear)="onClear()"
-          [customUpload]="true"
-          styleClass="w-full">
-          <ng-template pTemplate="header" let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback">
-            <div class="flex flex-wrap justify-content-between align-items-center flex-1 gap-2">
-              <div class="flex gap-2">
-                <p-button (onClick)="chooseCallback($event)" icon="pi pi-images" [rounded]="true" [outlined]="true" />
-                <p-button (onClick)="clearCallback()" icon="pi pi-times" [rounded]="true" [outlined]="true" severity="danger" [disabled]="!files || files.length === 0" />
-              </div>
-            </div>
-          </ng-template>
-          <ng-template pTemplate="content" let-files>
-            @if(files?.length > 0 ){
-            <div class="flex flex-wrap p-0 sm:p-5 gap-5">
-                @for (file of files; track $index) {
-                <div class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3">
-                  <div>
-                    <img role="presentation" [alt]="file.name" [src]="file.objectURL" width="100" height="100" style="object-fit: cover;" />
-                  </div>
-                  <span class="font-semibold">{{ file.name }}</span>
-                  <div>{{ formatSize(file.size) }}</div>
-                </div>
-              }
-              </div>
-            }
-          </ng-template>
-          <ng-template pTemplate="empty">
-            <div class="flex align-items-center justify-content-center flex-column">
-              <i class="pi pi-cloud-upload border-2 border-circle p-5 text-8xl text-400 border-400"></i>
-              <p class="mt-4 mb-0">Arrastra y suelta imágenes aquí o haz clic para seleccionar.</p>
-            </div>
-          </ng-template>
-        </p-fileUpload>
-        <span 
-            appErrorMessage
-            [errors]="fileField.errors"
-            [dirty]="fileField.dirty"
-            [touched]="fileField.touched"
-        ></span>
-      </div>
-
-      <div class="mt-4">
-        <p-button
-          label="Agregar"
-          type="submit"
-          icon="pi pi-plus"
-          styleClass="p-button-lg">
-        </p-button>
-      </div>
-    </form>
-
-    <!-- Listado de sponsors -->
-    @if(sponsors.controls.length > 0){
-    <div class="grid mt-6">
-      <div class="col-12 md:col-6 lg:col-4" *ngFor="let item of sponsors.controls; let i = index">
-        <div class="surface-card p-4 shadow-2 border-round h-full">
-          <div class="flex flex-column align-items-center">
-            <!-- Mostrar Imagen -->
-            <div class="mb-3">
-              @if(item.get('file')!.value){
-                <img
-                     [src]="getFileUrl(item.get('file')!.value)"
-                     class="border-circle"
-                     style="width: 150px; height: 150px; object-fit: cover;"
-                     alt="Imagen del Sponsor" />
-              }
-            </div>
-            <div class="text-900 text-xl font-medium mb-3">{{ item.get('name')!.value }}</div>
-
-            <!-- Botones de acción -->
-            <div class="flex gap-2">
-              <p-button
-                icon="pi pi-trash"
-                (onClick)="removeSponsor(i)"
-                styleClass="p-button-danger p-button-rounded">
-              </p-button>
-              <p-button
-                icon="pi pi-pencil"
-                (onClick)="editSponsor(i)"
-                styleClass="p-button-secondary p-button-rounded">
-              </p-button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    }
+<h2 class="text-center">Registrar Patrocinadores</h2>
+<!-- Form -->
+<form [formGroup]="sponsorForm" (submit)="addSponsor()" class="grid p-fluid">
+  <!-- name -->
+  <div class="field col-12 md:col-6">
+    <label appCustomLabel [label]="SponsorEnum.name" for="name">Nombre:</label>
+    <input pInputText id="name" formControlName="name" />
+    <span appErrorMessage [errors]="nameField.errors" [dirty]="nameField.dirty" [touched]="nameField.touched"></span>
   </div>
 
+  <!-- email -->
+  <div class="field col-12 md:col-6">
+    <label for="email" appCustomLabel [label]="SponsorEnum.email"></label>
+    <input pInputText id="email" formControlName="email">
+    <span appErrorMessage [errors]="emailField.errors" [dirty]="emailField.dirty" [touched]="emailField.touched"></span>
+
+  </div>
+
+  <!-- validation message -->
+  <div class="col-12 p-fluid">
+    <p-messages />
+  </div>
+  
+  <div class="col-12">
+    <p-button label="Agregar" type="submit" icon="pi pi-plus">
+    </p-button>
+  </div>
+</form>
+
+@if (sponsors.value.length > 0) {
+  <p-table [value]="sponsors.value" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-sponsor let-rowIndex="rowIndex">
+      <tr>
+        <td>{{ sponsor.name }}</td>
+        <td>{{ sponsor.email }}</td>
+        <td class="flex gap-2">
+          <p-button icon="pi pi-trash" (onClick)="removeSponsor(rowIndex)"></p-button>
+          <p-button icon="pi pi-pencil" (onClick)="editSponsor(rowIndex)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  
+  <div class="col-12">
+    <button class="w-full" pButton label="Guardar" (click)="onSubmit()"></button>
+  </div>
+  }

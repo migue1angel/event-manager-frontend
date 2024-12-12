@@ -1,40 +1,47 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { EventService } from '../../../../../services/core/event.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-
+  private readonly eventService = inject(EventService);
   protected readonly formBuilder = inject(FormBuilder);
-  protected form! : FormGroup;
+  protected form!: FormGroup;
 
-constructor() {
-  this.buildForm()
-}
-active: number | undefined = 0;
-  buildForm(){
-    return this.form = this.formBuilder.group({
+  constructor() {
+    this.buildForm();
+  }
+  active: number | undefined = 0;
+  buildForm() {
+    return (this.form = this.formBuilder.group({
       name: [null],
-      description:[null],
-      startDate:[null],
-      endDate:[null],
-      state:[null],
-      isPublic:[null],
-      category:[null],
-      organizer:[null],
-      address:[null],
-      hasSponsors:[null],
-      sponsors:[null],
-      ticketTypes:[null],
-    });
+      description: [null],
+      startDate: [null],
+      endDate: [null],
+      state: [null],
+      isPublic: [null],
+      category: [null],
+      organizer: [null],
+      address: [null],
+      hasSponsors: [true],
+      sponsors: [null],
+      ticketTypes: [null],
+      images: [null],
+    }));
   }
 
-  saveData(event:any){
+  saveData(event: any) {
     console.log(event);
-    
-    this.form.patchValue(event)
+    this.form.patchValue(event);
+  }
+
+  submit() {
+    this.eventService.create(this.form.value).subscribe((event) => {
+      console.log(event);
+    });
   }
 }

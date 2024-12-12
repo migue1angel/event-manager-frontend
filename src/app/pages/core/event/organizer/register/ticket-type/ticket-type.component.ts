@@ -15,17 +15,23 @@ import { MessageValidationService } from '../../../../../../services/core/messag
   styleUrl: './ticket-type.component.scss',
 })
 export class TicketTypeComponent implements OnInit {
-  form!: FormGroup;
-  ticketTypeForm!: FormGroup;
+  protected form!: FormGroup;
+  protected ticketTypeForm!: FormGroup;
   @Output() formOutput = new EventEmitter();
   private readonly formBuilder = inject(FormBuilder);
-  private readonly validationMessageService = inject(MessageValidationService);
+  private readonly messageValidationService = inject(MessageValidationService);
 
   protected ticketTypeEnum = TicketTypeEnum;
   constructor() {}
   ngOnInit(): void {
     this.buildForm();
     this.buildTicketTypeForm();
+  }
+
+  buildForm() {
+    this.form = this.formBuilder.group({
+      ticketTypes: this.formBuilder.array([]),
+    });
   }
 
   buildTicketTypeForm() {
@@ -37,26 +43,22 @@ export class TicketTypeComponent implements OnInit {
     });
   }
 
-  buildForm() {
-    this.form = this.formBuilder.group({
-      ticketTypes: this.formBuilder.array([]),
-    });
-  }
-
   onSubmit() {
     this.formOutput.emit(this.form.value);
   }
 
   addTicketType() {
-    this.ticketTypeForm.markAllAsTouched();
     if (this.ticketTypeForm.valid) {
       this.ticketTypesField.push(
         this.formBuilder.group(this.ticketTypeForm.value)
       );
-      this.buildTicketTypeForm();
-      return;
+      this.ticketTypeForm.reset({
+        isAvailable: true,
+      });
+    } else {
+      this.ticketTypeForm.markAllAsTouched();
+      this.messageValidationService.showMessage();
     }
-    this.validationMessageService.showMessage();
   }
 
   editTicketType(index: number) {
@@ -67,6 +69,10 @@ export class TicketTypeComponent implements OnInit {
 
   removeTicketType(index: number) {
     this.ticketTypesField.removeAt(index);
+  }
+
+  get ticketTypesField(): FormArray {
+    return this.form.get('ticketTypes') as FormArray;
   }
 
   get nameField(): AbstractControl {
@@ -81,11 +87,7 @@ export class TicketTypeComponent implements OnInit {
     return this.ticketTypeForm.controls['price'];
   }
 
-  get ticketTypesField(): FormArray {
-    return this.form.controls['ticketTypes'] as FormArray;
-  }
-
-  get availableField(): AbstractControl {
+  get isAvailableField(): AbstractControl {
     return this.ticketTypeForm.controls['available'];
   }
 }

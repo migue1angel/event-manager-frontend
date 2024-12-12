@@ -7,10 +7,10 @@ import { MessageService } from 'primeng/api';
 export class MessageValidationService {
   private readonly messageService = inject(MessageService);
 
-  showMessage() {
+  showMessage(message: string = 'Revise que todos los campos se han llenado correctamente') {
     this.messageService.add({
       severity: 'error',
-      detail: `Revise que todos los campos se han llenado correctamente`,
+      detail: message,
       life: 1500,
     });
   }

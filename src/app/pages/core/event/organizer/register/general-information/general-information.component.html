@@ -17,8 +17,6 @@
       [dirty]="categoryField.dirty"></span>
   </div>
 
-
-
   <!-- Description -->
 
   <div class="field col-12">
@@ -43,6 +41,13 @@
     <p-calendar formControlName="endDate" [showIcon]="true" [showTime]="true" [minDate]="startDateField.value" />
     <span appErrorMessage [errors]="endDateField.errors" [touched]="endDateField.touched"
       [dirty]="endDateField.dirty"></span>
+  </div>
+
+  <div class="field col-12">
+    <label for="image" appCustomLabel [label]="GeneralInformationEnum.images" for="image"></label>
+    <p-fileUpload #fileUpload (change)="onChange(fileUpload.files)" showCancelButton="false" showUploadButton="false" [multiple]="true" accept="image/*"
+      maxFileSize="2000000">
+    </p-fileUpload>
   </div>
 
   <!-- validation message -->

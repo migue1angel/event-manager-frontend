@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage, provideCloudinaryLoader } from '@angular/common';
 
 import { PublicRoutingModule } from './public-routing.module';
 import { EventListComponent } from './event-list/event-list.component';
@@ -20,7 +20,7 @@ import { DataViewModule } from 'primeng/dataview';
     DetailComponent,
     ButtonModule,
     TagModule,
-    DataViewModule
+    DataViewModule,
   ],
 })
 export class PublicModule { }

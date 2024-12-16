@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { EventService } from '../../../../../services/core/event.service';
+import { EventsHttpService } from '../../../../../services/core/event-http.service';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +8,7 @@ import { EventService } from '../../../../../services/core/event.service';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  private readonly eventService = inject(EventService);
+  private readonly eventService = inject(EventsHttpService);
   protected readonly formBuilder = inject(FormBuilder);
   protected form!: FormGroup;
 

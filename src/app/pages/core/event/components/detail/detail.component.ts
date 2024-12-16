@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { AddressEnum } from '../../../../../shared/enums';
 import { InputTextModule } from 'primeng/inputtext';
@@ -6,6 +6,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { EventInterface } from '../../../../../models/core/event.interface';
 
 @Component({
   standalone: true,
@@ -15,7 +16,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     CalendarModule,
     FormsModule,
     CarouselModule,
-    InputTextareaModule
+    InputTextareaModule,
   ],
   selector: 'event-detail',
   templateUrl: './detail.component.html',
@@ -23,34 +24,18 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 })
 export class DetailComponent {
   protected AddressEnum = AddressEnum;
-
-  protected dateTest = new Date();
-
-  protected products: any[] = Array.from({ length: 10 }).map((_, i) => ({
-    id: i + 1,
-    name: `Producto ${i + 1}`,
-    description: `Este es el producto ${i + 1}`,
-    date: new Date(),
-    price: 100,
-    inventoryStatus: 'INSTOCK',
-  }));
-
+  @Input({required:true}) event!: EventInterface;
+  
   responsiveOptions = [
     {
-        breakpoint: '1199px',
-        numVisible: 1,
-        numScroll: 1
+      breakpoint: '1199px',
+      numVisible: 1,
+      numScroll: 1,
     },
-    // {
-    //     breakpoint: '991px',
-    //     numVisible: 2,
-    //     numScroll: 1
-    // },
     {
-        breakpoint: '767px',
-        numVisible: 1,
-        numScroll: 1
-    }
-];
-
+      breakpoint: '767px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
 }

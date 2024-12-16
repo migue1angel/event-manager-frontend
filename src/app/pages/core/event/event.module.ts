@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { EventRoutingModule } from './event-routing.module';
 
@@ -8,6 +8,7 @@ import { EventRoutingModule } from './event-routing.module';
   imports: [
     CommonModule,
     EventRoutingModule,
+    NgOptimizedImage
   ]
 })
 export class EventModule { }

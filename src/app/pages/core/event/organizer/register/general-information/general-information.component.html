@@ -11,10 +11,30 @@
 
   <!-- Category -->
   <div class="field col-12 md:col-4">
-    <label appCustomLabel [label]="GeneralInformationEnum.category" for="category"></label>
-    <input id="category" formControlName="category" type="text" pInputText />
-    <span appErrorMessage [errors]="categoryField.errors" [touched]="categoryField.touched"
-      [dirty]="categoryField.dirty"></span>
+    <label appCustomLabel [label]="GeneralInformationEnum.category" for="category" formControlName="category"></label>
+    <p-dropdown 
+    id="category"
+    formControlName="category"
+    dataKey="id"
+    [options]="categories"
+    optionLabel="name" 
+    placeholder="Seleccionar Categoria" />
+  
+    <ng-template pTemplate="selectedItem" let-categories>
+      <div class="flex align-items-center gap-2">
+        <div>{{ categories.name }}</div>
+      </div>
+    </ng-template>
+    <ng-template let-item pTemplate="item">
+      <div class="flex align-items-center gap-2">
+        <div>{{ item.name }}</div>
+      </div>
+    </ng-template>
+    <span 
+    appErrorMessage 
+    [errors]="categoryField.errors" 
+    [touched]="categoryField.touched"
+    [dirty]="categoryField.dirty"></span>
   </div>
 
   <!-- Description -->
@@ -59,3 +79,6 @@
     <button pButton type="submit" label="Guardar"></button>
   </div>
 </form>
+
+<!-- {{form.errors|json}} -->
+ <!-- {{organizerField.value|json}} -->

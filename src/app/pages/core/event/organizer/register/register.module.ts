@@ -67,7 +67,8 @@ import { TableModule } from 'primeng/table';
     BadgeModule,
     PanelModule,
     InputTextareaModule,
-    TableModule
+    TableModule,
+    DropdownModule
   ],
   providers: [
     MessageService,

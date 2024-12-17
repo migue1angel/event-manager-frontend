@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -9,37 +9,43 @@ import {
 import { GeneralInformationEnum } from '../../../../../../shared/enums/fields.enum';
 import { MessageValidationService } from '../../../../../../services/core/message-validation.service';
 import { AuthService } from '../../../../../../services/auth/auth.service';
-import { UploadEvent } from 'primeng/fileupload';
-import { HttpEvent } from '@angular/common/http';
+import { CatalogueInterface } from '../../../../../../models/core/catalogue.interface';
+import { CataloguesHttpService } from '../../../../../../services/core/catalogues-http.service';
 
 @Component({
   selector: 'app-general-information',
   templateUrl: './general-information.component.html',
   styleUrl: './general-information.component.scss',
 })
-export class GeneralInformationComponent {
+export class GeneralInformationComponent implements OnInit {
   form!: FormGroup;
   generalInformationForm!: FormGroup;
   @Output() formOutput = new EventEmitter();
 
   protected readonly authService = inject(AuthService);
   protected readonly formBuilder = inject(FormBuilder);
+  protected readonly cataloguesHttpService = inject(CataloguesHttpService);
   private readonly messageValidationService = inject(MessageValidationService);
   protected GeneralInformationEnum = GeneralInformationEnum;
+  protected categories : CatalogueInterface[] = [];
 
   constructor() {
+  }
+  
+  ngOnInit(): void {
     this.formBuild();
+    this.organizerField.setValue(this.authService.currentUser!.id);
   }
 
   formBuild() {
     this.form = this.formBuilder.group({
-      organizer: [this.authService.currentUser?.id, [Validators.required]],
+      organizer: [null, [Validators.required]],
       name: [null, [Validators.required]],
       description: [null, [Validators.required]],
       startDate: [null, [Validators.required]],
       endDate: [null, [Validators.required]],
       state: ['COMING', [Validators.required]],
-      category: ['85a4bf40-2df8-44f9-8ccc-2ded0f64562e'],
+      category: [null, Validators.required],
       isPublic: [true, [Validators.required]],
       images: [[]],
     });
@@ -94,6 +100,11 @@ export class GeneralInformationComponent {
   get categoryField(): AbstractControl {
     return this.form.controls['category'];
   }
+
+  get organizerField(): AbstractControl {
+    return this.form.controls['organizer'];
+  }
+
   get imagesField(): FormArray {
     return this.form.controls['images'] as FormArray;
   }

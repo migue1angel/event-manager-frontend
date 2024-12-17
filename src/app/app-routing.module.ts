@@ -6,6 +6,10 @@ import { HomeComponent } from './shared/components/home/home.component';
 
 const routes: Routes = [
   {
+    path: 'usuario',
+    loadChildren: () => import('./pages/core/usuario/usuario.module').then(m => m.UsuarioModule)
+  },
+  {
     path: '',
     component: MainComponent,
     children: [
@@ -35,6 +39,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'home',
   },
+
 ];
 
 @NgModule({

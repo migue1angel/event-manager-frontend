@@ -8,10 +8,10 @@
                 @for (item of tickets; track $index) {
                 <div class="flex flex-row justify-content-between align-items-center">
                     <div>
-                        <p class="font-bold">{{item.name}}</p>
-                        <p>{{item.category}}</p>
+                        <p class="font-bold">{{item.ticketType.name}}</p>
+                        <p>{{item.ticketType.category}}</p>
                     </div>
-                    <p class="font-bold">${{item.price}}</p>
+                    <p class="font-bold">${{item.ticketType.price}} x {{item.quantity}}</p>
                 </div>
                 }
             </div>

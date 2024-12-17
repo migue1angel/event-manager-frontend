@@ -1,25 +1,11 @@
 <h2 class="text-center">Dirección del evento</h2>
 
-<div class="col-12 map">
+<div class="field col-12 map">
   <interactive-map class="col-6" (outputLngLat)="getLngLAt($event)"></interactive-map>
+  <span appErrorMessage [errors]="latitudeField.errors" [touched]="latitudeField.touched" [dirty]="latitudeField.dirty"></span>
 </div>
 
 <form [formGroup]="addressForm" (submit)="onSubmit()" class="grid p-fluid">
-  <!-- latitude -->
-  <div class="field col-6">
-    <label appCustomLabel [label]="AddressEnum.latitude" for="latitude"></label>
-    <p-inputNumber [readonly]="true" id="latitude" formControlName="latitude" mode="decimal" />
-    <span appErrorMessage [errors]="latitudeField.errors" [touched]="latitudeField.touched"
-      [dirty]="latitudeField.dirty"></span>
-  </div>
-
-  <!-- longitude -->
-  <div class="field col-6">
-    <label appCustomLabel [label]="AddressEnum.longitude" app for="longitude"></label>
-    <p-inputNumber [readonly]="true" id="longitude" formControlName="longitude" inputId="minmax" mode="decimal" />
-    <span appErrorMessage [errors]="longitudeField.errors" [touched]="longitudeField.touched"
-      [dirty]="longitudeField.dirty"></span>
-  </div>
 
   <!-- address  -->
   <div class="field col-12">

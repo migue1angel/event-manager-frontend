@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import { LngLat } from 'maplibre-gl';
 import { MessageService } from 'primeng/api';
-import { AddressEnum } from '../../../../../../shared/enums';
-import { MessageValidationService } from '../../../../../../services/core/message-validation.service';
+import { AddressEnum } from '../../../../../shared/enums/fields.enum';
+import { MessageValidationService } from '../../../../../services/core/message-validation.service';
 
 @Component({
   selector: 'app-address',

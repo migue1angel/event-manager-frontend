@@ -15,8 +15,8 @@ import {
 } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
 import { MessageService } from 'primeng/api';
-import { SponsorEnum } from '../../../../../../shared/enums/fields.enum';
-import { MessageValidationService } from '../../../../../../services/core/message-validation.service';
+import { SponsorEnum } from '../../../../../shared/enums/fields.enum';
+import { MessageValidationService } from '../../../../../services/core/message-validation.service';
 
 @Component({
   selector: 'app-sponsor',

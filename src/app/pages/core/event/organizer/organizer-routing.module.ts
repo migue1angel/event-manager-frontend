@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EventListComponent } from './event-list/event-list.component';
+import { EventDetailComponent } from './event-detail/event-detail.component';
 
 const routes: Routes = [
   {
-    path:'register',
-    loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)
+    path: 'event-list',
+    component: EventListComponent,
   },
   {
-    path:'view',
-    loadChildren: () => import('./view/view.module').then(m => m.ViewModule)
-  }
-  
+    path: 'event-detail/:id',
+    component: EventDetailComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class OrganizerRoutingModule { }
+export class OrganizerRoutingModule {}

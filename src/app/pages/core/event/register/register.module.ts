@@ -23,14 +23,14 @@ import { RegisterComponent } from './register.component';
 import { StepsModule } from 'primeng/steps';
 import { DividerModule } from 'primeng/divider';
 import { AddressComponent } from './address/address.component';
-import { SharedModule } from '../../../../../shared/shared.module';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
-import { MessageValidationService } from '../../../../../services/core/message-validation.service';
 import { PanelModule } from 'primeng/panel';
-import { PaypalComponent } from '../../components/paypal/paypal.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TableModule } from 'primeng/table';
+import { SharedModule } from '../../../../shared/shared.module';
+import { MessageValidationService } from '../../../../services/core/message-validation.service';
+import { PaypalComponent } from '../components/paypal/paypal.component';
 
 @NgModule({
   declarations: [

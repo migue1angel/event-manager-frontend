@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { EventsHttpService } from '../../../../../services/core/event-http.service';
+import { EventsHttpService } from '../../../../services/core/event-http.service';
 
 @Component({
   selector: 'app-register',

@@ -6,11 +6,11 @@ import {
   Validators,
   FormArray,
 } from '@angular/forms';
-import { GeneralInformationEnum } from '../../../../../../shared/enums/fields.enum';
-import { MessageValidationService } from '../../../../../../services/core/message-validation.service';
-import { AuthService } from '../../../../../../services/auth/auth.service';
-import { CatalogueInterface } from '../../../../../../models/core/catalogue.interface';
-import { CataloguesHttpService } from '../../../../../../services/core/catalogues-http.service';
+import { CatalogueInterface } from '../../../../../models/core/catalogue.interface';
+import { AuthService } from '../../../../../services/auth/auth.service';
+import { CataloguesHttpService } from '../../../../../services/core/catalogues-http.service';
+import { MessageValidationService } from '../../../../../services/core/message-validation.service';
+import { GeneralInformationEnum } from '../../../../../shared/enums';
 
 @Component({
   selector: 'app-general-information',
@@ -27,13 +27,13 @@ export class GeneralInformationComponent implements OnInit {
   protected readonly cataloguesHttpService = inject(CataloguesHttpService);
   private readonly messageValidationService = inject(MessageValidationService);
   protected GeneralInformationEnum = GeneralInformationEnum;
-  protected categories : CatalogueInterface[] = [];
+  protected categories: CatalogueInterface[] = [];
 
-  constructor() {
-  }
-  
+  constructor() {}
+
   ngOnInit(): void {
     this.formBuild();
+    this.getCategories();
     this.organizerField.setValue(this.authService.currentUser!.id);
   }
 
@@ -51,11 +51,17 @@ export class GeneralInformationComponent implements OnInit {
     });
   }
 
+  getCategories() {
+    this.cataloguesHttpService
+      .findAll()
+      .subscribe((res) => (this.categories = res));
+  }
+
   onChange(event: any) {
     if (this.imagesField.value.length <= 3) {
       return this.imagesField.setValue(event);
     }
-    this.messageValidationService.showMessage('Solo se puede subir 3 imagenes'); 
+    this.messageValidationService.showMessage('Solo se puede subir 3 imagenes');
     event.splice(3, 1);
   }
 

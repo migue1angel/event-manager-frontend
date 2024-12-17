@@ -6,8 +6,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { TicketTypeEnum } from '../../../../../../shared/enums';
-import { MessageValidationService } from '../../../../../../services/core/message-validation.service';
+import { MessageValidationService } from '../../../../../services/core/message-validation.service';
+import { TicketTypeEnum } from '../../../../../shared/enums';
 
 @Component({
   selector: 'app-ticket-type',

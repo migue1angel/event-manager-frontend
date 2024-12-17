@@ -10,6 +10,12 @@ const routes: Routes = [
     // canActivate: [privateGuard],
   },
   {
+    path: 'register',
+    loadChildren: () =>
+      import('./register/register.module').then((m) => m.RegisterModule),
+    // canActivate: [privateGuard],
+  },
+  {
     path: 'public',
     loadChildren: () =>
       import('./public/public.module').then((m) => m.PublicModule),

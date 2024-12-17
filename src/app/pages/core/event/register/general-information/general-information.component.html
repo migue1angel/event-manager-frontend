@@ -11,11 +11,11 @@
 
   <!-- Category -->
   <div class="field col-12 md:col-4">
-    <label appCustomLabel [label]="GeneralInformationEnum.category" for="category" formControlName="category"></label>
+    <label appCustomLabel [label]="GeneralInformationEnum.category" for="category"></label>
     <p-dropdown 
     id="category"
     formControlName="category"
-    dataKey="id"
+    optionValue="id"
     [options]="categories"
     optionLabel="name" 
     placeholder="Seleccionar Categoria" />

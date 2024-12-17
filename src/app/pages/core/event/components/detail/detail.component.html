@@ -1,6 +1,7 @@
 @if (event) {
 <div class="pt-3">
   <div class="grid p-fluid md:col-offset-1 gap-3 mt-3">
+
     <div class="col-12 md:col-8 p-3 surface-50 border-round-lg">
       <div class="grid p-fluid">
         <div class="col-12 lg:col-6 field">
@@ -37,7 +38,7 @@
           <p class="text-xl"><b>Organizador:</b></p>
           <p class="text-xl">{{event.organizer.informationUser.name}}</p>
         </div>
-          
+
         @if (event.hasSponsors) {
         <div class="col-12">
           <p class="text-xl text-center"><b>Sponsors</b></p>
@@ -48,13 +49,33 @@
               <div
                 class="border-1 surface-border border-round m-1 p-3 flex flex-column justify-content-center align-items-center">
                 <p class=" text-primary font-bold text-center">{{item.name}}</p>
-                <!-- <p class=" text-primary text-center max-w-full overflow-hidden">{{item.email}}</p> -->
+                <p class=" font-bold text-center max-w-full overflow-hidden">Correo de contacto:</p>
+                <p class=" text-primary text-center max-w-full overflow-hidden">{{item.email}}</p>
 
               </div>
             </ng-template>
           </p-carousel>
         </div>
         }
+
+        <p>Tickets disponibles:</p>
+        <form [formGroup]="form" (submit)="onSubmit()" class="col-12 flex flex-column gap-2">
+          <p-dropdown class="w-full" [options]="event.ticketTypes" formControlName="ticketType" optionLabel="name"
+            placeholder="Seleccione" />
+          <span appErrorMessage [errors]="ticketTypeField.errors" [touched]="ticketTypeField.touched"
+            [dirty]="ticketTypeField.dirty"></span>
+          <p-inputNumber formControlName="quantity" placeholder="Cantidad" useGrouping="false" max="5" />
+          <span appErrorMessage [errors]="quantityField.errors" [touched]="quantityField.touched"
+            [dirty]="quantityField.dirty"></span>
+
+          <div class="col-12 p-fluid">
+            <p-messages />
+          </div>
+          
+          <p-button label="Continuar con el pago" type="submit" severity="success"></p-button>
+
+        </form>
+
 
       </div>
     </div>

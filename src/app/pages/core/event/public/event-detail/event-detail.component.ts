@@ -14,6 +14,12 @@ export class EventDetailComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   protected event!: EventInterface;
 
+  visible: boolean = false;
+
+    showDialog() {
+        this.visible = true;
+    }
+
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
@@ -25,6 +31,7 @@ export class EventDetailComponent implements OnInit {
         this.event = res;
       });
   }
+  
 
   
 }

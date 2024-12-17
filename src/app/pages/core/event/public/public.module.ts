@@ -8,6 +8,9 @@ import { DetailComponent } from '../components/detail/detail.component';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { DataViewModule } from 'primeng/dataview';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { DataViewModule } from 'primeng/dataview';
     ButtonModule,
     TagModule,
     DataViewModule,
+    DialogModule,
+    InputTextModule,
+    FormsModule
   ],
 })
 export class PublicModule { }

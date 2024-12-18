@@ -1,30 +1,55 @@
 <h2 class="text-center">Registrar Patrocinadores</h2>
 <!-- Form -->
-<form [formGroup]="sponsorForm" (submit)="addSponsor()" class="grid p-fluid">
-  <!-- name -->
-  <div class="field col-12 md:col-6">
-    <label appCustomLabel [label]="SponsorEnum.name" for="name">Nombre:</label>
-    <input pInputText id="name" formControlName="name" />
-    <span appErrorMessage [errors]="nameField.errors" [dirty]="nameField.dirty" [touched]="nameField.touched"></span>
+<form [formGroup]="form" class="grid p-fluid">
+  
+  <!-- HasSponsors-->
+  <div class="col-12">
+    <label appCustomLabel [label]="SponsorEnum.isSponsors" for="hasSponsors"></label>    
+    <div class="flex gap-3 mt-2 ">
+      <div class="flex align-items-center">
+        <p-radioButton
+          id="hasSponsors"
+          formControlName="hasSponsors"
+          name="hasSponsors"
+          [value]="true"/>
+
+        <label for="hasSponsors" class="ml-2">Si</label>
+      </div>
+
+      <div class="flex align-items-center">
+        <p-radioButton
+          id="hasSponsors"
+          formControlName="hasSponsors"
+          name="hasSponsors"
+          [value]="false"/>
+
+        <label for="hasSponsors" class="ml-2">
+          No
+        </label>
+      </div>
+    </div>
   </div>
 
-  <!-- email -->
+  <!-- Add Sponsors -->
+  @if(hasSponsorsField.value){
+    <div class="field col-12 md:col-6" formArrayName="sponsors" (submit)="addSponsor()">
+      <label appCustomLabel [label]="SponsorEnum.name" for="name">Nombre:</label>
+      <input pInputText id="name" formControlName="name" />
+      <span appErrorMessage [errors]="nameField.errors" [dirty]="nameField.dirty" [touched]="nameField.touched"></span>
+    </div>
+
+    <!-- email -->
   <div class="field col-12 md:col-6">
     <label for="email" appCustomLabel [label]="SponsorEnum.email"></label>
     <input pInputText id="email" formControlName="email">
     <span appErrorMessage [errors]="emailField.errors" [dirty]="emailField.dirty" [touched]="emailField.touched"></span>
-
   </div>
 
-  <!-- validation message -->
-  <div class="col-12 p-fluid">
-    <p-messages />
-  </div>
-  
   <div class="col-12">
     <p-button label="Agregar" type="submit" icon="pi pi-plus">
     </p-button>
   </div>
+  }
 </form>
 
 @if (sponsors.value.length > 0) {

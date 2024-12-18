@@ -13,7 +13,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { FileUpload } from 'primeng/fileupload';
 import { MessageService } from 'primeng/api';
 import { SponsorEnum } from '../../../../../shared/enums/fields.enum';
 import { MessageValidationService } from '../../../../../services/core/message-validation.service';
@@ -41,6 +40,7 @@ export class SponsorComponent implements OnInit {
 
   buildForm() {
     this.form = this.formBuilder.group({
+      hasSponsors: [false, [Validators.required]],
       sponsors: this.formBuilder.array([]),
     });
   }
@@ -76,6 +76,8 @@ export class SponsorComponent implements OnInit {
     this.sponsors.removeAt(index);
   }
 
+  
+
   get sponsors(): FormArray {
     return this.form.get('sponsors') as FormArray;
   }
@@ -86,5 +88,9 @@ export class SponsorComponent implements OnInit {
 
   get emailField(): AbstractControl {
     return this.sponsorForm.controls['email'];
+  }
+
+  get hasSponsorsField():AbstractControl {
+    return this.form.controls['hasSponsors']
   }
 }

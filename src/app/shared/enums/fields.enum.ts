@@ -6,6 +6,7 @@ export enum AddressEnum {
 }
 
 export enum SponsorEnum {
+  isSponsors = '¿Agregar Patrocinadores?',
   name = 'Nombre',
   email = 'Correo de contacto',
 }

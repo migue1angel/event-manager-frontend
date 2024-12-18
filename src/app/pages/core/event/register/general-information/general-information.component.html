@@ -6,7 +6,12 @@
   <div class="field col-12 md:col-8">
     <label appCustomLabel [label]="GeneralInformationEnum.name" for="name"></label>
     <input id="name" formControlName="name" type="text" pInputText />
-    <span appErrorMessage [errors]="nameField.errors" [touched]="nameField.touched" [dirty]="nameField.dirty"></span>
+    <span 
+    appErrorMessage 
+    [errors]="nameField.errors" 
+    [touched]="nameField.touched" 
+    [dirty]="nameField.dirty">
+    </span>
   </div>
 
   <!-- Category -->
@@ -34,7 +39,8 @@
     appErrorMessage 
     [errors]="categoryField.errors" 
     [touched]="categoryField.touched"
-    [dirty]="categoryField.dirty"></span>
+    [dirty]="categoryField.dirty">
+    </span>
   </div>
 
   <!-- Description -->
@@ -42,8 +48,12 @@
   <div class="field col-12">
     <label appCustomLabel [label]="GeneralInformationEnum.description" for="description"></label>
     <textarea pInputTextarea autoResize="true" rows="5" class="col-12" formControlName="description"></textarea>
-    <span appErrorMessage [errors]="descriptionField.errors" [touched]="descriptionField.touched"
-      [dirty]="descriptionField.dirty"></span>
+    <span 
+    appErrorMessage 
+    [errors]="descriptionField.errors" 
+    [touched]="descriptionField.touched"
+    [dirty]="descriptionField.dirty">
+    </span>
   </div>
 
   <!-- StartDate -->
@@ -51,8 +61,12 @@
   <div class="field col-12 md:col-6">
     <label appCustomLabel [label]="GeneralInformationEnum.startDate" for="startDate"></label>
     <p-calendar formControlName="startDate" [showIcon]="true" [showTime]="true" />
-    <span appErrorMessage [errors]="startDateField.errors" [touched]="startDateField.touched"
-      [dirty]="startDateField.dirty"></span>
+    <span 
+    appErrorMessage 
+    [errors]="startDateField.errors" 
+    [touched]="startDateField.touched"
+    [dirty]="startDateField.dirty">
+    </span>
   </div>
 
   <!-- EndDate -->
@@ -60,8 +74,12 @@
   <div class="field col-12 md:col-6">
     <label appCustomLabel [label]="GeneralInformationEnum.endDate" for="endDate"></label>
     <p-calendar formControlName="endDate" [showIcon]="true" [showTime]="true" [minDate]="startDateField.value" />
-    <span appErrorMessage [errors]="endDateField.errors" [touched]="endDateField.touched"
-      [dirty]="endDateField.dirty"></span>
+    <span 
+    appErrorMessage 
+    [errors]="endDateField.errors" 
+    [touched]="endDateField.touched"
+      [dirty]="endDateField.dirty">
+    </span>
   </div>
 
   <!-- Image -->
@@ -85,7 +103,7 @@
 
         <label for="isPublic" class="ml-2">Si</label>
       </div>
-      <br>
+
       <div class="flex align-items-center">
         <p-radioButton
           id="isPublic"
@@ -93,7 +111,7 @@
           name="isPublic"
           [value]="false"/>
 
-        <label for="no" class="ml-2">
+        <label for="isPublic" class="ml-2">
           No
         </label>
       </div>

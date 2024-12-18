@@ -19,6 +19,7 @@ import {MessageModule} from "primeng/message";
 import {MessageService} from "primeng/api";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {InputNumberModule} from "primeng/inputnumber";
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { RegisterComponent } from './register.component';
 import { StepsModule } from 'primeng/steps';
 import { DividerModule } from 'primeng/divider';
@@ -68,7 +69,8 @@ import { PaypalComponent } from '../components/paypal/paypal.component';
     PanelModule,
     InputTextareaModule,
     TableModule,
-    DropdownModule
+    DropdownModule,
+    RadioButtonModule
   ],
   providers: [
     MessageService,

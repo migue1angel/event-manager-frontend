@@ -46,7 +46,7 @@ export class GeneralInformationComponent implements OnInit {
       endDate: [null, [Validators.required]],
       state: ['COMING', [Validators.required]],
       category: [null, Validators.required],
-      isPublic: [true, [Validators.required]],
+      isPublic: [false, [Validators.required]],
       images: [[]],
     });
   }

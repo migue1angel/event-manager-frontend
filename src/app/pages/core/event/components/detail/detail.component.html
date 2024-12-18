@@ -6,12 +6,12 @@
       <div class="grid p-fluid">
         <div class="col-12 lg:col-6 field">
           <label appCustomLabel label="Nombre" for="venue"></label>
-          <input id="venue" [value]="event.name" type="text" pInputText />
+          <input id="venue" readonly [value]="event.name" type="text" pInputText />
         </div>
 
         <div class="col-12 lg:col-6 field">
           <label appCustomLabel label="Categoría" for="venue"></label>
-          <input id="venue" [value]="event.category.name" type="text" pInputText />
+          <input id="venue" readonly [value]="event.category.name" type="text" pInputText />
         </div>
 
         <div class="w-full">
@@ -60,7 +60,7 @@
 
         <p>Tickets disponibles:</p>
         <form [formGroup]="form" (submit)="onSubmit()" class="col-12 flex flex-column gap-2">
-          <p-dropdown class="w-full" [options]="event.ticketTypes" formControlName="ticketType" optionLabel="name"
+          <p-dropdown class="w-full"  [options]="event.ticketTypes" formControlName="ticketType" optionLabel="name"
             placeholder="Seleccione" />
           <span appErrorMessage [errors]="ticketTypeField.errors" [touched]="ticketTypeField.touched"
             [dirty]="ticketTypeField.dirty"></span>
@@ -84,17 +84,17 @@
       <div class="grid p-fluid">
         <div class="col-12 field">
           <label appCustomLabel label="Descripción" for="venue"></label>
-          <textarea rows="5" cols="30" pInputTextarea [value]="event.description"></textarea>
+          <textarea rows="5" readonly cols="30" pInputTextarea [value]="event.description"></textarea>
         </div>
 
         <div class="col-12 lg:col-6 field">
           <label appCustomLabel label="Lugar del evento:" for="venue"></label>
-          <input id="venue" [value]="event.address.address" type="text" pInputText />
+          <input id="venue" readonly [value]="event.address.address" type="text" pInputText />
         </div>
 
         <div class="col-12 lg:col-6 field">
           <label appCustomLabel label="Referencia" for="venue"></label>
-          <input id="venue" [value]="event.address.reference" type="text" pInputText />
+          <input id="venue" readonly [value]="event.address.reference" type="text" pInputText />
         </div>
 
         <div class="col-12 h-30rem">

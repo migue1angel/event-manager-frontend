@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { ServerResponseInterface } from '../../models/auth/server-response.interface';
 import { EventInterface } from '../../models/core/event.interface';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class EventsHttpService {
   private readonly baseUrl = environment.baseApiUrl;
-  constructor(private readonly httpClient: HttpClient) {}
+  private readonly authService = inject(AuthService);
+  private readonly httpClient = inject(HttpClient);
+  constructor() {}
 
   create(data: any): Observable<any> {
     const url = `${this.baseUrl}/events`;
@@ -27,6 +30,10 @@ export class EventsHttpService {
 
   findAll(): Observable<EventInterface[]> {
     return this.httpClient.get<EventInterface[]>(`${this.baseUrl}/events`);
+  }
+
+  findAllByOrganizer(): Observable<EventInterface[]>{
+    return this.httpClient.get<EventInterface[]>(`${this.baseUrl}/events/organizer/${this.authService.currentUser!.id}`);
   }
 
   findById(id: string): Observable<EventInterface> {

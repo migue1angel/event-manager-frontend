@@ -1,0 +1,14 @@
+<div class="col-12 flex flex-wrap">
+    @for (item of orders; track $index) {
+    <p-card header="{{item.ticketType.event.name}}"
+        [subheader]="item.ticketType.name" class="col-12 md:col-6 lg:col-4">
+        <p><b>Fecha:</b> {{item.ticketType.event.startDate | date: 'medium'}} </p>
+        <p><b>Cantidad:</b> {{item.orderDetails[0].quantity}} </p>
+        <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+                <p-button label="Generar tickets" severity="secondary" class="w-full" styleClass="w-full" />
+            </div>
+        </ng-template>
+    </p-card>
+    }
+</div>

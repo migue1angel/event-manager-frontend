@@ -15,10 +15,6 @@
 
   <ng-template pTemplate="end">
     <div class="flex align-items-center gap-2">
-      <p-iconField iconPosition="left">
-        <p-inputIcon styleClass="pi pi-search" />
-        <input type="text" pInputText placeholder="Search" class="w-3rem sm:w-5rem md:w-8rem lg:w-11rem" />
-      </p-iconField>
       <app-theme></app-theme>
       @if(currentUser){
       <p-menu #menu [model]="profileItems" [popup]="true">

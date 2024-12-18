@@ -8,6 +8,7 @@ import { InteractiveMapComponent } from './components/interactive-map/interactiv
 import { CustomLabelDirective } from './directives/custom-label.directive';
 import { HomeComponent } from './components/home/home.component';
 import { MapComponent } from './components/map/map.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 
@@ -18,14 +19,16 @@ import { MapComponent } from './components/map/map.component';
     ErrorMessageDirective,
     CustomLabelDirective,
     InteractiveMapComponent,
-    MapComponent
+    MapComponent,
+    LoadingComponent
   ],
   exports:[
     AuthButtonsComponent,
     InteractiveMapComponent,
     ErrorMessageDirective,
     CustomLabelDirective,
-    MapComponent
+    MapComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,

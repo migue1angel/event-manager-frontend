@@ -68,6 +68,7 @@ export class GeneralInformationComponent implements OnInit {
   onSubmit() {
     this.form.markAllAsTouched();
     if (this.imagesField.value.length == 0) {
+      this.messageValidationService.showMessage()
       return this.messageValidationService.showMessage(
         'Se debe incluir al menos una imagen'
       );

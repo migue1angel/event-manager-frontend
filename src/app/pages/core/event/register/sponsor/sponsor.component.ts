@@ -53,7 +53,11 @@ export class SponsorComponent implements OnInit {
   }
 
   onSubmit() {
-    this.formOutput.emit(this.form.value);
+    if(this.form.valid) {
+      this.formOutput.emit(this.form.value);
+    }else{
+      this.messageValidationService.showMessage();
+    } 
   }
 
   addSponsor() {

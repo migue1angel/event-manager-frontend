@@ -1,3 +1,6 @@
+<div class="col-12 flex justify-content-end">
+    <p-button label="Crear evento" (onClick)="createEvent()" icon="pi pi-plus" severity="primary"></p-button>
+</div>
 <p-dataView [value]="events">
     <ng-template pTemplate="list">
         <div class="grid grid-nogutter">

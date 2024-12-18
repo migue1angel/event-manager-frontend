@@ -29,10 +29,12 @@
       </div>
     </div>
   </div>
+</form>
 
+<form class="grid p-fluid" [formGroup]="sponsorForm" (submit)="addSponsor()">
   <!-- Add Sponsors -->
   @if(hasSponsorsField.value){
-    <div class="field col-12 md:col-6" formArrayName="sponsors" (submit)="addSponsor()">
+    <div class="field col-12 md:col-6">
       <label appCustomLabel [label]="SponsorEnum.name" for="name">Nombre:</label>
       <input pInputText id="name" formControlName="name" />
       <span appErrorMessage [errors]="nameField.errors" [dirty]="nameField.dirty" [touched]="nameField.touched"></span>
@@ -44,6 +46,7 @@
     <input pInputText id="email" formControlName="email">
     <span appErrorMessage [errors]="emailField.errors" [dirty]="emailField.dirty" [touched]="emailField.touched"></span>
   </div>
+
 
   <div class="col-12">
     <p-button label="Agregar" type="submit" icon="pi pi-plus">
@@ -73,7 +76,10 @@
     </ng-template>
   </p-table>
   
-  <div class="col-12">
-    <button class="w-full" pButton label="Guardar" (click)="onSubmit()"></button>
-  </div>
-  }
+}
+
+
+<div class="col-12">
+  <button class="w-full" pButton label="Guardar" (click)="onSubmit()"></button>
+</div>
+

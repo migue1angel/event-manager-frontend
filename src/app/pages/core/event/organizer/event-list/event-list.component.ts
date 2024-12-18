@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { EventsHttpService } from '../../../../../services/core/event-http.service';
 import { EventInterface } from '../../../../../models/core/event.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'organizer-event-list',
@@ -8,6 +9,7 @@ import { EventInterface } from '../../../../../models/core/event.interface';
   styleUrl: './event-list.component.scss',
 })
 export class EventListComponent implements OnInit {
+  private readonly router = inject(Router);
   private readonly eventsHttpService = inject(EventsHttpService);
   events: EventInterface[] = [];
   sidebarVisible: boolean = false;
@@ -20,5 +22,9 @@ export class EventListComponent implements OnInit {
     return this.eventsHttpService.findAllByOrganizer().subscribe((res) => {
       this.events = res;
     });
+  }
+
+  createEvent(){
+    this.router.navigate(['/core/event/register']);
   }
 }

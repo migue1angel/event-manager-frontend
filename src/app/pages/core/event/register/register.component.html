@@ -3,7 +3,7 @@
     <div class="col-12 md:col-10 md:col-offset-1">
         <p-panel (onBeforeToggle)="saveData($event)" [showHeader]="false">
 
-            <p-accordion [activeIndex]="0">
+            <p-accordion (activeIndexChange)="activeIndexChange($event)" [activeIndex]=index>
 
                 <p-accordionTab header="Información General" [selected]="true">
                     <app-general-information (formOutput)="saveData($event)"></app-general-information>
@@ -25,10 +25,17 @@
             </p-accordion>
 
         </p-panel>
+        <div class="col-12">
+            <div class="col-12">
+                <p-messages />
+              </div>
+            
+            <p-button type="submit" (onClick)="submit()" label="Guardar Evento" icon="pi pi-check"
+                styleClass="p-button-success w-full">
+            </p-button>
+        </div>
     </div>
 </div>
-
-<p-button type="submit" (onClick)="submit()" label="Guardar" icon="pi pi-check" styleClass="p-button-success">
-
-</p-button>
-
+@if (isLoading) {
+    <shared-loading></shared-loading>
+}

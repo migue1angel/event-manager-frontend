@@ -1,0 +1,17 @@
+.loading{
+  gap: 5px;
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  background-color: rgb(51, 174, 26);
+  padding: 5px 5px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+span{
+  color: aliceblue;
+  margin-right: 10px;
+  font-size: 0.8rem;
+}

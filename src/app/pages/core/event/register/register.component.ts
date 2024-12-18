@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventsHttpService } from '../../../../services/core/event-http.service';
+import { MessageValidationService } from '../../../../services/core/message-validation.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -8,40 +10,53 @@ import { EventsHttpService } from '../../../../services/core/event-http.service'
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+  private readonly messageValidationService = inject(MessageValidationService);
+  private readonly router = inject(Router);
   private readonly eventService = inject(EventsHttpService);
   protected readonly formBuilder = inject(FormBuilder);
   protected form!: FormGroup;
-
+  protected index = 0;
+  protected isLoading:boolean = false;
   constructor() {
     this.buildForm();
   }
   active: number | undefined = 0;
   buildForm() {
     return (this.form = this.formBuilder.group({
-      name: [null],
-      description: [null],
-      startDate: [null],
-      endDate: [null],
-      state: [null],
-      isPublic: [null],
-      category: [null],
-      organizer: [null],
-      address: [null],
-      hasSponsors: [true],
+      name: [null, Validators.required],
+      description: [null, Validators.required],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
+      state: [null, Validators.required],
+      isPublic: [null, Validators.required],
+      category: [null, Validators.required],
+      organizer: [null, Validators.required],
+      address: [null, Validators.required],
+      hasSponsors: [true, Validators.required],
       sponsors: [null],
-      ticketTypes: [null],
-      images: [null],
+      ticketTypes: [null, Validators.required],
+      images: [null, Validators.required],
     }));
   }
 
   saveData(event: any) {
-    console.log(event);
     this.form.patchValue(event);
+    this.index = this.index + 1;
   }
 
   submit() {
-    this.eventService.create(this.form.value).subscribe((event) => {
-      console.log(event);
-    });
+    if (this.form.valid) {
+      this.isLoading = true;
+      this.eventService.create(this.form.value).subscribe((event) => {
+        this.isLoading = false;
+        this.router.navigate(['/core/event/organizer/my-events']);
+      });
+    }else{
+      this.messageValidationService.showMessage();
+    }
+  }
+
+  activeIndexChange(event: any) {
+    this.index = event;
   }
 }

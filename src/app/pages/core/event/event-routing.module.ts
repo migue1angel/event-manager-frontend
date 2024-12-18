@@ -7,13 +7,13 @@ const routes: Routes = [
     path: 'organizer',
     loadChildren: () =>
       import('./organizer/organizer.module').then((m) => m.OrganizerModule),
-    // canActivate: [privateGuard],
+    canActivate: [privateGuard],
   },
   {
     path: 'register',
     loadChildren: () =>
       import('./register/register.module').then((m) => m.RegisterModule),
-    // canActivate: [privateGuard],
+    canActivate: [privateGuard],
   },
   {
     path: 'public',

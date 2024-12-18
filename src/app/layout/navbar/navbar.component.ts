@@ -36,33 +36,6 @@ export class NavbarComponent implements OnInit {
           },
         ],
       },
-      {
-        label: 'Pendiente',
-        icon: 'pi pi-search',
-        items: [
-          {
-            label: 'Todos los eventos',
-            icon: 'pi pi-bolt',
-            route: 'core/event/public/event-list',
-          },
-          {
-            label: 'Templates',
-            icon: 'pi pi-palette',
-            items: [
-              {
-                label: 'Apollo',
-                icon: 'pi pi-palette',
-                badge: '2',
-              },
-              {
-                label: 'Ultima',
-                icon: 'pi pi-palette',
-                badge: '3',
-              },
-            ],
-          },
-        ],
-      },
     ];
     this.profileItems = [
       {

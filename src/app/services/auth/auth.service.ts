@@ -95,6 +95,6 @@ export class AuthService {
     sessionStorage.removeItem('token');
     this._currentUser = undefined;
     this._authStatus = AuthStatus.unauthenticated;
-    this.router.navigateByUrl('/auth/login');
+    this.router.navigateByUrl('/');
   }
 }

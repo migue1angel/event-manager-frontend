@@ -31,5 +31,6 @@ export enum GeneralInformationEnum {
   status = 'Estado',
   category = 'Categoría',
   address = 'Dirección',
-  images = 'Fotos'
+  images = 'Fotos',
+  isPublic = 'Evento Gratuito'
 }

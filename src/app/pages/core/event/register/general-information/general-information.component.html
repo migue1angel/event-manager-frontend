@@ -54,6 +54,7 @@
     <span appErrorMessage [errors]="startDateField.errors" [touched]="startDateField.touched"
       [dirty]="startDateField.dirty"></span>
   </div>
+
   <!-- EndDate -->
 
   <div class="field col-12 md:col-6">
@@ -63,17 +64,47 @@
       [dirty]="endDateField.dirty"></span>
   </div>
 
-  <div class="field col-12">
+  <!-- Image -->
+  <div class="field col-6">
     <label for="image" appCustomLabel [label]="GeneralInformationEnum.images" for="image"></label>
     <p-fileUpload #fileUpload (change)="onChange(fileUpload.files)" showCancelButton="false" showUploadButton="false" [multiple]="true" accept="image/*"
       maxFileSize="2000000">
     </p-fileUpload>
   </div>
 
+  <!-- IsPublic-->
+  <div class="col-6">
+    <label appCustomLabel [label]="GeneralInformationEnum.isPublic" for="isPublic"></label>    
+    <div class="flex gap-3 mt-2 ">
+      <div class="flex align-items-center">
+        <p-radioButton
+          id="isPublic"
+          formControlName="isPublic"
+          name="isPublic"
+          [value]="true"/>
+
+        <label for="isPublic" class="ml-2">Si</label>
+      </div>
+      <br>
+      <div class="flex align-items-center">
+        <p-radioButton
+          id="isPublic"
+          formControlName="isPublic"
+          name="isPublic"
+          [value]="false"/>
+
+        <label for="no" class="ml-2">
+          No
+        </label>
+      </div>
+    </div>
+  </div>
+
   <!-- validation message -->
-  <div class="col-12 p-fluid">
+  <div class="col-6 p-fluid">
     <p-messages />
   </div>
+
 
   <div class="col-12">
     <button pButton type="submit" label="Guardar"></button>

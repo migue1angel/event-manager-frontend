@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
           {
             label: 'Mis eventos',
             icon: 'pi pi-calendar',
-            route: 'core/event/organizer/my-events',
+              route: 'core/organizer/my-events',
           },
         ],
       },

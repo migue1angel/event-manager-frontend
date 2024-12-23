@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { EventInterface } from '../../../../../models/core/event.interface';
-import { EventsHttpService } from '../../../../../services/core/event-http.service';
+import { EventsHttpService } from '../../../../../services/core/events-http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, switchMap, tap, throwError } from 'rxjs';
 

@@ -1,3 +1,5 @@
+import { TicketType } from "./event.interface";
+
 export interface OrderInterface {
     id:           string;
     createdAt:    Date;
@@ -15,17 +17,6 @@ export interface OrderDetail {
     ticketTypeName: string;
     quantity:       number;
     price:          string;
-}
-
-export interface TicketType {
-    id:            string;
-    createdAt:     Date;
-    deletedAt:     null;
-    name:          string;
-    disponibility: number;
-    price:         string;
-    isAvailable:   boolean;
-    event:         Event;
 }
 
 export interface Event {

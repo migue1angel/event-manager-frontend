@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { OrderInterface } from '../../../../../models/core/order.interface';
-import { OrderHttpService } from '../../../../../services/core/order-http.service';
+import { OrderInterface } from '../../../../models/core';
+import { OrderHttpService } from '../../../../services/core';
 
 @Component({
   selector: 'app-my-events',

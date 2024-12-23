@@ -49,10 +49,6 @@ export class AddressComponent {
     if (this.form.valid) {
       this.formOutput.emit(this.form.value);
     } else {
-      // this.messageService.add({
-      //   severity: ValidateFormEnum.severity,
-      //   detail: ValidateFormEnum.message,
-      //   life: validateForm.life,});
       this.validationMessageService.showMessage();
     }
   }

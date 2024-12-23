@@ -63,6 +63,7 @@ export interface TicketType {
   disponibility: number;
   price: string;
   isAvailable: boolean;
+  event: EventInterface;
 }
 
 export interface OrganizerInterface {

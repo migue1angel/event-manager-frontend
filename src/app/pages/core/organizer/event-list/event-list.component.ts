@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { EventsHttpService } from '../../../../../services/core/event-http.service';
-import { EventInterface } from '../../../../../models/core/event.interface';
 import { Router } from '@angular/router';
+import { EventInterface } from '../../../../models/core';
+import { EventsHttpService } from '../../../../services/core';
 
 @Component({
   selector: 'organizer-event-list',

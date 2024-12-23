@@ -8,9 +8,8 @@ import {
 } from '@angular/forms';
 import { CatalogueInterface } from '../../../../../models/core/catalogue.interface';
 import { AuthService } from '../../../../../services/auth/auth.service';
-import { CataloguesHttpService } from '../../../../../services/core/catalogues-http.service';
-import { MessageValidationService } from '../../../../../services/core/message-validation.service';
 import { GeneralInformationEnum } from '../../../../../shared/enums';
+import { CataloguesHttpService, MessageValidationService } from '../../../../../services/core';
 
 @Component({
   selector: 'app-general-information',

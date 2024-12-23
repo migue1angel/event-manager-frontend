@@ -1,7 +1,6 @@
 import { Component, inject, Input, input, OnInit } from '@angular/core';
-import { OrderHttpService } from '../../../../../services/core/order-http.service';
-import { OrderInterface } from '../../../../../models/core/order.interface';
-import { TicketsHttpService } from '../../../../../services/core/tickets-http.service';
+import { OrderInterface } from '../../../../models/core';
+import { OrderHttpService, TicketsHttpService } from '../../../../services/core';
 
 @Component({
   selector: 'app-schedule',

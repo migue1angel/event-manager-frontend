@@ -4,7 +4,6 @@ import {
   inject,
   OnInit,
   Output,
-  ViewChild,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -15,7 +14,7 @@ import {
 } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { SponsorEnum } from '../../../../../shared/enums/fields.enum';
-import { MessageValidationService } from '../../../../../services/core/message-validation.service';
+import { MessageValidationService } from '../../../../../services/core';
 
 @Component({
   selector: 'app-sponsor',

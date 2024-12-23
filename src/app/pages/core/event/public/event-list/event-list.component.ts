@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EventsHttpService } from '../../../../../services/core/event-http.service';
+import { EventsHttpService } from '../../../../../services/core/events-http.service';
 import { EventInterface } from '../../../../../models/core/event.interface';
 
 @Component({

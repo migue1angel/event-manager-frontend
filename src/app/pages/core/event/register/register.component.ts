@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EventsHttpService } from '../../../../services/core/event-http.service';
-import { MessageValidationService } from '../../../../services/core/message-validation.service';
 import { Router } from '@angular/router';
+import { EventsHttpService, MessageValidationService } from '../../../../services/core';
 
 @Component({
   selector: 'app-register',
@@ -16,13 +15,13 @@ export class RegisterComponent {
   protected readonly formBuilder = inject(FormBuilder);
   protected form!: FormGroup;
   protected index = 0;
-  protected isLoading:boolean = false;
+  protected isLoading: boolean = false;
   constructor() {
     this.buildForm();
   }
   active: number | undefined = 0;
   buildForm() {
-    return (this.form = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       name: [null, Validators.required],
       description: [null, Validators.required],
       startDate: [null, Validators.required],
@@ -36,7 +35,7 @@ export class RegisterComponent {
       sponsors: [null],
       ticketTypes: [null, Validators.required],
       images: [null, Validators.required],
-    }));
+    });
   }
 
   saveData(event: any) {
@@ -51,7 +50,7 @@ export class RegisterComponent {
         this.isLoading = false;
         this.router.navigate(['/core/event/organizer/my-events']);
       });
-    }else{
+    } else {
       this.messageValidationService.showMessage();
     }
   }

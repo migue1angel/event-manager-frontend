@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, input, OnInit } from '@angular/core';
 import { OrderHttpService } from '../../../../../services/core/order-http.service';
 import { OrderInterface } from '../../../../../models/core/order.interface';
 import { TicketsHttpService } from '../../../../../services/core/tickets-http.service';
@@ -12,7 +12,7 @@ export class ScheduleComponent implements OnInit {
   private readonly ordersHttpService = inject(OrderHttpService);
   private readonly ticketsHttpService = inject(TicketsHttpService);
 
-  protected orders: OrderInterface[] = [];
+  @Input() orders: OrderInterface[] = [];
   ngOnInit(): void {
     this.ordersHttpService
       .findByUser()

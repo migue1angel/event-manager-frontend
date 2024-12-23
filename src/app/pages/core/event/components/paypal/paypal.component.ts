@@ -9,6 +9,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { PaypalService } from '../../../../../services/core/paypal.service';
 import { AuthService } from '../../../../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -20,6 +21,7 @@ import { AuthService } from '../../../../../services/auth/auth.service';
 export class PaypalComponent implements OnInit {
   private paypal!: PayPalNamespace | null;
   private readonly http = inject(HttpClient);
+  private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly paypalService = inject(PaypalService);
   constructor() {}
@@ -68,9 +70,12 @@ export class PaypalComponent implements OnInit {
               this.http.post<{ id: string }>(
                 `http://localhost:3000/payment/${data.orderID}/capture-order`,
                 data
+              ).pipe(
+                tap((res) => console.log(res)),
+                tap(() => this.router.navigate(['/core/event/organizer/my-events']))
               )
             );
-            console.log(order);
+            
           },
           onCancel: async (data, actions) => {
             const order = await firstValueFrom(

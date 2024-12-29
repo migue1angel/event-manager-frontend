@@ -2,7 +2,6 @@
     <ng-template pTemplate="list">
         <div class="grid grid-nogutter">
             @for (event of events; track event.id; let first = $first) {
-
             <div class="col-12" class="col-12">
                 <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3"
                     [ngClass]="{ 'border-top-1 surface-border': !first }">

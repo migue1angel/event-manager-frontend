@@ -27,7 +27,6 @@ export class PaypalComponent implements OnInit {
   constructor() {}
   ngOnInit(): void {
     this.setPaypalButtons();
-    console.log(this.paypalService.orderData);
   }
 
   tickets: any[] = this.paypalService.orderData;

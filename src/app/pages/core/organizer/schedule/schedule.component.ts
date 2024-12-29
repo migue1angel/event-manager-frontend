@@ -1,6 +1,10 @@
 import { Component, inject, Input, input, OnInit } from '@angular/core';
 import { OrderInterface } from '../../../../models/core';
-import { OrderHttpService, TicketsHttpService } from '../../../../services/core';
+import {
+  OrderHttpService,
+  TicketsHttpService,
+} from '../../../../services/core';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-schedule',
@@ -11,7 +15,7 @@ export class ScheduleComponent implements OnInit {
   private readonly ordersHttpService = inject(OrderHttpService);
   private readonly ticketsHttpService = inject(TicketsHttpService);
 
-  @Input() orders: OrderInterface[] = [];
+  protected orders: OrderInterface[] = [];
   ngOnInit(): void {
     this.ordersHttpService
       .findByUser()
@@ -27,7 +31,7 @@ export class ScheduleComponent implements OnInit {
         a.href = url;
         a.download = 'tickets.pdf';
         a.click();
-        window.URL.revokeObjectURL(url); 
+        window.URL.revokeObjectURL(url);
       });
   }
 }

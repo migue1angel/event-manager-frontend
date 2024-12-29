@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventInterface } from '../../../../models/core';
 import { EventsHttpService } from '../../../../services/core';
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'organizer-event-list',
@@ -11,6 +12,7 @@ import { EventsHttpService } from '../../../../services/core';
 export class EventListComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly eventsHttpService = inject(EventsHttpService);
+  private readonly authService = inject(AuthService);
   events: EventInterface[] = [];
   sidebarVisible: boolean = false;
 
@@ -19,12 +21,14 @@ export class EventListComponent implements OnInit {
   }
 
   getEvents() {
-    return this.eventsHttpService.findAllByOrganizer().subscribe((res) => {
-      this.events = res;
-    });
+    return this.eventsHttpService
+      .findAllByOrganizer(this.authService.currentUser!.id)
+      .subscribe((res) => {
+        this.events = res;
+      });
   }
 
-  createEvent(){
+  createEvent() {
     this.router.navigate(['/core/event/register']);
   }
 }

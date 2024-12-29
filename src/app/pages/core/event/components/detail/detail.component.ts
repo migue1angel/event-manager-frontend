@@ -60,8 +60,7 @@ export class DetailComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
-      
+
       this.paypalService.orderData = [ this.form.value ];
 
       this.router.navigate(['/core/event/register/payment']);

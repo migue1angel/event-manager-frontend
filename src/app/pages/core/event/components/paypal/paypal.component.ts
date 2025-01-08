@@ -3,7 +3,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { loadScript, PayPalNamespace } from '@paypal/paypal-js';
 import { firstValueFrom, map, tap } from 'rxjs';
 import { environment } from '../../../../../../environments/environment';
-import { DividerModule } from 'primeng/divider';
 import { PanelModule } from 'primeng/panel';
 import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
@@ -49,37 +48,34 @@ export class PaypalComponent implements OnInit {
       try {
         await this.paypal.Buttons!({
           createOrder: async () => {
-            console.log(this.dataOrder);
-
             const response = await firstValueFrom(
               this.http
                 .post<{ id: string }>(
                   'http://localhost:3000/orders',
                   this.dataOrder
                 )
-                .pipe(
-                  tap((res) => console.log(res)),
-                  map((res) => res.id)
-                )
+                .pipe(map((res) => res.id))
             );
             return response;
           },
           onApprove: async (data, actions) => {
             const order = await firstValueFrom(
-              this.http.post<{ id: string }>(
-                `http://localhost:3000/payment/${data.orderID}/capture-order`,
-                data
-              ).pipe(
-                tap((res) => console.log(res)),
-                tap(() => this.router.navigate(['/core/event/organizer/my-events']))
-              )
+              this.http
+                .post<{ id: string }>(
+                  `http://localhost:3000/payment/${data.orderID}/capture-order`,
+                  data
+                )
+                .pipe(
+                  tap(() =>
+                    this.router.navigate(['/core/event/organizer/my-events'])
+                  )
+                )
             );
-            
           },
           onCancel: async (data, actions) => {
             const order = await firstValueFrom(
-              this.http.post<{ id: string }>(
-                `http://localhost:3000/payment/${data['orderID']}/capture-order`,
+              this.http.patch<{ id: string }>(
+                `http://localhost:3000/payment/cancel/${data['orderID']}`,
                 data
               )
             );
